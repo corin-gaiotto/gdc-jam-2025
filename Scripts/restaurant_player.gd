@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
-class_name restaurantPlayer
+class_name RestaurantPlayer
 
 # movement
-@export var speed = 200;
+@export var speed = 200
 @export_range(1, 3) var sprintMultiplier: float
 @export_range(0, 1) var decceleration: float
 @export var isSprinting: bool = false
