@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3cqax6wiyuqf"]
+
+[ext_resource type="Script" uid="uid://bl4eg62kjkcgr" path="res://Scripts/restaurant_player.gd" id="1_ju37u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ju37u"]
+
+[node name="RestaurantPlayer" type="CharacterBody2D"]
+script = ExtResource("1_ju37u")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ju37u")
