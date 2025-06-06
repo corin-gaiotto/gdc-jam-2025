@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwn8pa462x2y"]
+
+[ext_resource type="Script" uid="uid://b7ublsh78c1la" path="res://Fishing/fish.gd" id="1_74ugf"]
+[ext_resource type="Texture2D" uid="uid://dokj5ftigyxx8" path="res://icon.svg" id="2_jtija"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c4ibo"]
+size = Vector2(128, 128)
+
+[node name="Fish" type="Area2D"]
+scale = Vector2(0.5, 0.5)
+collision_mask = 0
+script = ExtResource("1_74ugf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_jtija")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_c4ibo")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

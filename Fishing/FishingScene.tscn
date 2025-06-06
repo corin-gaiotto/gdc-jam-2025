@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=3 uid="uid://dsbtedevf5vc1"]
+
+[ext_resource type="Script" uid="uid://cdwuc7i8tayex" path="res://Fishing/FishingScene.gd" id="1_jag5f"]
+[ext_resource type="Texture2D" uid="uid://dokj5ftigyxx8" path="res://icon.svg" id="2_8gv05"]
+[ext_resource type="Script" uid="uid://cayouotjco0t3" path="res://Fishing/fish_spawner.gd" id="3_1hrq1"]
+[ext_resource type="PackedScene" uid="uid://bwn8pa462x2y" path="res://Fishing/fish.tscn" id="4_fruyy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y05ux"]
+size = Vector2(305, 838)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jag5f"]
+size = Vector2(301, 833)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gv05"]
+size = Vector2(1849, 78)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1hrq1"]
+size = Vector2(1853, 122)
+
+[node name="FishingScene" type="Node2D"]
+script = ExtResource("1_jag5f")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1152, 648)
+zoom = Vector2(0.5, 0.5)
+
+[node name="FishSpawner" type="Node2D" parent="."]
+position = Vector2(1152, 648)
+script = ExtResource("3_1hrq1")
+scene_list = Array[PackedScene]([ExtResource("4_fruyy")])
+
+[node name="FishBoundaryLeft" type="Area2D" parent="."]
+position = Vector2(148, 873)
+collision_layer = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="FishBoundaryLeft"]
+position = Vector2(3, 1.5)
+scale = Vector2(2.39063, 6.58594)
+texture = ExtResource("2_8gv05")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FishBoundaryLeft"]
+shape = SubResource("RectangleShape2D_y05ux")
+
+[node name="FishBoundaryRight" type="Area2D" parent="."]
+position = Vector2(2312, 873)
+collision_layer = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="FishBoundaryRight"]
+scale = Vector2(2.375, 6.52344)
+texture = ExtResource("2_8gv05")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FishBoundaryRight"]
+shape = SubResource("RectangleShape2D_jag5f")
+
+[node name="FishBoundaryTop" type="Area2D" parent="."]
+position = Vector2(1228, 489)
+collision_layer = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="FishBoundaryTop"]
+texture = ExtResource("2_8gv05")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FishBoundaryTop"]
+shape = SubResource("RectangleShape2D_8gv05")
+
+[node name="FishBoundaryBottom" type="Area2D" parent="."]
+position = Vector2(1233, 1256)
+collision_layer = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="FishBoundaryBottom"]
+position = Vector2(-3.50006, 0)
+scale = Vector2(14.3984, 1)
+texture = ExtResource("2_8gv05")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FishBoundaryBottom"]
+position = Vector2(-2, -1)
+shape = SubResource("RectangleShape2D_1hrq1")
+
+[connection signal="area_entered" from="FishBoundaryLeft" to="." method="_on_fish_boundary_left_area_entered"]
+[connection signal="area_entered" from="FishBoundaryRight" to="." method="_on_fish_boundary_right_area_entered"]
+[connection signal="area_entered" from="FishBoundaryTop" to="." method="_on_fish_boundary_top_area_entered"]
+[connection signal="area_entered" from="FishBoundaryBottom" to="." method="_on_fish_boundary_bottom_area_entered"]
