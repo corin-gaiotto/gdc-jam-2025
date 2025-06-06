@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://c82kc21gwu57i"]
+
+[ext_resource type="Script" uid="uid://c3dgu655bgxdj" path="res://Scripts/fish_species.gd" id="1_1yh1m"]
+[ext_resource type="Texture2D" uid="uid://dokj5ftigyxx8" path="res://icon.svg" id="2_et2xq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b00gv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_et2xq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TestSpecies" type="Node"]
+script = ExtResource("1_1yh1m")
+size = 1.0
+baseSellValue = 30.0
+fishTexture = SubResource("SpriteFrames_b00gv")
+preferredDepth = 20.0
+idleTurnTime = 300
+idleMoveSpeed = 0.1
+fishingTurnTime = 120
+fishingResistance = 1.0
+fishingEnergyDrain = 1.0
+metadata/_custom_type_script = "uid://c3dgu655bgxdj"

@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://biouiciisyeg2"]
+
+[ext_resource type="Script" uid="uid://dit08ixmmktq5" path="res://Scripts/fish_manager.gd" id="1_w4qpl"]
+[ext_resource type="PackedScene" uid="uid://c82kc21gwu57i" path="res://Assets/FishSpecies/TestSpecies.tscn" id="2_56iai"]
+
+[node name="FishManagerTemplate" type="Node2D" node_paths=PackedStringArray("SpeciesDict")]
+script = ExtResource("1_w4qpl")
+SpeciesDict = {
+"TestSpecies": NodePath("TestSpecies")
+}
+SpeciesWeights = Dictionary[String, int]({
+"TestSpecies": 1
+})
+spawnTimeMin = 480
+spawnTimeMax = 720
+spawnAmountMin = 1
+spawnAmountMax = 3
+spawningActive = true
+metadata/_custom_type_script = "uid://dit08ixmmktq5"
+
+[node name="TestSpecies" parent="." instance=ExtResource("2_56iai")]

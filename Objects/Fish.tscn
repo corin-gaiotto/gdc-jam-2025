@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlmq4i5th33hf"]
+
+[ext_resource type="Script" uid="uid://cwd5tvr0hdob1" path="res://Scripts/fish.gd" id="1_f7nft"]
+
+[node name="Fish" type="AnimatedSprite2D"]
+script = ExtResource("1_f7nft")
