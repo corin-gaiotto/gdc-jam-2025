@@ -1,3 +1,10 @@
-[gd_scene format=3 uid="uid://bx237ya2lpwll"]
+[gd_scene load_steps=2 format=3 uid="uid://bx237ya2lpwll"]
 
-[node name="FishingPlayer" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xur5a"]
+
+[node name="FishingPlayer" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xur5a")
