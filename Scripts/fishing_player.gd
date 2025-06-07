@@ -25,6 +25,9 @@ var stateTimeRemaining: int # amount of time in frames before the state is done.
 
 var maxEnergy: float = 240
 var energy: float = maxEnergy
+var _audioPlayer : AudioStreamPlayer
+signal play_fishing_calm
+signal play_fishing_bite
 
 # NOTE (Corin): I've commented this out as it's not how enums work. 
 # const FISHING_IDLE = "fishing-idle"
@@ -47,6 +50,20 @@ func _ready() -> void:
 	_energyBar.max_value = maxEnergy
 	_energyBar.value = energy
 	_energyBar.visible = false
+	
+	# find audio player
+	if get_parent().get_parent():
+		for sibling in get_parent().get_parent().get_children():
+			if is_instance_of(sibling, AudioStreamPlayer):
+				_audioPlayer = sibling
+				break
+	
+	if _audioPlayer:
+		print(_audioPlayer)
+		play_fishing_calm.connect(_audioPlayer.switch_to_fishing_calm)
+		play_fishing_bite.connect(_audioPlayer.switch_to_fishing_bite)
+	play_fishing_calm.emit()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -140,6 +157,7 @@ func _physics_process(delta: float) -> void:
 			fishingEnum.FISHING_PULL_HOOK:
 				_energyBar.visible = true
 				_energyBar.value = energy
+				play_fishing_bite.emit()
 				# here is where the fishing minigame goes: on a success, return to FISHING_OBTAIN, otherwise, return to FISHING_IDLE
 				var pull_strength: float = abs(_x_dir) # 0 if not pulling, 1 if pulling
 				var energy_cost: float = 1
@@ -176,6 +194,7 @@ func _physics_process(delta: float) -> void:
 					print("[minigame] Got away...")
 					currentState = fishingEnum.FISHING_IDLE
 					hookedFish.currentState = hookedFish.fishStatesEnum.IDLE
+					play_fishing_calm.emit()
 			
 			fishingEnum.FISHING_OBTAIN:
 				_energyBar.visible = false
@@ -183,6 +202,7 @@ func _physics_process(delta: float) -> void:
 				if stateTimeRemaining < 1 and Input.is_action_just_pressed("fishing-interact"):
 					currentState = fishingEnum.FISHING_IDLE
 					_hookSprite.visible = false
+					play_fishing_calm.emit()
 					
 		
 	stateTimeRemaining -= 1
