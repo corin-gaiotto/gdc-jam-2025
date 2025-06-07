@@ -75,7 +75,7 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 	move_and_slide()
 	
-	if canFish and Input.is_action_just_pressed("fishing-interact"):
+	if canFish and Input.is_action_just_pressed("start-fishing"):
 		_animatedSprite.play("fishing-idle")
 		isFishing = true
 		canFish = false
@@ -90,6 +90,7 @@ func _physics_process(delta: float) -> void:
 					# cast a line
 					currentState = fishingEnum.FISHING_CAST_ANIMATION
 					_animatedSprite.play("fishing-cast-animation")
+
 					stateTimeRemaining = 60 # placeholder
 				elif Input.is_action_just_pressed("fishing-cancel"):
 					# stop fishing
@@ -97,6 +98,7 @@ func _physics_process(delta: float) -> void:
 			
 			fishingEnum.FISHING_CAST_ANIMATION:
 				if stateTimeRemaining < 1:
+					_animatedSprite.play("fishing-cast-idle")
 					currentState = fishingEnum.FISHING_CAST_IDLE
 					# make hook visible, and place it correctly
 					_hookSprite.visible = true
