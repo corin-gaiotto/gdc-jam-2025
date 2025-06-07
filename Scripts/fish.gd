@@ -47,7 +47,7 @@ func Initialize():
 	idleTimer.wait_time = idleBurstTime
 	
 	fishingTimer = $FishingTimer
-	fishingTimer.wait_time = fishingTurnTime
+	fishingTimer.wait_time = max(0.01, fishingTurnTime)
 	
 	idleTimer.start()
 	# Set own texture to match fishTexture

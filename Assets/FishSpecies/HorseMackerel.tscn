@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://ct8fpxw73qs1c"]
+
+[ext_resource type="Script" uid="uid://c3dgu655bgxdj" path="res://Scripts/fish_species.gd" id="1_314hc"]
+[ext_resource type="Texture2D" uid="uid://dokj5ftigyxx8" path="res://icon.svg" id="2_etkqd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b00gv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_etkqd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TestSpecies" type="Node"]
+script = ExtResource("1_314hc")
+speciesName = "Horse Mackerel"
+size = 1.0
+baseSellValue = 30.0
+fishTexture = SubResource("SpriteFrames_b00gv")
+preferredDepth = 400.0
+idleBurstTime = 5
+idleMoveSpeed = 100.0
+fishingTurnTime = 1
+fishingResistance = 1.0
+fishingEnergyDrain = 1.0
+metadata/_custom_type_script = "uid://c3dgu655bgxdj"

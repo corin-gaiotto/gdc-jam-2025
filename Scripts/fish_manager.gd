@@ -53,8 +53,8 @@ func spawnFish(SceneParent : Node, chosenSpecies : FishSpecies):
 	# Spawns a fish and attaches it as a child of the given parent node
 	var fishNode = chosenSpecies.generateFish()
 	
-	# TODO: set position properly. For now, just random between 0 and 400 on each axis
-	fishNode.position = Vector2(randf_range(0, 400), randf_range(0, 400))
+	# place fish horizontally in ocean around their preferred depth
+	fishNode.position = Vector2(randf_range(500, 1000), fishNode.preferredDepth + randf_range(-100, 100))
 	
 	SceneParent.add_child(fishNode)	
 
