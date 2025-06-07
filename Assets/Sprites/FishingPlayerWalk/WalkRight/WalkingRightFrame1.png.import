@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dajol4aba7smd"
-path="res://.godot/imported/Untitled_Artwork-3 9.png-e90c3178a9661391cba6919a00e2cb1f.ctex"
+uid="uid://bnfh6acdyo51j"
+path="res://.godot/imported/WalkingRightFrame1.png-5ea53e9aa3d4e8c7cf3887ec682bd637.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Untitled_Artwork-3 9.png"
-dest_files=["res://.godot/imported/Untitled_Artwork-3 9.png-e90c3178a9661391cba6919a00e2cb1f.ctex"]
+source_file="res://Assets/Sprites/FishingPlayerWalk/WalkRight/WalkingRightFrame1.png"
+dest_files=["res://.godot/imported/WalkingRightFrame1.png-5ea53e9aa3d4e8c7cf3887ec682bd637.ctex"]
 
 [params]
 

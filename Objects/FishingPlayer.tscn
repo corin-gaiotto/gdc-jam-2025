@@ -1,18 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://638hqodqju1e"]
+[gd_scene load_steps=19 format=3 uid="uid://638hqodqju1e"]
 
 [ext_resource type="Script" uid="uid://bah45uowqio7v" path="res://Scripts/fishing_player.gd" id="1_45n1i"]
 [ext_resource type="Texture2D" uid="uid://dokj5ftigyxx8" path="res://icon.svg" id="2_ygoci"]
+[ext_resource type="Texture2D" uid="uid://bir30nrc88lpq" path="res://Assets/Sprites/FishingPlayerWalk/WalkLeft/WalkLeftFrame0.png" id="3_pu66u"]
+[ext_resource type="Texture2D" uid="uid://dtxh00thqx284" path="res://Assets/Sprites/FishingPlayerWalk/StandingIdle/Ver2IdleF1.png" id="4_7wb4h"]
+[ext_resource type="Texture2D" uid="uid://d162xtkw8irka" path="res://Assets/Sprites/FishingPlayerWalk/StandingIdle/Ver2IdleF1Right.png" id="4_66nnk"]
+[ext_resource type="Texture2D" uid="uid://dh6878rdu7t5o" path="res://Assets/Sprites/FishingPlayerWalk/WalkLeft/WalkLeftFrame1.png" id="4_w8gg5"]
+[ext_resource type="Texture2D" uid="uid://dajol4aba7smd" path="res://Assets/Sprites/FishingPlayerWalk/WalkLeft/WalkLeftFrame2.png" id="5_ieu00"]
+[ext_resource type="Texture2D" uid="uid://c3d4rdyejpjno" path="res://Assets/Sprites/FishingPlayerWalk/WalkLeft/WalkLeftFrame3.png" id="6_kqgf7"]
+[ext_resource type="Texture2D" uid="uid://baqh2mddvye7w" path="res://Assets/Sprites/FishingPlayerWalk/WalkLeft/WalkLeftFrame4.png" id="7_5a7w7"]
+[ext_resource type="Texture2D" uid="uid://df4x7xocem241" path="res://Assets/Sprites/FishingPlayerWalk/WalkRight/WalkingRightFrame0.png" id="8_ljflr"]
+[ext_resource type="Texture2D" uid="uid://bnfh6acdyo51j" path="res://Assets/Sprites/FishingPlayerWalk/WalkRight/WalkingRightFrame1.png" id="9_kcg54"]
+[ext_resource type="Texture2D" uid="uid://cdgcx6abjq33f" path="res://Assets/Sprites/FishingPlayerWalk/WalkRight/WalkingRightFrame2.png" id="10_66nnk"]
+[ext_resource type="Texture2D" uid="uid://dadpkpaxvv0j6" path="res://Assets/Sprites/FishingPlayerWalk/WalkRight/WalkingRightFrame3.png" id="11_7wb4h"]
+[ext_resource type="Texture2D" uid="uid://cwtlewl2vfhuw" path="res://Assets/Sprites/FishingPlayerWalk/WalkRight/WalkingRightFrame4.png" id="12_iydyx"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_88ni6"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_ygoci")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_ygoci")
@@ -36,9 +40,66 @@ animations = [{
 "loop": true,
 "name": &"fishing-interact",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_7wb4h")
+}],
+"loop": true,
+"name": &"standing-idle-left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_66nnk")
+}],
+"loop": true,
+"name": &"standing-idle-right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_pu66u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_w8gg5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ieu00")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kqgf7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_5a7w7")
+}],
+"loop": true,
+"name": &"walk-left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_ljflr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_kcg54")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_66nnk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_7wb4h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_iydyx")
+}],
+"loop": true,
+"name": &"walk-right",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xur5a"]
+size = Vector2(14.5, 70)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_45n1i"]
 
@@ -55,12 +116,16 @@ animations = [{
 
 [node name="FishingPlayer" type="CharacterBody2D"]
 script = ExtResource("1_45n1i")
+speed = 750.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(48, 320.566)
+scale = Vector2(0.0282044, 0.0327924)
 sprite_frames = SubResource("SpriteFrames_88ni6")
-animation = &"fishing-interact"
+animation = &"standing-idle-right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(49, 324)
 shape = SubResource("RectangleShape2D_xur5a")
 
 [node name="Hook" type="Area2D" parent="."]
