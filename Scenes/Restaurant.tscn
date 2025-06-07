@@ -1,3 +1,10 @@
-[gd_scene format=3 uid="uid://bl1stivf7y0us"]
+[gd_scene load_steps=3 format=3 uid="uid://bl1stivf7y0us"]
+
+[ext_resource type="PackedScene" uid="uid://dmcswnvo3phg2" path="res://Objects/RestaurantPlayer.tscn" id="1_hi3lj"]
+[ext_resource type="PackedScene" uid="uid://y0gf5mbgh4g3" path="res://Objects/RestaurantManager.tscn" id="2_3p8wv"]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="RestaurantPlayer" parent="." instance=ExtResource("1_hi3lj")]
+
+[node name="RestaurantManager" parent="." instance=ExtResource("2_3p8wv")]

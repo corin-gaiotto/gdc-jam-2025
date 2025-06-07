@@ -1,6 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmcswnvo3phg2"]
+[gd_scene load_steps=5 format=3 uid="uid://dmcswnvo3phg2"]
 
 [ext_resource type="Script" uid="uid://bl4eg62kjkcgr" path="res://Scripts/restaurant_player.gd" id="1_ju37u"]
+[ext_resource type="Texture2D" uid="uid://dokj5ftigyxx8" path="res://icon.svg" id="2_447i3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tvcfu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_447i3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ju37u"]
 
@@ -8,6 +20,8 @@
 script = ExtResource("1_ju37u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tvcfu")
+frame_progress = 0.479843
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ju37u")

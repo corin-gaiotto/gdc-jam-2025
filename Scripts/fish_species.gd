@@ -9,6 +9,8 @@ class_name FishSpecies
 # NOTE: idea to possibly implement: increase complexity of sell price calculation to include attributes other than size (for instance, a tougher fish to catch should probably sell for more)
 
 #  [ATTRIBUTES]
+#    [Name]
+@export var speciesName: String
 #    [Catch-related]
 @export var size: float                  # Size of the fish, to be displayed when caught. Is randomly varied by some amount in individuals.
 @export var baseSellValue: float         # Base sell value of the fish, randomly varied by the eventual size of the individual fish
@@ -28,6 +30,7 @@ func generateFish() -> Fish:
 	var generatedFish : Fish = fishTemplate.instantiate()
 	
 	# Set attributes based on species
+	generatedFish.speciesName = speciesName
 	generatedFish.size = size * randf_range(0.8, 1.2) # TODO: tweak the random ranges later
 	generatedFish.baseSellValue = baseSellValue
 	

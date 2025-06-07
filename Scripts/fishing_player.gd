@@ -7,6 +7,8 @@ class_name FishingPlayer
 @onready var _hookSprite = $Hook/HookSprite
 @onready var _collisionShape = $CollisionShape2D
 
+@export var _energyBar : TextureProgressBar
+
 var hookedFish: Fish # fish actor that has been hooked
 
 # movement
@@ -25,6 +27,10 @@ var stateTimeRemaining: int # amount of time in frames before the state is done.
 
 var maxEnergy: float = 240
 var energy: float = maxEnergy
+var _audioPlayer : AudioStreamPlayer
+var _mainScene : Node
+signal play_fishing_calm
+signal play_fishing_bite
 
 # NOTE (Corin): I've commented this out as it's not how enums work. 
 # const FISHING_IDLE = "fishing-idle"
@@ -44,6 +50,25 @@ var energy: float = maxEnergy
 
 func _ready() -> void:
 	_hookSprite.visible = false # only display hook's sprite during FISHING_CAST_IDLE
+	_energyBar.max_value = maxEnergy
+	_energyBar.value = energy
+	_energyBar.visible = false
+	
+	_mainScene = get_parent().get_parent()
+	if _mainScene:
+		# if has parents two layers up, then is running from the main scene.
+		# find audio player
+		for sibling in _mainScene.get_children():
+			if is_instance_of(sibling, AudioStreamPlayer):
+				_audioPlayer = sibling
+				break
+	
+	if _audioPlayer:
+		print(_audioPlayer)
+		play_fishing_calm.connect(_audioPlayer.switch_to_fishing_calm)
+		play_fishing_bite.connect(_audioPlayer.switch_to_fishing_bite)
+	play_fishing_calm.emit()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -88,6 +113,7 @@ func _physics_process(delta: float) -> void:
 		match currentState:
 			
 			fishingEnum.FISHING_IDLE:
+				_energyBar.visible = false
 				if Input.is_action_just_pressed("fishing-interact"):
 					# cast a line
 					currentState = fishingEnum.FISHING_CAST_ANIMATION
@@ -101,6 +127,7 @@ func _physics_process(delta: float) -> void:
 						canFish = true
 			
 			fishingEnum.FISHING_CAST_ANIMATION:
+				_energyBar.visible = false
 				if stateTimeRemaining < 1:
 					_animatedSprite.play("fishing-cast-idle")
 					currentState = fishingEnum.FISHING_CAST_IDLE
@@ -109,6 +136,7 @@ func _physics_process(delta: float) -> void:
 					_hook.position = Vector2(400, 200) # placeholder: relative to player position
 			
 			fishingEnum.FISHING_CAST_IDLE:
+				_energyBar.visible = false
 				# Abilities: move hook in 4 directions, and cancel back to fishing_idle
 				
 				# TODO: clamp hook global position within the water (once the scene is more set up)
@@ -134,6 +162,9 @@ func _physics_process(delta: float) -> void:
 					_hookSprite.visible = false
 			
 			fishingEnum.FISHING_PULL_HOOK:
+				_energyBar.visible = true
+				_energyBar.value = energy
+				play_fishing_bite.emit()
 				# here is where the fishing minigame goes: on a success, return to FISHING_OBTAIN, otherwise, return to FISHING_IDLE
 				var pull_strength: float = abs(_x_dir) # 0 if not pulling, 1 if pulling
 				var energy_cost: float = 1
@@ -162,7 +193,9 @@ func _physics_process(delta: float) -> void:
 					# caught the fish
 					print("[minigame] Caught!")
 					hookedFish.global_position = global_position + Vector2(0, -80)
-					# for now, just remove the fish entirely
+					# remove the fish and add its name and price to the list of fish
+					_mainScene.conservedData["FishCaught"].append([hookedFish.speciesName, hookedFish.finalSellValue])
+					print(_mainScene.conservedData["FishCaught"])
 					hookedFish.queue_free()
 					currentState = fishingEnum.FISHING_OBTAIN
 				elif energy < 0:
@@ -170,12 +203,15 @@ func _physics_process(delta: float) -> void:
 					print("[minigame] Got away...")
 					currentState = fishingEnum.FISHING_IDLE
 					hookedFish.currentState = hookedFish.fishStatesEnum.IDLE
+					play_fishing_calm.emit()
 			
 			fishingEnum.FISHING_OBTAIN:
+				_energyBar.visible = false
 				# wait for the obtain animation to play out, then allow the player to return to FISHING_IDLE using interact
 				if stateTimeRemaining < 1 and Input.is_action_just_pressed("fishing-interact"):
 					currentState = fishingEnum.FISHING_IDLE
 					_hookSprite.visible = false
+					play_fishing_calm.emit()
 					
 		
 	stateTimeRemaining -= 1
