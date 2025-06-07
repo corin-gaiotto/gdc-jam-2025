@@ -6,10 +6,17 @@
 [ext_resource type="Texture2D" uid="uid://ckw8t1fex5blh" path="res://Assets/Art/UI/EnergyBar/over.png" id="4_5bvba"]
 [ext_resource type="Texture2D" uid="uid://bj0ct40kvwjv6" path="res://Assets/Art/UI/EnergyBar/progress.png" id="5_p25a2"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aonvm"]
+size = Vector2(64, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nnhe8"]
+size = Vector2(32, 128)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="FishingPlayer" parent="." node_paths=PackedStringArray("_energyBar") instance=ExtResource("1_aonvm")]
 _energyBar = NodePath("../TextureProgressBar")
+position = Vector2(147, 15)
 
 [node name="FishManagerTemplate" parent="." node_paths=PackedStringArray("SpeciesDict") instance=ExtResource("2_nnhe8")]
 SpeciesDict = {
@@ -31,3 +38,20 @@ fill_mode = 3
 texture_under = ExtResource("3_y05ux")
 texture_over = ExtResource("4_5bvba")
 texture_progress = ExtResource("5_p25a2")
+
+[node name="Border" type="StaticBody2D" parent="."]
+position = Vector2(100, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Border"]
+position = Vector2(516, 320)
+shape = SubResource("RectangleShape2D_aonvm")
+
+[node name="FishingArea" type="Area2D" parent="."]
+position = Vector2(139, -96)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FishingArea"]
+position = Vector2(437, 416)
+shape = SubResource("RectangleShape2D_nnhe8")
+
+[connection signal="body_entered" from="FishingArea" to="FishingPlayer" method="_on_fishing_area_body_entered"]
+[connection signal="body_exited" from="FishingArea" to="FishingPlayer" method="_on_fishing_area_body_exited"]
