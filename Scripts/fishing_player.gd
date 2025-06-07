@@ -15,9 +15,13 @@ var hookedFish: Fish # fish actor that has been hooked
 @export var canFish: bool = true
 @export var isFishing: bool = false
 
+
 enum fishingEnum {FISHING_IDLE, FISHING_CAST_ANIMATION, FISHING_CAST_IDLE, FISHING_BIT_HOOK, FISHING_PULL_HOOK, FISHING_OBTAIN}
 var currentState: int # which of the above enumerated states the player is in (used while isFishing is true)
 var stateTimeRemaining: int # amount of time in frames before the state is done. (used for states which transition after some amount of time)
+
+var maxEnergy: float = 240
+var energy: float = maxEnergy
 
 # NOTE (Corin): I've commented this out as it's not how enums work. 
 # const FISHING_IDLE = "fishing-idle"
@@ -90,11 +94,14 @@ func _physics_process(delta: float) -> void:
 					_hookSprite.visible = false
 			
 			fishingEnum.FISHING_BIT_HOOK:
+				energy = maxEnergy
 				# if stateTimeRemaining runs out, fish gets away; otherwise, if interact pressed, then start reeling in
 				if Input.is_action_just_pressed("fishing-interact"):
 					currentState = fishingEnum.FISHING_PULL_HOOK
 					_hookSprite.visible = false
 					# set fish state to reeling (instead of idle)
+					print(hookedFish)
+					hookedFish.currentState = hookedFish.fishStatesEnum.REELING
 				elif stateTimeRemaining < 1:
 					# also maybe remove the fish entirely? idk
 					currentState = fishingEnum.FISHING_IDLE
@@ -102,7 +109,38 @@ func _physics_process(delta: float) -> void:
 			
 			fishingEnum.FISHING_PULL_HOOK:
 				# here is where the fishing minigame goes: on a success, return to FISHING_OBTAIN, otherwise, return to FISHING_IDLE
-				pass
+				var pull_strength: float = abs(_x_dir) # 0 if not pulling, 1 if pulling
+				var energy_cost: float = 1
+				pull_strength /= hookedFish.fishingResistance
+				energy_cost *= hookedFish.fishingEnergyDrain
+				
+				if sign(_x_dir) == sign(hookedFish.fishingDirection):
+					# pulling in same direction, so increase pull strength and decrease energy cost
+					pull_strength *= 3
+					energy_cost /= 3
+				elif sign(_x_dir) == -1 * sign(hookedFish.fishingDirection):
+					# pulling in opposite direction, so decrease pull strength and heavily increase energy cost
+					pull_strength /= 2
+					energy_cost *= 3
+				
+				# move the fish upwards based on the pull strength
+				hookedFish.position.y -= pull_strength
+				
+				# decrease own energy by energy cost
+				energy -= energy_cost
+				
+				if hookedFish.position.y < 80: # placeholder: wherever water surface will be
+					# caught the fish
+					print("[minigame] Caught!")
+					hookedFish.global_position = global_position + Vector2(0, -80)
+					# for now, just remove the fish entirely
+					hookedFish.queue_free()
+					currentState = fishingEnum.FISHING_OBTAIN
+				elif energy < 0:
+					# lost the fish
+					print("[minigame] Got away...")
+					currentState = fishingEnum.FISHING_IDLE
+					hookedFish.currentState = hookedFish.fishStatesEnum.IDLE
 			
 			fishingEnum.FISHING_OBTAIN:
 				# wait for the obtain animation to play out, then allow the player to return to FISHING_IDLE using interact
@@ -118,6 +156,7 @@ func _on_hook_area_entered(area: Area2D) -> void:
 	# Fish collides with hook while hook is active
 	if currentState == fishingEnum.FISHING_CAST_IDLE:
 		print("[fishing_player] A Bite!")
-		var hookedFish = area.get_parent()
+		hookedFish = area.get_parent()
 		currentState = fishingEnum.FISHING_BIT_HOOK
 		stateTimeRemaining = 30 # half a second to react to fish bite (placeholder)
+		hookedFish.currentState = hookedFish.fishStatesEnum.BITHOOK
