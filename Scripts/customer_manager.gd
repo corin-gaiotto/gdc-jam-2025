@@ -6,8 +6,6 @@ class_name CustomerManager
 
 # [ATTRIBUTES]
 
-@export var orderSatisfied: bool
-
 @export var CustomerDict         : Dictionary[String, CustomerType] # Dict of available customers to spawn
 @export var CustomerWeights      : Dictionary[String, int]          # Dict of integer weights for their spawning rarity
 
