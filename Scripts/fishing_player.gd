@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 class_name FishingPlayer
 
+# grabbing children
 @onready var _animatedSprite = $AnimatedSprite2D
 @onready var _hook = $Hook
 @onready var _hookSprite = $Hook/HookSprite
@@ -110,7 +111,7 @@ func _physics_process(delta: float) -> void:
 		currentState = fishingEnum.FISHING_IDLE # Current (maybe) unfortunate side effect: the player casts a line whenever they start fishing. Honestly, this is pretty beneficial so I'm loath to call it a bad side effect.
 			
 	if isFishing:
-		print("[fishing_player]", currentState)
+		#print("[fishing_player]", currentState)
 		match currentState:
 			
 			fishingEnum.FISHING_IDLE:
@@ -237,9 +238,12 @@ func _on_hook_area_entered(area: Area2D) -> void:
 
 
 func _on_fishing_area_body_entered(body: Node2D) -> void:
+	print("Entered Fishing area!")
 	# when entering fishing area
 	inArea = true
 	canFish = true
+	print(inArea)
+	print(canFish)
 	pass # Replace with function body.
 
 
@@ -247,4 +251,12 @@ func _on_fishing_area_body_exited(body: Node2D) -> void:
 	# exiting fishing area
 	inArea = false
 	canFish = false
+	print(inArea)
+	print(canFish)
+	pass # Replace with function body.
+
+
+func _on_door_area_body_entered(body: Node2D) -> void:
+	if Input.is_action_just_pressed("fishing-interact"):	
+		get_tree().change_scene("res://Scenes/Restaurant.tscn")
 	pass # Replace with function body.
