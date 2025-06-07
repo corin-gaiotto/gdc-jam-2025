@@ -26,7 +26,7 @@ enum fishingEnum {FISHING_IDLE, FISHING_CAST_ANIMATION, FISHING_CAST_IDLE, FISHI
 var currentState: int # which of the above enumerated states the player is in (used while isFishing is true)
 var stateTimeRemaining: int # amount of time in frames before the state is done. (used for states which transition after some amount of time)
 
-var maxEnergy: float = 240
+var maxEnergy: float = 420
 var energy: float = maxEnergy
 var _audioPlayer : AudioStreamPlayer
 var _mainScene : Node
@@ -199,6 +199,8 @@ func _physics_process(delta: float) -> void:
 					print(_mainScene.conservedData["FishCaught"])
 					hookedFish.queue_free()
 					currentState = fishingEnum.FISHING_OBTAIN
+					
+					
 				elif energy < 0:
 					# lost the fish
 					print("[minigame] Got away...")
