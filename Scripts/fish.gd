@@ -25,8 +25,11 @@ class_name Fish
 # [VARIABLES]
 
 var timer : Timer
-var Velocity = Vector2(0,0) 
+var initialVelocity = Vector2.ZERO
+var currentVelocity = Vector2.ZERO
 var isBursting = false
+
+
 
 func _ready() -> void:
 	# Called when enters the scene for the first time.
@@ -40,34 +43,33 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# Called 60 times per second on a fixed update.
 	if isBursting:
-		print("prev", Velocity)
-		Velocity *= pow((timer.time_left/timer.wait_time),0.5)#Velocity * (1 - (timer.time_left/timer.wait_time))
+		currentVelocity = initialVelocity * pow((timer.time_left/timer.wait_time),1.5)#Velocity * (1 - (timer.time_left/timer.wait_time))
 
 	
-	#var depthDeviation = position.y - preferredDepth
-	#if depthDeviation > 20:
+#	var depthDeviation = position.y - preferredDepth
+#	if depthDeviation > 20:
 #		Velocity.y -= maxf(depthDeviation/idleMoveSpeed ,1)
 #	elif depthDeviation < 20:
 #		Velocity.y += maxf(depthDeviation/idleMoveSpeed ,1)
 	
-	position += Velocity * delta
+	position += currentVelocity * delta
 	pass
 
 func apply_burst():
-	Velocity = Vector2(randf_range(-1,1), randf_range(-1,1)).normalized() * idleMoveSpeed
+	initialVelocity = Vector2(randf_range(-1,1), randf_range(-1,1)).normalized() * idleMoveSpeed
 	var depthDeviation = position.y - preferredDepth
 	if depthDeviation > 20:
-		Velocity.y -= maxf(depthDeviation/idleMoveSpeed ,1)
+		initialVelocity.y -= maxf(depthDeviation/idleMoveSpeed ,1)
 	elif depthDeviation < 20:
-		Velocity.y += maxf(depthDeviation/idleMoveSpeed ,1)
+		initialVelocity.y += maxf(depthDeviation/idleMoveSpeed ,1)
 	
 
 func _on_timer_timeout() -> void:
-	Velocity = Vector2.ZERO
+	initialVelocity = Vector2.ZERO
 	print("timeout", timer.wait_time)
 	if !isBursting:
-		Velocity = Vector2(randf_range(-1,1), randf_range(-1,1)).normalized() * idleMoveSpeed
-		print("new velocity", Velocity)
+		apply_burst()
+
 		
 		
 	isBursting = !isBursting

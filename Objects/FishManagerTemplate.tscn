@@ -19,4 +19,3 @@ spawningActive = true
 metadata/_custom_type_script = "uid://dit08ixmmktq5"
 
 [node name="TestSpecies" parent="." instance=ExtResource("2_56iai")]
-fishingTurnTime = 0
