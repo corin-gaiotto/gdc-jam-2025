@@ -31,11 +31,10 @@ var initialVelocity = Vector2.ZERO
 var currentVelocity = Vector2.ZERO
 var isBursting = false
 
-enum fishStatesEnum {IDLE, BITHOOK, }
-var currentState = 0
+enum fishStatesEnum {IDLE, BITHOOK, REELING}
+@export var currentState = 0
 
-var hookLocation = Vector2.ZERO
-var fishingDirection = Vector2.ZERO
+var fishingDirection : float = 0
 
 func _ready() -> void:
 	# Called when enters the scene for the first time.
@@ -60,8 +59,13 @@ func _physics_process(delta: float) -> void:
 				currentVelocity = initialVelocity * pow((idleTimer.time_left/idleTimer.wait_time),1.5)
 				position += currentVelocity * delta
 		fishStatesEnum.BITHOOK:
-			position.y -= delta
-			position += fishingDirection*(1 - ((global_position - hookLocation).length()/10))
+			fishingTimer.start()
+			fishingDirection = (randi_range(0, 1) - 0.5) * 2
+		fishStatesEnum.REELING:
+			# move in direction
+			position += Vector2(idleMoveSpeed * delta * fishingDirection, 0)
+			
+			
 			
 			
 	
@@ -72,7 +76,6 @@ func _physics_process(delta: float) -> void:
 #		Velocity.y += maxf(depthDeviation/idleMoveSpeed ,1)
 	
 	
-	pass
 
 func applyIdleBurst():
 	print(self.name)
@@ -94,10 +97,9 @@ func _on_idle_timer_timeout() -> void:
 		
 	isBursting = !isBursting
 	idleTimer.start()
-	pass # Replace with function body.
 
 
 func _on_fishing_timer_timeout() -> void:
-	var Direction = Vector2(randf_range(-1,1),randf_range(0,1)).normalized()
-		
-	pass # Replace with function body.
+	fishingDirection = (randi_range(0, 1) - 0.5) * 2
+	
+	fishingTimer.start()
