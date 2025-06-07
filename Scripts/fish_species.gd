@@ -16,7 +16,7 @@ class_name FishSpecies
 @export var fishTexture: SpriteFrames    # How the species looks.
 #    [Idle Behaviour]
 @export var preferredDepth: float        # What depth the fish species appears at.
-@export var idleTurnTime: int            # Amount of frames the species spends moving in one direction before turning around (on average)
+@export var idleBurstTime: int            # Amount of frames the species spends moving in one direction before turning around (on average)
 @export var idleMoveSpeed: float         # How fast the fish moves while idle.
 #    [Fishing Behaviour]
 @export var fishingTurnTime: int         # Amount of frames the species spends moving in one direction before turning around, while being caught
@@ -34,7 +34,7 @@ func generateFish() -> Fish:
 	generatedFish.fishTexture = fishTexture
 	
 	generatedFish.preferredDepth = preferredDepth * randf_range(0.8, 1.2)
-	generatedFish.idleTurnTime = idleTurnTime * randf_range(0.8, 1.2)
+	generatedFish.idleBurstTime = idleBurstTime * randf_range(0.8, 1.2)
 	generatedFish.idleMoveSpeed = idleMoveSpeed * randf_range(0.8, 1.2)
 	
 	generatedFish.fishingTurnTime = fishingTurnTime * randf_range(0.8, 1.2)
