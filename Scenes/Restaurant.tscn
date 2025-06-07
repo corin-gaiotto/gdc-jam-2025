@@ -1,10 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://bl1stivf7y0us"]
+[gd_scene load_steps=6 format=3 uid="uid://bl1stivf7y0us"]
 
 [ext_resource type="PackedScene" uid="uid://dmcswnvo3phg2" path="res://Objects/RestaurantPlayer.tscn" id="1_hi3lj"]
-[ext_resource type="PackedScene" uid="uid://y0gf5mbgh4g3" path="res://Objects/RestaurantManager.tscn" id="2_3p8wv"]
+[ext_resource type="Texture2D" uid="uid://dokj5ftigyxx8" path="res://icon.svg" id="2_yfx12"]
+[ext_resource type="PackedScene" uid="uid://c4onavem3i6q6" path="res://Objects/Customer.tscn" id="3_yfx12"]
+[ext_resource type="PackedScene" uid="uid://wxs78acgk1qk" path="res://Objects/MenuItem.tscn" id="5_piffy"]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_piffy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_yfx12")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node2D2" type="Node2D"]
+position = Vector2(500, 350)
+scale = Vector2(0.5, 0.5)
 
 [node name="RestaurantPlayer" parent="." instance=ExtResource("1_hi3lj")]
+restaurantPlayerSprite = SubResource("SpriteFrames_piffy")
 
-[node name="RestaurantManager" parent="." instance=ExtResource("2_3p8wv")]
+[node name="Customer" parent="." instance=ExtResource("3_yfx12")]
+
+[node name="MenuItem" parent="." instance=ExtResource("5_piffy")]
+baseTimer = 5.0
