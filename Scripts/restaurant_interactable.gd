@@ -3,6 +3,7 @@ extends Area2D
 class_name RestaurantInteractable
 
 var canInteract = false
+var storedIngredients
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
