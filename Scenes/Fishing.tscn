@@ -21,10 +21,15 @@ speed = 750.0
 
 [node name="FishManagerTemplate" parent="." node_paths=PackedStringArray("SpeciesDict") instance=ExtResource("2_nnhe8")]
 SpeciesDict = {
-"Anchovy": NodePath("Anchovy"),
-"Horse Mackerel": NodePath("HorseMackerel"),
+"Anchovy": null,
+"Horse Mackerel": null,
 "TestSpecies": NodePath("TestSpecies")
 }
+SpeciesWeights = Dictionary[String, int]({
+"TestSpecies": 1
+})
+spawnTimeMin = 480
+spawnTimeMax = 720
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 anchors_preset = 15
