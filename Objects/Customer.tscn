@@ -1,3 +1,100 @@
-[gd_scene load_steps=0 format=3 uid="uid://c4onavem3i6q6"]
+[gd_scene load_steps=13 format=3 uid="uid://c4onavem3i6q6"]
 
-[node name="Customer" type="Node2D"]
+[ext_resource type="Script" uid="uid://b0lnctqxeoiia" path="res://Scripts/customer.gd" id="1_bdb25"]
+[ext_resource type="Texture2D" uid="uid://ddx8cecpjn41w" path="res://Assets/Art/TestCustomer/CustomerSit.png" id="2_py31r"]
+[ext_resource type="Texture2D" uid="uid://cy428a7pnx1q6" path="res://Assets/Art/TestCustomer/TestSpeechBubble.png" id="3_dohlm"]
+[ext_resource type="Texture2D" uid="uid://boh5l5scglkf5" path="res://Assets/Art/TestCustomer/CustomerWalkLeft.png" id="3_w6vul"]
+[ext_resource type="Texture2D" uid="uid://cyfpimqm1pace" path="res://Assets/Art/TestCustomer/TestMenuItem.png" id="4_0g1uc"]
+[ext_resource type="Texture2D" uid="uid://2hb7ghrjosrp" path="res://Assets/Art/TestCustomer/CustomerWalkRight.png" id="4_iyeuv"]
+[ext_resource type="Texture2D" uid="uid://bugytd7yvl4ns" path="res://Assets/Art/TestCustomer/HappyFace.png" id="5_a7kyv"]
+[ext_resource type="Texture2D" uid="uid://de0qk0o4dlxmj" path="res://Assets/Art/TestCustomer/SadFace.png" id="6_j0p7o"]
+[ext_resource type="Texture2D" uid="uid://c8bgn5qwxkk8f" path="res://Assets/Art/TestCustomer/CustomerStand.png" id="7_w6vul"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a7kyv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_dohlm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j0p7o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_0g1uc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_a7kyv")
+}],
+"loop": true,
+"name": &"happy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_j0p7o")
+}],
+"loop": true,
+"name": &"sad",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iyeuv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_w6vul")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_py31r")
+}],
+"loop": true,
+"name": &"sit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_w6vul")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_iyeuv")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Customer" type="AnimatedSprite2D"]
+script = ExtResource("1_bdb25")
+customerPatience = 1.0
+customerTip = 1.0
+isWalking = false
+
+[node name="SpeechBubble" type="AnimatedSprite2D" parent="."]
+position = Vector2(400, -200)
+sprite_frames = SubResource("SpriteFrames_a7kyv")
+
+[node name="OrderedDish" type="AnimatedSprite2D" parent="."]
+position = Vector2(400, -200)
+sprite_frames = SubResource("SpriteFrames_j0p7o")
+animation = &"sad"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_iyeuv")
+animation = &"walk"
+frame_progress = 0.808002
+speed_scale = 0.5

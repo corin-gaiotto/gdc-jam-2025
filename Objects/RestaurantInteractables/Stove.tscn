@@ -8,7 +8,6 @@
 [node name="Stove" type="Area2D"]
 collision_layer = 0
 script = ExtResource("1_1cxga")
-metadata/_custom_type_script = "uid://haqw6fvltw5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 10)

@@ -11,10 +11,11 @@ class_name CustomerType
 # [ATTRIBUTES]
 
 @export var customerPatience: float             # Multiplier for time limit on order
-@export var customerTip: float                  # Customer tip% (decimal) on top of base price
+@export var customerTip: float                  # Customer tip on top of base price
 @export var customerOrder: MenuItem             # Customer's ordered dish
 
-@export var totalBill: float                 # Total customer bill with tip
+@export var customerTimer: float                # Total time limit for customer order
+@export var totalBill: float                    # Total customer bill with tip
 
 #[Visuals]
 @export var customerTexture: SpriteFrames       # How the customer looks.
@@ -24,13 +25,15 @@ func generateCustomer() -> Customer:
 	var generatedCustomer : Customer = customerTemplate.instantiate()
 	
 	# Set attributes based on type
+	generatedCustomer.orderSatisfied = false
 	generatedCustomer.orderTimer = randf_range(0, 30) # TODO: tweak the random ranges later
 	generatedCustomer.customerTip = randf_range(0, 1)
 	generatedCustomer.customerOrder = generateCustomerOrder() # Select random Menu Item from dictionary
 	
 	# Calculate any derived attributes based on the above
 	#  Calculate final payment value based on customer tip
-	generatedCustomer.totalBill = generateCustomer().customerOrder.basePrice * (1 + generatedCustomer.customerTip)
+	generatedCustomer.customerTimer = customerOrder.baseTimer * customerPatience
+	generatedCustomer.totalBill = generateCustomer().customerOrder.basePrice * generatedCustomer.customerTip
 	
 	# If we would like to implement multiple orders per customer
 	#generatedCustomer.totalBill = calculateBillNoTip(generatedCustomer.customerOrder) * (1 + generatedCustomer.customerTip)
