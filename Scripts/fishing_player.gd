@@ -210,6 +210,8 @@ func _physics_process(delta: float) -> void:
 					print(_mainScene.conservedData["FishCaught"])
 					hookedFish.queue_free()
 					currentState = fishingEnum.FISHING_OBTAIN
+					stateTimeRemaining = 75
+					_animatedSprite.play("fishing-reel-complete")
 					
 					
 				elif energy < 0:
@@ -224,6 +226,7 @@ func _physics_process(delta: float) -> void:
 				# wait for the obtain animation to play out, then allow the player to return to FISHING_IDLE using interact
 				if stateTimeRemaining < 1 and Input.is_action_just_pressed("fishing-interact"):
 					currentState = fishingEnum.FISHING_IDLE
+					_animatedSprite.play("fishing-idle")
 					_hookSprite.visible = false
 					play_fishing_calm.emit()
 					
