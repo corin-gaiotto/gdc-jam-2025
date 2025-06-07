@@ -12,6 +12,7 @@ var hookedFish: Fish # fish actor that has been hooked
 
 # movement
 @export var speed: float = 200
+@export var lastWalkedRight: bool = true
 
 # check if in fishing area
 @export var canFish: bool = true
@@ -52,15 +53,34 @@ func _physics_process(delta: float) -> void:
 	# get direction from inputs
 	var _x_dir = Input.get_axis("left", "right")
 	var _y_dir = Input.get_axis("up", "down")
+	var _idle_state = "standing-idle-right";
+	
+	if _x_dir < 0:
+		_idle_state = "standing-idle-left"
+		lastWalkedRight = false
+	elif _x_dir > 0:
+		_idle_state = "standing-idle-right"
+		lastWalkedRight = true
+	else:
+		if lastWalkedRight:
+			_idle_state = "standing-idle-right"
+		else:
+			_idle_state = "standing-idle-left"
 	
 	# set velocity (only when not fishing)
 	if not(isFishing):
 		velocity = Vector2(_x_dir * speed * delta, 0)
+		if _x_dir < Vector2.ZERO.x:
+			_animatedSprite.play("walk-left")
+		elif _x_dir > Vector2.ZERO.x:
+			_animatedSprite.play("walk-right")
+		else:
+				_animatedSprite.play(_idle_state)
 	else:
 		velocity = Vector2.ZERO
 	move_and_slide()
 	
-	if canFish and Input.is_action_just_pressed("fishing-interact"):
+	if canFish and Input.is_action_just_pressed("start-fishing"):
 		_animatedSprite.play("fishing-idle")
 		isFishing = true
 		canFish = false
@@ -76,6 +96,7 @@ func _physics_process(delta: float) -> void:
 					# cast a line
 					currentState = fishingEnum.FISHING_CAST_ANIMATION
 					_animatedSprite.play("fishing-cast-animation")
+
 					stateTimeRemaining = 60 # placeholder
 				elif Input.is_action_just_pressed("fishing-cancel"):
 					# stop fishing
@@ -84,6 +105,7 @@ func _physics_process(delta: float) -> void:
 			fishingEnum.FISHING_CAST_ANIMATION:
 				_energyBar.visible = false
 				if stateTimeRemaining < 1:
+					_animatedSprite.play("fishing-cast-idle")
 					currentState = fishingEnum.FISHING_CAST_IDLE
 					# make hook visible, and place it correctly
 					_hookSprite.visible = true
