@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="GDC JAM 2025"
+run/main_scene="uid://dlmq4i5th33hf"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[dotnet]
+
+project/assembly_name="GDC JAM 2025"
 
 [input]
 
