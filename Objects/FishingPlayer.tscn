@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://638hqodqju1e"]
+[gd_scene load_steps=3 format=3 uid="uid://638hqodqju1e"]
+
+[ext_resource type="Script" uid="uid://bah45uowqio7v" path="res://Scripts/fishing_player.gd" id="1_45n1i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xur5a"]
 
 [node name="FishingPlayer" type="CharacterBody2D"]
+script = ExtResource("1_45n1i")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 
