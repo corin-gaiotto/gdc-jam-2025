@@ -126,6 +126,9 @@ func _physics_process(delta: float) -> void:
 				# move the fish upwards based on the pull strength
 				hookedFish.position.y -= pull_strength
 				
+				if pull_strength == 0:
+					hookedFish.position.y += hookedFish.fishingResistance
+				
 				# decrease own energy by energy cost
 				energy -= energy_cost
 				
