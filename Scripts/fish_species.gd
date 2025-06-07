@@ -18,10 +18,10 @@ class_name FishSpecies
 @export var fishTexture: SpriteFrames    # How the species looks.
 #    [Idle Behaviour]
 @export var preferredDepth: float        # What depth the fish species appears at.
-@export var idleBurstTime: int            # Amount of frames the species spends moving in one direction before turning around (on average)
+@export var idleBurstTime: float            # Amount of frames the species spends moving in one direction before turning around (on average)
 @export var idleMoveSpeed: float         # How fast the fish moves while idle.
 #    [Fishing Behaviour]
-@export var fishingTurnTime: int         # Amount of frames the species spends moving in one direction before turning around, while being caught
+@export var fishingTurnTime: float         # Amount of frames the species spends moving in one direction before turning around, while being caught
 @export var fishingResistance: float     # Multiplier for how long the fish takes to be reeled in.
 @export var fishingEnergyDrain: float    # Multiplier for how much energy the fish drains while reeling it in.
 
@@ -49,6 +49,6 @@ func generateFish() -> Fish:
 	generatedFish.finalSellValue = generatedFish.baseSellValue * (generatedFish.size)/size
 	
 	# Visuals: make the generated fish's sprite transform scale with the amount its size is scaling by
-	generatedFish.transform = generatedFish.transform.scaled(Vector2((generatedFish.size)/size, (generatedFish.size)/size))
+	generatedFish.transform = generatedFish.transform.scaled(Vector2((generatedFish.size), (generatedFish.size)))
 	
 	return generatedFish # NOTE: being returned does not automatically add it to the scene tree!

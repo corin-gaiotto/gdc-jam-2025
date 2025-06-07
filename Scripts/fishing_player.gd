@@ -142,7 +142,8 @@ func _physics_process(delta: float) -> void:
 				
 				# TODO: clamp hook global position within the water (once the scene is more set up)
 				_hook.position += delta * hookSpeed * Vector2(_x_dir, _y_dir)
-				_hook.position.y = clamp(_hook.position.y, 256, 648)
+				_hook.global_position.y = clamp(_hook.global_position.y, 256, 648)
+				_hook.global_position.x = clamp(_hook.global_position.x, 465, 1150)
 				if Input.is_action_just_pressed("fishing-cancel"):
 					# return to fishing idle
 					currentState = fishingEnum.FISHING_IDLE
@@ -152,6 +153,7 @@ func _physics_process(delta: float) -> void:
 				energy = maxEnergy
 				# if stateTimeRemaining runs out, fish gets away; otherwise, if interact pressed, then start reeling in
 				if Input.is_action_just_pressed("fishing-interact"):
+					play_fishing_bite.emit()
 					currentState = fishingEnum.FISHING_PULL_HOOK
 					_hookSprite.visible = false
 					# set fish state to reeling (instead of idle)
@@ -160,12 +162,12 @@ func _physics_process(delta: float) -> void:
 				elif stateTimeRemaining < 1:
 					# also maybe remove the fish entirely? idk
 					currentState = fishingEnum.FISHING_IDLE
+					play_fishing_calm.emit()
 					_hookSprite.visible = false
 			
 			fishingEnum.FISHING_PULL_HOOK:
 				_energyBar.visible = true
 				_energyBar.value = energy
-				play_fishing_bite.emit()
 				# here is where the fishing minigame goes: on a success, return to FISHING_OBTAIN, otherwise, return to FISHING_IDLE
 				var pull_strength: float = abs(_x_dir) # 0 if not pulling, 1 if pulling
 				var energy_cost: float = 1
