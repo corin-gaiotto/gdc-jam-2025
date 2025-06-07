@@ -7,7 +7,7 @@ class_name Fish
 #  [ATTRIBUTES]
 #    [Species name]
 @export var speciesName: String
-#    [Catch-related]
+#    [Catch-related]v1
 @export var size: float                  # Size of the fish, to be displayed when caught.
 @export var baseSellValue: float         # Base sell value of the fish.
 #    [Visuals]
