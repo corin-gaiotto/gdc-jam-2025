@@ -24,7 +24,9 @@ const FISHING_OBTAIN_FISH = "fishing-obtain-fish"
 func _physics_process(delta: float) -> void:
 	# get direction from inputs
 	var _dir = Input.get_axis("left", "right")
-	
+	while _dir != Vector2.ZERO:
+		_animatedSprite.play("walking")
+		
 	# set velocity
 	velocity = _dir.normalized()
 	move_and_slide()
