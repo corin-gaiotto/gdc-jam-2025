@@ -27,3 +27,6 @@ metadata/_custom_type_script = "uid://dit08ixmmktq5"
 [node name="Anchovy" parent="." instance=ExtResource("3_sv0qc")]
 
 [node name="HorseMackerel" parent="." instance=ExtResource("4_vadww")]
+size = 0.2
+idleBurstTime = 0.0
+fishingTurnTime = 0.0

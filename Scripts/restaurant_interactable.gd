@@ -3,6 +3,7 @@ extends Area2D
 class_name RestaurantInteractable
 
 var canInteract = false
+var storedIngredients = []
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
@@ -11,7 +12,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("restaurant-interact"):
 		interact()
-		print("interacting")
 		
 func interact():
 	print("interactable")
