@@ -6,7 +6,6 @@
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_tt5f1")
-showTutorial = false
 
 [node name="StartButton" type="Button" parent="."]
 offset_left = 385.0
