@@ -58,7 +58,7 @@ func _physics_process(delta: float) -> void:
 		currentState = fishingEnum.FISHING_IDLE # Current (maybe) unfortunate side effect: the player casts a line whenever they start fishing. Honestly, this is pretty beneficial so I'm loath to call it a bad side effect.
 			
 	if isFishing:
-		print(currentState)
+		print("[fishing_player]", currentState)
 		match currentState:
 			
 			fishingEnum.FISHING_IDLE:
@@ -93,7 +93,7 @@ func _physics_process(delta: float) -> void:
 				# if stateTimeRemaining runs out, fish gets away; otherwise, if interact pressed, then start reeling in
 				if Input.is_action_just_pressed("fishing-interact"):
 					currentState = fishingEnum.FISHING_PULL_HOOK
-					_hookSprite.visible = true
+					_hookSprite.visible = false
 					# set fish state to reeling (instead of idle)
 				elif stateTimeRemaining < 1:
 					# also maybe remove the fish entirely? idk
@@ -117,5 +117,7 @@ func _physics_process(delta: float) -> void:
 func _on_hook_area_entered(area: Area2D) -> void:
 	# Fish collides with hook while hook is active
 	if currentState == fishingEnum.FISHING_CAST_IDLE:
+		print("[fishing_player] A Bite!")
 		var hookedFish = area.get_parent()
 		currentState = fishingEnum.FISHING_BIT_HOOK
+		stateTimeRemaining = 30 # half a second to react to fish bite (placeholder)
