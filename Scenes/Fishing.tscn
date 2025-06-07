@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dsbtedevf5vc1"]
+[gd_scene load_steps=10 format=3 uid="uid://dsbtedevf5vc1"]
 
 [ext_resource type="PackedScene" uid="uid://638hqodqju1e" path="res://Objects/FishingPlayer.tscn" id="1_aonvm"]
 [ext_resource type="PackedScene" uid="uid://biouiciisyeg2" path="res://Objects/FishManagerTemplate.tscn" id="2_nnhe8"]
@@ -6,11 +6,17 @@
 [ext_resource type="Texture2D" uid="uid://ckw8t1fex5blh" path="res://Assets/Art/UI/EnergyBar/over.png" id="4_5bvba"]
 [ext_resource type="Texture2D" uid="uid://bj0ct40kvwjv6" path="res://Assets/Art/UI/EnergyBar/progress.png" id="5_p25a2"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nnhe8"]
+size = Vector2(32, 128)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aonvm"]
 size = Vector2(64, 128)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nnhe8"]
-size = Vector2(32, 128)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y05ux"]
+size = Vector2(16, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5bvba"]
+size = Vector2(24, 88)
 
 [node name="Node2D" type="Node2D"]
 
@@ -28,10 +34,9 @@ SpeciesDict = {
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1040.0
-offset_top = 21.0
-offset_right = 1296.0
-offset_bottom = 1426.0
+offset_left = 1086.0
+offset_right = 1342.0
+offset_bottom = 1405.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.25, 0.25)
@@ -40,13 +45,6 @@ texture_under = ExtResource("3_y05ux")
 texture_over = ExtResource("4_5bvba")
 texture_progress = ExtResource("5_p25a2")
 
-[node name="Border" type="StaticBody2D" parent="."]
-position = Vector2(-36, -160)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Border"]
-position = Vector2(516, 320)
-shape = SubResource("RectangleShape2D_aonvm")
-
 [node name="FishingArea" type="Area2D" parent="."]
 position = Vector2(11, -256)
 
@@ -54,5 +52,25 @@ position = Vector2(11, -256)
 position = Vector2(437, 416)
 shape = SubResource("RectangleShape2D_nnhe8")
 
+[node name="FishingBorder" type="StaticBody2D" parent="."]
+position = Vector2(-36, -160)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FishingBorder"]
+position = Vector2(516, 320)
+shape = SubResource("RectangleShape2D_aonvm")
+
+[node name="DoorBorder" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorBorder"]
+position = Vector2(72, 180)
+shape = SubResource("RectangleShape2D_y05ux")
+
+[node name="DoorArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorArea"]
+position = Vector2(84, 180)
+shape = SubResource("RectangleShape2D_5bvba")
+
 [connection signal="body_entered" from="FishingArea" to="FishingPlayer" method="_on_fishing_area_body_entered"]
 [connection signal="body_exited" from="FishingArea" to="FishingPlayer" method="_on_fishing_area_body_exited"]
+[connection signal="body_entered" from="DoorArea" to="FishingPlayer" method="_on_door_area_body_entered"]

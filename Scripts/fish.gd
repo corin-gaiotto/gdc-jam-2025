@@ -60,7 +60,7 @@ func _physics_process(delta: float) -> void:
 	match currentState:
 		fishStatesEnum.IDLE:
 			if isBursting:
-				currentVelocity = initialVelocity * pow((idleTimer.time_left/idleTimer.wait_time),1.5)
+				currentVelocity = initialVelocity * pow((idleTimer.time_left/idleTimer.wait_time), 1.2)
 				position += currentVelocity * delta
 			position.x = clamp(position.x, 465, 1150)
 			position.y = clamp(position.y, 280, 648)
