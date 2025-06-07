@@ -23,14 +23,7 @@ spawningActive = true
 metadata/_custom_type_script = "uid://dit08ixmmktq5"
 
 [node name="TestSpecies" parent="." instance=ExtResource("2_56iai")]
-idleBurstTime = 5.0
-fishingTurnTime = 1.0
 
 [node name="Anchovy" parent="." instance=ExtResource("3_sv0qc")]
-idleBurstTime = 3.0
-fishingTurnTime = 0.5
 
 [node name="HorseMackerel" parent="." instance=ExtResource("4_vadww")]
-size = 0.4
-idleBurstTime = 5.0
-fishingTurnTime = 1.0

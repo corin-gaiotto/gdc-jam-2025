@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 class_name FishingPlayer
 
+# grabbing children
 @onready var _animatedSprite = $AnimatedSprite2D
 @onready var _hook = $Hook
 @onready var _hookSprite = $Hook/HookSprite
@@ -20,13 +21,14 @@ var hookedFish: Fish # fish actor that has been hooked
 @export var canFish: bool = false
 @export var isFishing: bool = false
 @export var inArea: bool = false
+@export var inDoor: bool = false
 
 
 enum fishingEnum {FISHING_IDLE, FISHING_CAST_ANIMATION, FISHING_CAST_IDLE, FISHING_BIT_HOOK, FISHING_PULL_HOOK, FISHING_OBTAIN}
 var currentState: int # which of the above enumerated states the player is in (used while isFishing is true)
 var stateTimeRemaining: int # amount of time in frames before the state is done. (used for states which transition after some amount of time)
 
-var maxEnergy: float = 240
+var maxEnergy: float = 420
 var energy: float = maxEnergy
 var _audioPlayer : AudioStreamPlayer
 var _mainScene : Node
@@ -103,6 +105,11 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 	move_and_slide()
 	
+	if inDoor and Input.is_action_just_pressed("start-fishing"):
+		_mainScene.switchScene("Restaurant")
+	
+	#print("[debug-sitting]", isFishing, canFish, inArea)
+	
 	if canFish and Input.is_action_just_pressed("start-fishing"):
 		_animatedSprite.play("fishing-idle")
 		isFishing = true
@@ -110,7 +117,7 @@ func _physics_process(delta: float) -> void:
 		currentState = fishingEnum.FISHING_IDLE # Current (maybe) unfortunate side effect: the player casts a line whenever they start fishing. Honestly, this is pretty beneficial so I'm loath to call it a bad side effect.
 			
 	if isFishing:
-		print("[fishing_player]", currentState)
+		#print("[fishing_player]", currentState)
 		match currentState:
 			
 			fishingEnum.FISHING_IDLE:
@@ -203,6 +210,8 @@ func _physics_process(delta: float) -> void:
 					print(_mainScene.conservedData["FishCaught"])
 					hookedFish.queue_free()
 					currentState = fishingEnum.FISHING_OBTAIN
+					
+					
 				elif energy < 0:
 					# lost the fish
 					print("[minigame] Got away...")
@@ -237,14 +246,25 @@ func _on_hook_area_entered(area: Area2D) -> void:
 
 
 func _on_fishing_area_body_entered(body: Node2D) -> void:
+	print("Entered Fishing area!")
 	# when entering fishing area
 	inArea = true
 	canFish = true
-	pass # Replace with function body.
+	print(inArea)
+	print(canFish)
 
 
 func _on_fishing_area_body_exited(body: Node2D) -> void:
 	# exiting fishing area
 	inArea = false
 	canFish = false
-	pass # Replace with function body.
+	print(inArea)
+	print(canFish)
+
+
+func _on_door_area_body_entered(body: Node2D) -> void:
+	inDoor = true
+
+
+func _on_door_area_body_exited(body: Node2D) -> void:
+	inDoor = false
