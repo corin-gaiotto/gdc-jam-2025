@@ -182,7 +182,6 @@ animations = [{
 
 [node name="FishingPlayer" type="CharacterBody2D"]
 script = ExtResource("1_45n1i")
-speed = 4500.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(48, 320.566)
