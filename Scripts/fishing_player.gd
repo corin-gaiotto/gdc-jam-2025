@@ -104,6 +104,8 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 	move_and_slide()
 	
+	#print("[debug-sitting]", isFishing, canFish, inArea)
+	
 	if canFish and Input.is_action_just_pressed("start-fishing"):
 		_animatedSprite.play("fishing-idle")
 		isFishing = true
