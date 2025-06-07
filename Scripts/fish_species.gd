@@ -9,6 +9,8 @@ class_name FishSpecies
 # NOTE: idea to possibly implement: increase complexity of sell price calculation to include attributes other than size (for instance, a tougher fish to catch should probably sell for more)
 
 #  [ATTRIBUTES]
+#    [Name]
+@export var speciesName: String
 #    [Catch-related]
 @export var size: float                  # Size of the fish, to be displayed when caught. Is randomly varied by some amount in individuals.
 @export var baseSellValue: float         # Base sell value of the fish, randomly varied by the eventual size of the individual fish
@@ -16,10 +18,10 @@ class_name FishSpecies
 @export var fishTexture: SpriteFrames    # How the species looks.
 #    [Idle Behaviour]
 @export var preferredDepth: float        # What depth the fish species appears at.
-@export var idleBurstTime: int            # Amount of frames the species spends moving in one direction before turning around (on average)
+@export var idleBurstTime: float            # Amount of frames the species spends moving in one direction before turning around (on average)
 @export var idleMoveSpeed: float         # How fast the fish moves while idle.
 #    [Fishing Behaviour]
-@export var fishingTurnTime: int         # Amount of frames the species spends moving in one direction before turning around, while being caught
+@export var fishingTurnTime: float         # Amount of frames the species spends moving in one direction before turning around, while being caught
 @export var fishingResistance: float     # Multiplier for how long the fish takes to be reeled in.
 @export var fishingEnergyDrain: float    # Multiplier for how much energy the fish drains while reeling it in.
 
@@ -28,6 +30,7 @@ func generateFish() -> Fish:
 	var generatedFish : Fish = fishTemplate.instantiate()
 	
 	# Set attributes based on species
+	generatedFish.speciesName = speciesName
 	generatedFish.size = size * randf_range(0.8, 1.2) # TODO: tweak the random ranges later
 	generatedFish.baseSellValue = baseSellValue
 	
@@ -46,6 +49,6 @@ func generateFish() -> Fish:
 	generatedFish.finalSellValue = generatedFish.baseSellValue * (generatedFish.size)/size
 	
 	# Visuals: make the generated fish's sprite transform scale with the amount its size is scaling by
-	generatedFish.transform = generatedFish.transform.scaled(Vector2((generatedFish.size)/size, (generatedFish.size)/size))
+	generatedFish.transform = generatedFish.transform.scaled(Vector2((generatedFish.size), (generatedFish.size)))
 	
 	return generatedFish # NOTE: being returned does not automatically add it to the scene tree!

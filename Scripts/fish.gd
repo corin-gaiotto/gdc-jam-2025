@@ -5,6 +5,8 @@ class_name Fish
 # Class for individual fish instances. Has various statistics that are partially randomized, determined by the FishSpecies provided.
 
 #  [ATTRIBUTES]
+#    [Species name]
+@export var speciesName: String
 #    [Catch-related]
 @export var size: float                  # Size of the fish, to be displayed when caught.
 @export var baseSellValue: float         # Base sell value of the fish.
@@ -15,7 +17,7 @@ class_name Fish
 @export var idleBurstTime: int            # Amount of frames the species spends moving in one direction before turning around (on average)
 @export var idleMoveSpeed: float         # How fast the fish moves while idle.
 #    [Fishing Behaviour]
-@export var fishingTurnTime: int         # Amount of frames the species spends moving in one direction before turning around, while being caught
+@export var fishingTurnTime: float         # Amount of frames the species spends moving in one direction before turning around, while being caught
 @export var fishingResistance: float     # Multiplier for how long the fish takes to be reeled in.
 @export var fishingEnergyDrain: float    # Multiplier for how much energy the fish drains while reeling it in.
 
@@ -45,11 +47,13 @@ func Initialize():
 	idleTimer.wait_time = idleBurstTime
 	
 	fishingTimer = $FishingTimer
-	fishingTimer.wait_time = fishingTurnTime
+	print("[testing]", fishingTurnTime)
+	fishingTimer.wait_time = max(0.01, fishingTurnTime)
 	
 	idleTimer.start()
 	# Set own texture to match fishTexture
 	set_sprite_frames(fishTexture)
+	play()
 
 func _physics_process(delta: float) -> void:
 	# Called 60 times per second on a fixed update.
@@ -58,12 +62,15 @@ func _physics_process(delta: float) -> void:
 			if isBursting:
 				currentVelocity = initialVelocity * pow((idleTimer.time_left/idleTimer.wait_time),1.5)
 				position += currentVelocity * delta
+			position.x = clamp(position.x, 465, 1150)
+			position.y = clamp(position.y, 280, 648)
 		fishStatesEnum.BITHOOK:
 			fishingTimer.start()
 			fishingDirection = (randi_range(0, 1) - 0.5) * 2
 		fishStatesEnum.REELING:
 			# move in direction
 			position += Vector2(idleMoveSpeed * delta * fishingDirection, 0)
+			position.x = clamp(position.x, 465, 1150)
 			
 			
 			

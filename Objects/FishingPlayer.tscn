@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://638hqodqju1e"]
+[gd_scene load_steps=35 format=3 uid="uid://638hqodqju1e"]
 
 [ext_resource type="Script" uid="uid://bah45uowqio7v" path="res://Scripts/fishing_player.gd" id="1_45n1i"]
 [ext_resource type="Texture2D" uid="uid://w38rmx0euw02" path="res://Assets/Sprites/FishingPlayerFishing/FishingCasting/Casting0.png" id="2_qqduh"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://yvos4ow1ttwh" path="res://Assets/Sprites/FishingPlayerWalk/StandingIdle/Frame2Right.png" id="11_8kch1"]
 [ext_resource type="Texture2D" uid="uid://clrl6amyquniq" path="res://Assets/Sprites/FishingPlayerWalk/StandingIdle/Frame3Right.png" id="12_t28he"]
 [ext_resource type="Texture2D" uid="uid://do7vcjab8a1ky" path="res://Assets/Sprites/FishingPlayerWalk/WalkLeft/WalkLeft0.png" id="13_gljcj"]
+[ext_resource type="Texture2D" uid="uid://crup04jdqxbuf" path="res://Assets/Sprites/FishingPlayerWalk/StandingIdle/Frame1.png" id="14_8kch1"]
 [ext_resource type="Texture2D" uid="uid://bl28r2ol26qvo" path="res://Assets/Sprites/FishingPlayerWalk/WalkLeft/WalkLeft1.png" id="14_t6e8o"]
 [ext_resource type="Texture2D" uid="uid://djrkv7qqb3dk0" path="res://Assets/Sprites/FishingPlayerWalk/WalkLeft/WalkLeft2.png" id="15_hd4i8"]
 [ext_resource type="Texture2D" uid="uid://blvryyscxw1wk" path="res://Assets/Sprites/FishingPlayerWalk/WalkLeft/WalkLeft3.png" id="16_vpeqk"]
@@ -93,6 +94,9 @@ animations = [{
 "texture": ExtResource("6_qb8u7")
 }, {
 "duration": 1.0,
+"texture": ExtResource("14_8kch1")
+}, {
+"duration": 1.0,
 "texture": ExtResource("7_7t373")
 }, {
 "duration": 1.0,
@@ -137,7 +141,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk-left",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -157,7 +161,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk-right",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xur5a"]
@@ -178,13 +182,14 @@ animations = [{
 
 [node name="FishingPlayer" type="CharacterBody2D"]
 script = ExtResource("1_45n1i")
-speed = 750.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(48, 320.566)
 scale = Vector2(0.0282044, 0.0327924)
 sprite_frames = SubResource("SpriteFrames_88ni6")
-animation = &"fishing-cast-animation"
+animation = &"standing-idle-left"
+frame = 2
+frame_progress = 0.665315
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(48.4063, 332)

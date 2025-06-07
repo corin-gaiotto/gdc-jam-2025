@@ -1,21 +1,36 @@
-[gd_scene load_steps=3 format=3 uid="uid://biouiciisyeg2"]
+[gd_scene load_steps=5 format=3 uid="uid://biouiciisyeg2"]
 
 [ext_resource type="Script" uid="uid://dit08ixmmktq5" path="res://Scripts/fish_manager.gd" id="1_w4qpl"]
 [ext_resource type="PackedScene" uid="uid://c82kc21gwu57i" path="res://Assets/FishSpecies/TestSpecies.tscn" id="2_56iai"]
+[ext_resource type="PackedScene" uid="uid://cfe7akv2fmbsw" path="res://Assets/FishSpecies/Anchovy.tscn" id="3_sv0qc"]
+[ext_resource type="PackedScene" uid="uid://ct8fpxw73qs1c" path="res://Assets/FishSpecies/HorseMackerel.tscn" id="4_vadww"]
 
 [node name="FishManagerTemplate" type="Node2D" node_paths=PackedStringArray("SpeciesDict")]
 script = ExtResource("1_w4qpl")
 SpeciesDict = {
-"TestSpecies": NodePath("TestSpecies")
+"Anchovy": NodePath("Anchovy"),
+"Horse Mackerel": NodePath("HorseMackerel")
 }
 SpeciesWeights = Dictionary[String, int]({
-"TestSpecies": 1
+"Anchovy": 2,
+"Horse Mackerel": 1
 })
-spawnTimeMin = 480
-spawnTimeMax = 720
+spawnTimeMin = 600
+spawnTimeMax = 900
 spawnAmountMin = 1
 spawnAmountMax = 3
 spawningActive = true
 metadata/_custom_type_script = "uid://dit08ixmmktq5"
 
 [node name="TestSpecies" parent="." instance=ExtResource("2_56iai")]
+idleBurstTime = 5.0
+fishingTurnTime = 1.0
+
+[node name="Anchovy" parent="." instance=ExtResource("3_sv0qc")]
+idleBurstTime = 3.0
+fishingTurnTime = 0.5
+
+[node name="HorseMackerel" parent="." instance=ExtResource("4_vadww")]
+size = 0.4
+idleBurstTime = 5.0
+fishingTurnTime = 1.0

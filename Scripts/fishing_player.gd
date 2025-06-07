@@ -5,18 +5,21 @@ class_name FishingPlayer
 @onready var _animatedSprite = $AnimatedSprite2D
 @onready var _hook = $Hook
 @onready var _hookSprite = $Hook/HookSprite
+@onready var _collisionShape = $CollisionShape2D
 
 @export var _energyBar : TextureProgressBar
 
 var hookedFish: Fish # fish actor that has been hooked
 
 # movement
-@export var speed: float = 200
+@export var speed: float = 4500
 @export var lastWalkedRight: bool = true
+@export var hookSpeed: float = 200
 
 # check if in fishing area
-@export var canFish: bool = true
+@export var canFish: bool = false
 @export var isFishing: bool = false
+@export var inArea: bool = false
 
 
 enum fishingEnum {FISHING_IDLE, FISHING_CAST_ANIMATION, FISHING_CAST_IDLE, FISHING_BIT_HOOK, FISHING_PULL_HOOK, FISHING_OBTAIN}
@@ -25,6 +28,10 @@ var stateTimeRemaining: int # amount of time in frames before the state is done.
 
 var maxEnergy: float = 240
 var energy: float = maxEnergy
+var _audioPlayer : AudioStreamPlayer
+var _mainScene : Node
+signal play_fishing_calm
+signal play_fishing_bite
 
 # NOTE (Corin): I've commented this out as it's not how enums work. 
 # const FISHING_IDLE = "fishing-idle"
@@ -47,6 +54,22 @@ func _ready() -> void:
 	_energyBar.max_value = maxEnergy
 	_energyBar.value = energy
 	_energyBar.visible = false
+	
+	_mainScene = get_parent().get_parent()
+	if _mainScene:
+		# if has parents two layers up, then is running from the main scene.
+		# find audio player
+		for sibling in _mainScene.get_children():
+			if is_instance_of(sibling, AudioStreamPlayer):
+				_audioPlayer = sibling
+				break
+	
+	if _audioPlayer:
+		print(_audioPlayer)
+		play_fishing_calm.connect(_audioPlayer.switch_to_fishing_calm)
+		play_fishing_bite.connect(_audioPlayer.switch_to_fishing_bite)
+	play_fishing_calm.emit()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -101,6 +124,8 @@ func _physics_process(delta: float) -> void:
 				elif Input.is_action_just_pressed("fishing-cancel"):
 					# stop fishing
 					isFishing = false
+					if inArea:
+						canFish = true
 			
 			fishingEnum.FISHING_CAST_ANIMATION:
 				_energyBar.visible = false
@@ -109,15 +134,16 @@ func _physics_process(delta: float) -> void:
 					currentState = fishingEnum.FISHING_CAST_IDLE
 					# make hook visible, and place it correctly
 					_hookSprite.visible = true
-					_hook.position = Vector2(400, 200) # placeholder: relative to player position
+					_hook.global_position = Vector2(global_position.x + 240, 256) # placeholder: relative to player position
 			
 			fishingEnum.FISHING_CAST_IDLE:
 				_energyBar.visible = false
 				# Abilities: move hook in 4 directions, and cancel back to fishing_idle
 				
 				# TODO: clamp hook global position within the water (once the scene is more set up)
-				_hook.position += delta * 50 * Vector2(_x_dir, _y_dir)
-				
+				_hook.position += delta * hookSpeed * Vector2(_x_dir, _y_dir)
+				_hook.global_position.y = clamp(_hook.global_position.y, 256, 648)
+				_hook.global_position.x = clamp(_hook.global_position.x, 465, 1150)
 				if Input.is_action_just_pressed("fishing-cancel"):
 					# return to fishing idle
 					currentState = fishingEnum.FISHING_IDLE
@@ -127,6 +153,7 @@ func _physics_process(delta: float) -> void:
 				energy = maxEnergy
 				# if stateTimeRemaining runs out, fish gets away; otherwise, if interact pressed, then start reeling in
 				if Input.is_action_just_pressed("fishing-interact"):
+					play_fishing_bite.emit()
 					currentState = fishingEnum.FISHING_PULL_HOOK
 					_hookSprite.visible = false
 					# set fish state to reeling (instead of idle)
@@ -135,12 +162,15 @@ func _physics_process(delta: float) -> void:
 				elif stateTimeRemaining < 1:
 					# also maybe remove the fish entirely? idk
 					currentState = fishingEnum.FISHING_IDLE
+					play_fishing_calm.emit()
 					_hookSprite.visible = false
 			
 			fishingEnum.FISHING_PULL_HOOK:
 				_energyBar.visible = true
 				_energyBar.value = energy
 				# here is where the fishing minigame goes: on a success, return to FISHING_OBTAIN, otherwise, return to FISHING_IDLE
+				var minigame_difficulty = 3 # constant that determines how long it takes to reel fish in
+				
 				var pull_strength: float = abs(_x_dir) # 0 if not pulling, 1 if pulling
 				var energy_cost: float = 1
 				pull_strength /= hookedFish.fishingResistance
@@ -153,10 +183,10 @@ func _physics_process(delta: float) -> void:
 				elif sign(_x_dir) == -1 * sign(hookedFish.fishingDirection):
 					# pulling in opposite direction, so decrease pull strength and heavily increase energy cost
 					pull_strength /= 2
-					energy_cost *= 3
+					energy_cost *= 1.5
 				
 				# move the fish upwards based on the pull strength
-				hookedFish.position.y -= pull_strength
+				hookedFish.position.y -= pull_strength / minigame_difficulty
 				
 				if pull_strength == 0:
 					hookedFish.position.y += hookedFish.fishingResistance
@@ -164,11 +194,13 @@ func _physics_process(delta: float) -> void:
 				# decrease own energy by energy cost
 				energy -= energy_cost
 				
-				if hookedFish.position.y < 80: # placeholder: wherever water surface will be
+				if hookedFish.position.y < 256: # placeholder: wherever water surface will be
 					# caught the fish
 					print("[minigame] Caught!")
 					hookedFish.global_position = global_position + Vector2(0, -80)
-					# for now, just remove the fish entirely
+					# remove the fish and add its name and price to the list of fish
+					_mainScene.conservedData["FishCaught"].append([hookedFish.speciesName, snapped(hookedFish.finalSellValue, 0.01)])
+					print(_mainScene.conservedData["FishCaught"])
 					hookedFish.queue_free()
 					currentState = fishingEnum.FISHING_OBTAIN
 				elif energy < 0:
@@ -176,6 +208,7 @@ func _physics_process(delta: float) -> void:
 					print("[minigame] Got away...")
 					currentState = fishingEnum.FISHING_IDLE
 					hookedFish.currentState = hookedFish.fishStatesEnum.IDLE
+					play_fishing_calm.emit()
 			
 			fishingEnum.FISHING_OBTAIN:
 				_energyBar.visible = false
@@ -183,9 +216,14 @@ func _physics_process(delta: float) -> void:
 				if stateTimeRemaining < 1 and Input.is_action_just_pressed("fishing-interact"):
 					currentState = fishingEnum.FISHING_IDLE
 					_hookSprite.visible = false
+					play_fishing_calm.emit()
 					
 		
 	stateTimeRemaining -= 1
+	
+
+
+
 
 
 func _on_hook_area_entered(area: Area2D) -> void:
@@ -196,3 +234,17 @@ func _on_hook_area_entered(area: Area2D) -> void:
 		currentState = fishingEnum.FISHING_BIT_HOOK
 		stateTimeRemaining = 30 # half a second to react to fish bite (placeholder)
 		hookedFish.currentState = hookedFish.fishStatesEnum.BITHOOK
+
+
+func _on_fishing_area_body_entered(body: Node2D) -> void:
+	# when entering fishing area
+	inArea = true
+	canFish = true
+	pass # Replace with function body.
+
+
+func _on_fishing_area_body_exited(body: Node2D) -> void:
+	# exiting fishing area
+	inArea = false
+	canFish = false
+	pass # Replace with function body.

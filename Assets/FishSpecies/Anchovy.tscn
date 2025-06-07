@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://cfe7akv2fmbsw"]
+
+[ext_resource type="Script" uid="uid://c3dgu655bgxdj" path="res://Scripts/fish_species.gd" id="1_4wj3h"]
+[ext_resource type="Texture2D" uid="uid://dldaadgufbgcb" path="res://Assets/Sprites/Fish/Generic/1.png" id="2_kcu8q"]
+[ext_resource type="Texture2D" uid="uid://dytipigr3ib2p" path="res://Assets/Sprites/Fish/Generic/2.png" id="3_o1wa8"]
+[ext_resource type="Texture2D" uid="uid://dw3bmorjwbcu0" path="res://Assets/Sprites/Fish/Generic/3.png" id="4_retbn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b00gv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kcu8q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_o1wa8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_retbn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TestSpecies" type="Node"]
+script = ExtResource("1_4wj3h")
+speciesName = "Anchovy"
+size = 0.15
+baseSellValue = 10.0
+fishTexture = SubResource("SpriteFrames_b00gv")
+preferredDepth = 300.0
+idleMoveSpeed = 50.0
+fishingResistance = 0.75
+fishingEnergyDrain = 0.5
+metadata/_custom_type_script = "uid://c3dgu655bgxdj"

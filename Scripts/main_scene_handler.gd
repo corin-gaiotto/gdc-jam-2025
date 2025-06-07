@@ -14,7 +14,10 @@ var currentScene: Node
 	"FishCaught": []
 }
 
+@onready var _musicHandler = $MusicHandler
+
 func _ready() -> void:
+	_musicHandler.play()
 	currentScene = scenes["MainMenu"].instantiate()
 	add_child(currentScene)
 

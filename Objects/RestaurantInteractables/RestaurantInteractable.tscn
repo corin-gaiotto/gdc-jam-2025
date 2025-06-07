@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsfqlbbtiqiwp"]
+
+[ext_resource type="Script" uid="uid://haqw6fvltw5" path="res://Scripts/restaurant_interactable.gd" id="1_u88gw"]
+[ext_resource type="PackedScene" uid="uid://dmcswnvo3phg2" path="res://Objects/RestaurantPlayer.tscn" id="2_t6k5v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vgcbo"]
+
+[node name="Interactable" type="Area2D"]
+script = ExtResource("1_u88gw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vgcbo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="RestaurantPlayer" parent="." instance=ExtResource("2_t6k5v")]
+position = Vector2(121, 0)

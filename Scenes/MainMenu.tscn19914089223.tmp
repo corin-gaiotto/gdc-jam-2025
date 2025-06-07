@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxn6is0lw48to"]
+
+[ext_resource type="Script" uid="uid://ci2ujbudpnctm" path="res://Scripts/main_menu.gd" id="1_tt5f1"]
+[ext_resource type="Script" uid="uid://drojcjnhgeiwp" path="res://Scenes/main_menu_sprite_pivot.gd" id="2_8saeu"]
+[ext_resource type="Texture2D" uid="uid://dokj5ftigyxx8" path="res://icon.svg" id="2_853f1"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_tt5f1")
+
+[node name="StartButton" type="Button" parent="."]
+offset_left = 385.0
+offset_top = 137.0
+offset_right = 751.0
+offset_bottom = 209.0
+text = "Start"
+
+[node name="ExitButton" type="Button" parent="."]
+offset_left = 382.0
+offset_top = 333.0
+offset_right = 748.0
+offset_bottom = 405.0
+text = "Exit"
+
+[node name="IntroTimer" type="Timer" parent="."]
+
+[node name="IntroFrames" type="AnimatedSprite2D" parent="."]
+
+[node name="SpritePivot" type="Node2D" parent="."]
+position = Vector2(224, 290)
+script = ExtResource("2_8saeu")
+
+[node name="Sprite2D" type="Sprite2D" parent="SpritePivot"]
+position = Vector2(-14, -162)
+texture = ExtResource("2_853f1")
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
