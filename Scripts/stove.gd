@@ -2,22 +2,19 @@ extends RestaurantInteractable
 
 var finishedCooking
 
-func interact():
-	super.interact()
-	if storedIngredients.length() != 0:
+func interact(player : RestaurantPlayer):
+	super.interact(player)
+	if storedIngredients.length() == 0:
 		$Timer.start()
-		#TODO player should transfer their held item to storedIngredients
+		storedIngredients.append_array(player.heldIngredients)
 	elif finishedCooking:
-		#TODO create a new cooked food object and  store fish back in player inventory
-		pass
+		var cookedFood = FoodItem.new()
+		cookedFood.Ingredients.append_array(storedIngredients)
+		
 	else:
 		$Timer.stop()
-		#TODO store fish back in player inventory
+		player.heldIngredients.append_array(storedIngredients)
 		pass
-
-func _process(delta: float) -> void:
-	if storedIngredients.length() != 0:
-		return
 
 
 func _on_timer_timeout() -> void:
