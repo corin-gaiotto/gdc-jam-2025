@@ -8,6 +8,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_hmv8f"]
 
 [node name="Fish" type="AnimatedSprite2D"]
+modulate = Color(0.587613, 0.969514, 0.869707, 1)
 position = Vector2(329, 184)
 script = ExtResource("1_f7nft")
 size = 1.0
@@ -20,7 +21,9 @@ idleMoveSpeed = 100.0
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_hmv8f")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="IdleTimer" type="Timer" parent="."]
+
+[node name="FishingTimer" type="Timer" parent="."]
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
@@ -29,4 +32,5 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_hmv8f")
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="FishingTimer" to="." method="_on_fishing_timer_timeout"]
