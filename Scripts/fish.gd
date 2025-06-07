@@ -67,9 +67,9 @@ func _physics_process(delta: float) -> void:
 		fishStatesEnum.BITHOOK:
 			fishingTimer.start()
 			fishingDirection = (randi_range(0, 1) - 0.5) * 2
-			flip_h = sign(fishingDirection) < 0
 		fishStatesEnum.REELING:
 			# move in direction
+			flip_h = sign(fishingDirection) < 0
 			position += Vector2(idleMoveSpeed * delta * fishingDirection, 0)
 			position.x = clamp(position.x, 465, 1150)
 			
