@@ -40,24 +40,34 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# Called 60 times per second on a fixed update.
 	if isBursting:
-		Velocity -= Velocity/(1-timer.time_left)
+		print("prev", Velocity)
+		Velocity *= pow((timer.time_left/timer.wait_time),0.5)#Velocity * (1 - (timer.time_left/timer.wait_time))
+
 	
-	var depthDeviation = position.y - preferredDepth
+	#var depthDeviation = position.y - preferredDepth
 	#if depthDeviation > 20:
-#		Velocity.y -= maxf(depthDeviation/idleMoveSpeed ,0.1)
+#		Velocity.y -= maxf(depthDeviation/idleMoveSpeed ,1)
 #	elif depthDeviation < 20:
-#		Velocity.y += maxf(depthDeviation/idleMoveSpeed ,0.1)
+#		Velocity.y += maxf(depthDeviation/idleMoveSpeed ,1)
 	
-	position += Velocity
+	position += Velocity * delta
 	pass
 
+func apply_burst():
+	Velocity = Vector2(randf_range(-1,1), randf_range(-1,1)).normalized() * idleMoveSpeed
+	var depthDeviation = position.y - preferredDepth
+	if depthDeviation > 20:
+		Velocity.y -= maxf(depthDeviation/idleMoveSpeed ,1)
+	elif depthDeviation < 20:
+		Velocity.y += maxf(depthDeviation/idleMoveSpeed ,1)
 	
 
 func _on_timer_timeout() -> void:
 	Velocity = Vector2.ZERO
 	print("timeout", timer.wait_time)
 	if !isBursting:
-		Velocity += Vector2(randf_range(-1,1), randf_range(-1,1)).normalized() * idleMoveSpeed
+		Velocity = Vector2(randf_range(-1,1), randf_range(-1,1)).normalized() * idleMoveSpeed
+		print("new velocity", Velocity)
 		
 		
 	isBursting = !isBursting

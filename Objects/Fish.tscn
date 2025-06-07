@@ -14,8 +14,8 @@ size = 1.0
 baseSellValue = 1.0
 fishTexture = SubResource("SpriteFrames_hmv8f")
 preferredDepth = 400.0
-idleBurstTime = 2
-idleMoveSpeed = 1.0
+idleBurstTime = 5
+idleMoveSpeed = 100.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_hmv8f")
