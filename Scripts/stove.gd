@@ -6,6 +6,7 @@ func interact():
 	super.interact()
 	if storedIngredients.length() != 0:
 		$Timer.start()
+		#TODO player should transfer their held item to storedIngredients
 	elif finishedCooking:
 		#TODO create a new cooked food object and  store fish back in player inventory
 		pass
