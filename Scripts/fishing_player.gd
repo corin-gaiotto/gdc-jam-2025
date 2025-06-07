@@ -26,6 +26,7 @@ var stateTimeRemaining: int # amount of time in frames before the state is done.
 var maxEnergy: float = 240
 var energy: float = maxEnergy
 var _audioPlayer : AudioStreamPlayer
+var _mainScene : Node
 signal play_fishing_calm
 signal play_fishing_bite
 
@@ -51,9 +52,11 @@ func _ready() -> void:
 	_energyBar.value = energy
 	_energyBar.visible = false
 	
-	# find audio player
-	if get_parent().get_parent():
-		for sibling in get_parent().get_parent().get_children():
+	_mainScene = get_parent().get_parent()
+	if _mainScene:
+		# if has parents two layers up, then is running from the main scene.
+		# find audio player
+		for sibling in _mainScene.get_children():
 			if is_instance_of(sibling, AudioStreamPlayer):
 				_audioPlayer = sibling
 				break
@@ -186,7 +189,9 @@ func _physics_process(delta: float) -> void:
 					# caught the fish
 					print("[minigame] Caught!")
 					hookedFish.global_position = global_position + Vector2(0, -80)
-					# for now, just remove the fish entirely
+					# remove the fish and add its name and price to the list of fish
+					_mainScene.conservedData["FishCaught"].append(["Placeholder Fish Name", hookedFish.finalSellValue])
+					print(_mainScene.conservedData["FishCaught"])
 					hookedFish.queue_free()
 					currentState = fishingEnum.FISHING_OBTAIN
 				elif energy < 0:
