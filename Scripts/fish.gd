@@ -5,6 +5,8 @@ class_name Fish
 # Class for individual fish instances. Has various statistics that are partially randomized, determined by the FishSpecies provided.
 
 #  [ATTRIBUTES]
+#    [Species name]
+@export var speciesName: String
 #    [Catch-related]
 @export var size: float                  # Size of the fish, to be displayed when caught.
 @export var baseSellValue: float         # Base sell value of the fish.
