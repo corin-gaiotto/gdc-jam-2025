@@ -22,6 +22,7 @@ size = Vector2(24, 88)
 
 [node name="FishingPlayer" parent="." node_paths=PackedStringArray("_energyBar") instance=ExtResource("1_aonvm")]
 position = Vector2(88, -202)
+collision_layer = 5
 _energyBar = NodePath("../TextureProgressBar")
 
 [node name="FishManagerTemplate" parent="." node_paths=PackedStringArray("SpeciesDict") instance=ExtResource("2_nnhe8")]
@@ -47,6 +48,8 @@ texture_progress = ExtResource("5_p25a2")
 
 [node name="FishingArea" type="Area2D" parent="."]
 position = Vector2(11, -256)
+collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FishingArea"]
 position = Vector2(437, 416)
@@ -66,6 +69,8 @@ position = Vector2(72, 180)
 shape = SubResource("RectangleShape2D_y05ux")
 
 [node name="DoorArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DoorArea"]
 position = Vector2(84, 180)
@@ -74,3 +79,4 @@ shape = SubResource("RectangleShape2D_5bvba")
 [connection signal="body_entered" from="FishingArea" to="FishingPlayer" method="_on_fishing_area_body_entered"]
 [connection signal="body_exited" from="FishingArea" to="FishingPlayer" method="_on_fishing_area_body_exited"]
 [connection signal="body_entered" from="DoorArea" to="FishingPlayer" method="_on_door_area_body_entered"]
+[connection signal="body_exited" from="DoorArea" to="FishingPlayer" method="_on_door_area_body_exited"]

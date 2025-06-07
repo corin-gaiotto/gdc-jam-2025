@@ -21,6 +21,7 @@ var hookedFish: Fish # fish actor that has been hooked
 @export var canFish: bool = false
 @export var isFishing: bool = false
 @export var inArea: bool = false
+@export var inDoor: bool = false
 
 
 enum fishingEnum {FISHING_IDLE, FISHING_CAST_ANIMATION, FISHING_CAST_IDLE, FISHING_BIT_HOOK, FISHING_PULL_HOOK, FISHING_OBTAIN}
@@ -103,6 +104,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = Vector2.ZERO
 	move_and_slide()
+	
+	if inDoor and Input.is_action_just_pressed("start-fishing"):
+		_mainScene.switchScene("Restaurant")
+	
+	#print("[debug-sitting]", isFishing, canFish, inArea)
 	
 	if canFish and Input.is_action_just_pressed("start-fishing"):
 		_animatedSprite.play("fishing-idle")
@@ -246,7 +252,6 @@ func _on_fishing_area_body_entered(body: Node2D) -> void:
 	canFish = true
 	print(inArea)
 	print(canFish)
-	pass # Replace with function body.
 
 
 func _on_fishing_area_body_exited(body: Node2D) -> void:
@@ -255,10 +260,11 @@ func _on_fishing_area_body_exited(body: Node2D) -> void:
 	canFish = false
 	print(inArea)
 	print(canFish)
-	pass # Replace with function body.
 
 
 func _on_door_area_body_entered(body: Node2D) -> void:
-	if Input.is_action_just_pressed("fishing-interact"):	
-		get_tree().change_scene("res://Scenes/Restaurant.tscn")
-	pass # Replace with function body.
+	inDoor = true
+
+
+func _on_door_area_body_exited(body: Node2D) -> void:
+	inDoor = false
