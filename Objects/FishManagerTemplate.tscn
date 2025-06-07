@@ -9,23 +9,28 @@
 script = ExtResource("1_w4qpl")
 SpeciesDict = {
 "Anchovy": NodePath("Anchovy"),
-"Horse Mackerel": NodePath("HorseMackerel"),
-"TestSpecies": NodePath("TestSpecies")
+"Horse Mackerel": NodePath("HorseMackerel")
 }
 SpeciesWeights = Dictionary[String, int]({
 "Anchovy": 2,
-"Horse Mackerel": 1,
-"TestSpecies": 1
+"Horse Mackerel": 1
 })
 spawnTimeMin = 600
-spawnTimeMax = 1200
+spawnTimeMax = 900
 spawnAmountMin = 1
 spawnAmountMax = 3
 spawningActive = true
 metadata/_custom_type_script = "uid://dit08ixmmktq5"
 
 [node name="TestSpecies" parent="." instance=ExtResource("2_56iai")]
+idleBurstTime = 5.0
+fishingTurnTime = 1.0
 
 [node name="Anchovy" parent="." instance=ExtResource("3_sv0qc")]
+idleBurstTime = 3.0
+fishingTurnTime = 0.5
 
 [node name="HorseMackerel" parent="." instance=ExtResource("4_vadww")]
+size = 0.4
+idleBurstTime = 5.0
+fishingTurnTime = 1.0

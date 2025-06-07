@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://bk53gndqfvu11" path="res://Assets/Sprites/MainMenu/MainMenu2.png" id="5_xim88"]
 [ext_resource type="Texture2D" uid="uid://hytj65l2l70k" path="res://Assets/Sprites/MainMenu/MainMenu3.png" id="6_koqhg"]
 
-[sub_resource type="Animation" id="Animation_cmrfp"]
-resource_name = "pop in"
+[sub_resource type="Animation" id="Animation_loo7a"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -22,8 +22,8 @@ tracks/0/keys = {
 "values": [Vector2(1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_loo7a"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_cmrfp"]
+resource_name = "pop in"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
