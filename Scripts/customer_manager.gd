@@ -10,7 +10,6 @@ class_name CustomerManager
 
 @export var CustomerDict         : Dictionary[String, CustomerType] # Dict of available customers to spawn
 @export var CustomerWeights      : Dictionary[String, int]          # Dict of integer weights for their spawning rarity
-@export var CustomerMenu         : Dictionary[String, MenuItem]    # Dict of available menu items
 
 # Spawning time is random between these two values
 @export var spawnTimeMin : int # in frames (60fps): how long between spawns (minimum)
@@ -39,7 +38,7 @@ func weightedChoice() -> String:
 	
 	return chosenStr
 
-func spawnCustomer(SceneParent : Node, chosenType : CustomerType, chosenOrder : CustomerOrder):
+func spawnCustomer(SceneParent : Node, chosenType : CustomerType):
 	# Spawns a customer and attaches it as a child of the given parent node
 	var customerNode = chosenType.generateCustomer()
 	
@@ -48,22 +47,9 @@ func spawnCustomer(SceneParent : Node, chosenType : CustomerType, chosenOrder : 
 	
 	SceneParent.add_child(customerNode)	
 
-func customerOrder():
-	# Choose a random order combination from menu items
-	var choiceList = []
-	for k in CustomerMenu.keys():
-		for i in range(CustomerMenu[k]):
-			choiceList.append(k)
-	var orderLengths = [1, 2, 3]
-	var chosenOrderLength = orderLengths.pick_random()
-	
-	var orderList = []
-	for k in chosenOrderLength:
-		orderList.append(choiceList.pick_random())
-			
 
 func spawnRandomCustomer(SceneParent : Node):
 	# Spawns a random customer and attaches it as a child of the given parent node
 	var chosenType = CustomerDict[weightedChoice()]
 	
-	spawnCustomer(SceneParent, chosenType, chosenOrder)
+	spawnCustomer(SceneParent, chosenType)

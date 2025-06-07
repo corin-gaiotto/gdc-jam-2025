@@ -5,7 +5,8 @@ class_name Customer
 # [ATTRIBUTES]
 
 @export var customerPatience: float             # Multiplier for time limit on order
-@export var customerTip: float                  #Customer tip on top of base price
+@export var customerTip: float                  # Customer tip on top of base price
+@export var customerOrder: MenuItem             # List of menu items for customer's order
 
 #[Visuals]
 @export var customerTexture: SpriteFrames       #How the customer looks.
