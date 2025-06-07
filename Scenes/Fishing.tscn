@@ -20,15 +20,9 @@ _energyBar = NodePath("../TextureProgressBar")
 
 [node name="FishManagerTemplate" parent="." node_paths=PackedStringArray("SpeciesDict") instance=ExtResource("2_nnhe8")]
 SpeciesDict = {
-"Anchovy": null,
-"Horse Mackerel": null,
-"TestSpecies": NodePath("TestSpecies")
+"Anchovy": NodePath("Anchovy"),
+"Horse Mackerel": NodePath("HorseMackerel")
 }
-SpeciesWeights = Dictionary[String, int]({
-"TestSpecies": 1
-})
-spawnTimeMin = 480
-spawnTimeMax = 720
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 anchors_preset = 15

@@ -67,6 +67,7 @@ func _physics_process(delta: float) -> void:
 		fishStatesEnum.BITHOOK:
 			fishingTimer.start()
 			fishingDirection = (randi_range(0, 1) - 0.5) * 2
+			flip_h = sign(fishingDirection) < 0
 		fishStatesEnum.REELING:
 			# move in direction
 			position += Vector2(idleMoveSpeed * delta * fishingDirection, 0)
@@ -87,6 +88,7 @@ func _physics_process(delta: float) -> void:
 func applyIdleBurst():
 	print(self.name)
 	initialVelocity = Vector2(randf_range(-1,1), randf_range(-1,1)).normalized() * idleMoveSpeed
+	flip_h = sign(initialVelocity.x) < 0
 	print(initialVelocity)
 	var depthDeviation = position.y - preferredDepth
 	if depthDeviation > 20:
@@ -108,5 +110,6 @@ func _on_idle_timer_timeout() -> void:
 
 func _on_fishing_timer_timeout() -> void:
 	fishingDirection = (randi_range(0, 1) - 0.5) * 2
+	flip_h = sign(fishingDirection) < 0
 	
 	fishingTimer.start()

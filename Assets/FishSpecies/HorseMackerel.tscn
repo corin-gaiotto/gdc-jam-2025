@@ -25,11 +25,13 @@ animations = [{
 [node name="TestSpecies" type="Node"]
 script = ExtResource("1_314hc")
 speciesName = "Horse Mackerel"
-size = 0.2
+size = 0.25
 baseSellValue = 30.0
 fishTexture = SubResource("SpriteFrames_b00gv")
 preferredDepth = 400.0
+idleBurstTime = 5.0
 idleMoveSpeed = 100.0
+fishingTurnTime = 2.0
 fishingResistance = 1.0
 fishingEnergyDrain = 1.0
 metadata/_custom_type_script = "uid://c3dgu655bgxdj"
