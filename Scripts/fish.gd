@@ -53,6 +53,7 @@ func Initialize():
 	idleTimer.start()
 	# Set own texture to match fishTexture
 	set_sprite_frames(fishTexture)
+	play()
 
 func _physics_process(delta: float) -> void:
 	# Called 60 times per second on a fixed update.

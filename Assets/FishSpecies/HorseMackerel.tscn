@@ -1,13 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://ct8fpxw73qs1c"]
+[gd_scene load_steps=6 format=3 uid="uid://ct8fpxw73qs1c"]
 
 [ext_resource type="Script" uid="uid://c3dgu655bgxdj" path="res://Scripts/fish_species.gd" id="1_314hc"]
-[ext_resource type="Texture2D" uid="uid://dokj5ftigyxx8" path="res://icon.svg" id="2_etkqd"]
+[ext_resource type="Texture2D" uid="uid://dldaadgufbgcb" path="res://Assets/Sprites/Fish/Generic/1.png" id="2_wgutr"]
+[ext_resource type="Texture2D" uid="uid://dytipigr3ib2p" path="res://Assets/Sprites/Fish/Generic/2.png" id="3_6v16q"]
+[ext_resource type="Texture2D" uid="uid://dw3bmorjwbcu0" path="res://Assets/Sprites/Fish/Generic/3.png" id="4_e6o6i"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b00gv"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_etkqd")
+"texture": ExtResource("2_wgutr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6v16q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_e6o6i")
 }],
 "loop": true,
 "name": &"default",
@@ -17,7 +25,7 @@ animations = [{
 [node name="TestSpecies" type="Node"]
 script = ExtResource("1_314hc")
 speciesName = "Horse Mackerel"
-size = 1.0
+size = 0.2
 baseSellValue = 30.0
 fishTexture = SubResource("SpriteFrames_b00gv")
 preferredDepth = 400.0
