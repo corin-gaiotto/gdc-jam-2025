@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bl1stivf7y0us"]
 
-[ext_resource type="PackedScene" uid="uid://b3cqax6wiyuqf" path="res://Objects/RestaurantPlayer.tscn" id="1_hi3lj"]
+[ext_resource type="PackedScene" uid="uid://dmcswnvo3phg2" path="res://Objects/RestaurantPlayer.tscn" id="1_hi3lj"]
 [ext_resource type="PackedScene" uid="uid://y0gf5mbgh4g3" path="res://Objects/RestaurantManager.tscn" id="2_3p8wv"]
 
 [node name="Node2D" type="Node2D"]
