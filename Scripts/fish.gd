@@ -60,9 +60,10 @@ func _physics_process(delta: float) -> void:
 				position += currentVelocity * delta
 		fishStatesEnum.BITHOOK:
 			fishingTimer.start()
+			fishingDirection = (randi_range(0, 1) - 0.5) * 2
 		fishStatesEnum.REELING:
 			# move in direction
-			position += Vector2(idleMoveSpeed * 3 * delta * fishingDirection, 0)
+			position += Vector2(idleMoveSpeed * delta * fishingDirection, 0)
 			
 			
 			
