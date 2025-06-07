@@ -1,10 +1,77 @@
-[gd_scene load_steps=2 format=3 uid="uid://bx237ya2lpwll"]
+[gd_scene load_steps=7 format=3 uid="uid://638hqodqju1e"]
+
+[ext_resource type="Script" uid="uid://bah45uowqio7v" path="res://Scripts/fishing_player.gd" id="1_45n1i"]
+[ext_resource type="Texture2D" uid="uid://dokj5ftigyxx8" path="res://icon.svg" id="2_ygoci"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_88ni6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ygoci")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ygoci")
+}],
+"loop": true,
+"name": &"fishing-cast-animation",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ygoci")
+}],
+"loop": true,
+"name": &"fishing-idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ygoci")
+}],
+"loop": true,
+"name": &"fishing-interact",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xur5a"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_45n1i"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fe5ay"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ygoci")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="FishingPlayer" type="CharacterBody2D"]
+script = ExtResource("1_45n1i")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_88ni6")
+animation = &"fishing-interact"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_xur5a")
+
+[node name="Hook" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hook"]
+shape = SubResource("CircleShape2D_45n1i")
+
+[node name="HookSprite" type="AnimatedSprite2D" parent="Hook"]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_fe5ay")
+
+[connection signal="area_entered" from="Hook" to="." method="_on_hook_area_entered"]

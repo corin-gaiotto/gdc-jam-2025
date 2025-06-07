@@ -1,6 +1,32 @@
-[gd_scene load_steps=2 format=3 uid="uid://dlmq4i5th33hf"]
+[gd_scene load_steps=5 format=3 uid="uid://dlmq4i5th33hf"]
 
 [ext_resource type="Script" uid="uid://cwd5tvr0hdob1" path="res://Scripts/fish.gd" id="1_f7nft"]
+[ext_resource type="Texture2D" uid="uid://dokj5ftigyxx8" path="res://icon.svg" id="2_hmv8f"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hmv8f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hmv8f"]
 
 [node name="Fish" type="AnimatedSprite2D"]
+position = Vector2(329, 184)
 script = ExtResource("1_f7nft")
+size = 1.0
+baseSellValue = 1.0
+fishTexture = SubResource("SpriteFrames_hmv8f")
+preferredDepth = 400.0
+idleBurstTime = 5
+idleMoveSpeed = 100.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_hmv8f")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_hmv8f")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

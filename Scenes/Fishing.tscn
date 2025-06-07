@@ -1,3 +1,13 @@
-[gd_scene format=3 uid="uid://dsbtedevf5vc1"]
+[gd_scene load_steps=3 format=3 uid="uid://dsbtedevf5vc1"]
+
+[ext_resource type="PackedScene" uid="uid://638hqodqju1e" path="res://Objects/FishingPlayer.tscn" id="1_aonvm"]
+[ext_resource type="PackedScene" uid="uid://biouiciisyeg2" path="res://Objects/FishManagerTemplate.tscn" id="2_nnhe8"]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="FishingPlayer" parent="." instance=ExtResource("1_aonvm")]
+
+[node name="FishManagerTemplate" parent="." node_paths=PackedStringArray("SpeciesDict") instance=ExtResource("2_nnhe8")]
+SpeciesDict = {
+"TestSpecies": NodePath("TestSpecies")
+}
