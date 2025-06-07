@@ -5,6 +5,7 @@ class_name FishingPlayer
 @onready var _animatedSprite = $AnimatedSprite2D
 @onready var _hook = $Hook
 @onready var _hookSprite = $Hook/HookSprite
+@onready var _collisionShape = $CollisionShape2D
 
 var hookedFish: Fish # fish actor that has been hooked
 
@@ -13,8 +14,9 @@ var hookedFish: Fish # fish actor that has been hooked
 @export var lastWalkedRight: bool = true
 
 # check if in fishing area
-@export var canFish: bool = true
+@export var canFish: bool = false
 @export var isFishing: bool = false
+@export var inArea: bool = false
 
 
 enum fishingEnum {FISHING_IDLE, FISHING_CAST_ANIMATION, FISHING_CAST_IDLE, FISHING_BIT_HOOK, FISHING_PULL_HOOK, FISHING_OBTAIN}
@@ -95,6 +97,8 @@ func _physics_process(delta: float) -> void:
 				elif Input.is_action_just_pressed("fishing-cancel"):
 					# stop fishing
 					isFishing = false
+					if inArea:
+						canFish = true
 			
 			fishingEnum.FISHING_CAST_ANIMATION:
 				if stateTimeRemaining < 1:
@@ -175,6 +179,10 @@ func _physics_process(delta: float) -> void:
 					
 		
 	stateTimeRemaining -= 1
+	
+
+
+
 
 
 func _on_hook_area_entered(area: Area2D) -> void:
@@ -185,3 +193,17 @@ func _on_hook_area_entered(area: Area2D) -> void:
 		currentState = fishingEnum.FISHING_BIT_HOOK
 		stateTimeRemaining = 30 # half a second to react to fish bite (placeholder)
 		hookedFish.currentState = hookedFish.fishStatesEnum.BITHOOK
+
+
+func _on_fishing_area_body_entered(body: Node2D) -> void:
+	# when entering fishing area
+	inArea = true
+	canFish = true
+	pass # Replace with function body.
+
+
+func _on_fishing_area_body_exited(body: Node2D) -> void:
+	# exiting fishing area
+	inArea = false
+	canFish = false
+	pass # Replace with function body.

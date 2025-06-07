@@ -69,4 +69,5 @@ start-fishing={
 
 [layer_names]
 
+2d_physics/layer_1="Main"
 2d_physics/layer_2="Fish"
