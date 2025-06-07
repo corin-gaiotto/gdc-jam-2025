@@ -15,7 +15,7 @@ size = Vector2(32, 128)
 [node name="Node2D" type="Node2D"]
 
 [node name="FishingPlayer" parent="." node_paths=PackedStringArray("_energyBar") instance=ExtResource("1_aonvm")]
-position = Vector2(84, -142)
+position = Vector2(88, -202)
 _energyBar = NodePath("../TextureProgressBar")
 
 [node name="FishManagerTemplate" parent="." node_paths=PackedStringArray("SpeciesDict") instance=ExtResource("2_nnhe8")]
