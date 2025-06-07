@@ -6,10 +6,13 @@ class_name FishingPlayer
 @onready var _hook = $Hook
 @onready var _hookSprite = $Hook/HookSprite
 
+@export var _energyBar : TextureProgressBar
+
 var hookedFish: Fish # fish actor that has been hooked
 
 # movement
 @export var speed: float = 200
+@export var lastWalkedRight: bool = true
 
 # check if in fishing area
 @export var canFish: bool = true
@@ -41,21 +44,43 @@ var energy: float = maxEnergy
 
 func _ready() -> void:
 	_hookSprite.visible = false # only display hook's sprite during FISHING_CAST_IDLE
+	_energyBar.max_value = maxEnergy
+	_energyBar.value = energy
+	_energyBar.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	# get direction from inputs
 	var _x_dir = Input.get_axis("left", "right")
 	var _y_dir = Input.get_axis("up", "down")
+	var _idle_state = "standing-idle-right";
+	
+	if _x_dir < 0:
+		_idle_state = "standing-idle-left"
+		lastWalkedRight = false
+	elif _x_dir > 0:
+		_idle_state = "standing-idle-right"
+		lastWalkedRight = true
+	else:
+		if lastWalkedRight:
+			_idle_state = "standing-idle-right"
+		else:
+			_idle_state = "standing-idle-left"
 	
 	# set velocity (only when not fishing)
 	if not(isFishing):
 		velocity = Vector2(_x_dir * speed * delta, 0)
+		if _x_dir < Vector2.ZERO.x:
+			_animatedSprite.play("walk-left")
+		elif _x_dir > Vector2.ZERO.x:
+			_animatedSprite.play("walk-right")
+		else:
+				_animatedSprite.play(_idle_state)
 	else:
 		velocity = Vector2.ZERO
 	move_and_slide()
 	
-	if canFish and Input.is_action_just_pressed("fishing-interact"):
+	if canFish and Input.is_action_just_pressed("start-fishing"):
 		_animatedSprite.play("fishing-idle")
 		isFishing = true
 		canFish = false
@@ -66,23 +91,28 @@ func _physics_process(delta: float) -> void:
 		match currentState:
 			
 			fishingEnum.FISHING_IDLE:
+				_energyBar.visible = false
 				if Input.is_action_just_pressed("fishing-interact"):
 					# cast a line
 					currentState = fishingEnum.FISHING_CAST_ANIMATION
 					_animatedSprite.play("fishing-cast-animation")
+
 					stateTimeRemaining = 60 # placeholder
 				elif Input.is_action_just_pressed("fishing-cancel"):
 					# stop fishing
 					isFishing = false
 			
 			fishingEnum.FISHING_CAST_ANIMATION:
+				_energyBar.visible = false
 				if stateTimeRemaining < 1:
+					_animatedSprite.play("fishing-cast-idle")
 					currentState = fishingEnum.FISHING_CAST_IDLE
 					# make hook visible, and place it correctly
 					_hookSprite.visible = true
 					_hook.position = Vector2(400, 200) # placeholder: relative to player position
 			
 			fishingEnum.FISHING_CAST_IDLE:
+				_energyBar.visible = false
 				# Abilities: move hook in 4 directions, and cancel back to fishing_idle
 				
 				# TODO: clamp hook global position within the water (once the scene is more set up)
@@ -108,6 +138,8 @@ func _physics_process(delta: float) -> void:
 					_hookSprite.visible = false
 			
 			fishingEnum.FISHING_PULL_HOOK:
+				_energyBar.visible = true
+				_energyBar.value = energy
 				# here is where the fishing minigame goes: on a success, return to FISHING_OBTAIN, otherwise, return to FISHING_IDLE
 				var pull_strength: float = abs(_x_dir) # 0 if not pulling, 1 if pulling
 				var energy_cost: float = 1
@@ -146,6 +178,7 @@ func _physics_process(delta: float) -> void:
 					hookedFish.currentState = hookedFish.fishStatesEnum.IDLE
 			
 			fishingEnum.FISHING_OBTAIN:
+				_energyBar.visible = false
 				# wait for the obtain animation to play out, then allow the player to return to FISHING_IDLE using interact
 				if stateTimeRemaining < 1 and Input.is_action_just_pressed("fishing-interact"):
 					currentState = fishingEnum.FISHING_IDLE
