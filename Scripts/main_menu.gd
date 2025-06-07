@@ -1,7 +1,7 @@
 extends Node2D
 
 
-var introFrames
+var tutorialFrames
 var mainScene
 var fadeIn
 
@@ -11,17 +11,19 @@ var TEMPFrames = 2 # temporary for testing
 
 func _ready() -> void:
 	mainScene = get_parent()
-	introFrames = $IntroFrames
+	tutorialFrames = $tutorialFrames
+	$TitleScreen.play("default")
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_released("click-menu-interact"):
-		#introFrames.Frame += 1
-		print("to be added, will show the next frame on introFrames")
+		#tutorialFrames.Frame += 1
+		print("to be added, will show the next frame on tutorialFrames")
 		TEMPFrameCounter += 1
 		print("frame: ", TEMPFrameCounter, " of ", TEMPFrames)
 		if TEMPFrameCounter >= TEMPFrames:
 			showTutorial = false
 	return
+	
 
 func _on_start_button_pressed() -> void:
 	if !showTutorial:
