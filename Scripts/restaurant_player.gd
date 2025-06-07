@@ -19,6 +19,8 @@ class_name RestaurantPlayer
 # appearance
 @export var restaurantPlayerSprite: SpriteFrames
 
+var heldIngredients = [FoodItem]
+var heldMenuItem : MenuItem
 
 
 # Called when the node enters the scene tree for the first time.
