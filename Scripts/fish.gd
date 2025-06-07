@@ -24,27 +24,50 @@ class_name Fish
 
 # [VARIABLES]
 
-var timer : Timer
+var idleTimer : Timer
+var fishingTimer : Timer
+
 var initialVelocity = Vector2.ZERO
 var currentVelocity = Vector2.ZERO
 var isBursting = false
 
+enum fishStatesEnum {IDLE, BITHOOK, REELING}
+@export var currentState = 0
 
+var fishingDirection : float = 0
 
 func _ready() -> void:
 	# Called when enters the scene for the first time.
-	timer = $Timer
-	timer.wait_time = idleBurstTime
+	call_deferred("Initialize")
+
+func Initialize():
+	idleTimer = $IdleTimer
+	idleTimer.wait_time = idleBurstTime
 	
-	timer.start()
+	fishingTimer = $FishingTimer
+	fishingTimer.wait_time = fishingTurnTime
+	
+	idleTimer.start()
 	# Set own texture to match fishTexture
 	set_sprite_frames(fishTexture)
 
 func _physics_process(delta: float) -> void:
 	# Called 60 times per second on a fixed update.
-	if isBursting:
-		currentVelocity = initialVelocity * pow((timer.time_left/timer.wait_time),1.5)#Velocity * (1 - (timer.time_left/timer.wait_time))
-
+	match currentState:
+		fishStatesEnum.IDLE:
+			if isBursting:
+				currentVelocity = initialVelocity * pow((idleTimer.time_left/idleTimer.wait_time),1.5)
+				position += currentVelocity * delta
+		fishStatesEnum.BITHOOK:
+			fishingTimer.start()
+			fishingDirection = (randi_range(0, 1) - 0.5) * 2
+		fishStatesEnum.REELING:
+			# move in direction
+			position += Vector2(idleMoveSpeed * delta * fishingDirection, 0)
+			
+			
+			
+			
 	
 #	var depthDeviation = position.y - preferredDepth
 #	if depthDeviation > 20:
@@ -52,11 +75,12 @@ func _physics_process(delta: float) -> void:
 #	elif depthDeviation < 20:
 #		Velocity.y += maxf(depthDeviation/idleMoveSpeed ,1)
 	
-	position += currentVelocity * delta
-	pass
+	
 
-func apply_burst():
+func applyIdleBurst():
+	print(self.name)
 	initialVelocity = Vector2(randf_range(-1,1), randf_range(-1,1)).normalized() * idleMoveSpeed
+	print(initialVelocity)
 	var depthDeviation = position.y - preferredDepth
 	if depthDeviation > 20:
 		initialVelocity.y -= maxf(depthDeviation/idleMoveSpeed ,1)
@@ -64,14 +88,18 @@ func apply_burst():
 		initialVelocity.y += maxf(depthDeviation/idleMoveSpeed ,1)
 	
 
-func _on_timer_timeout() -> void:
+func _on_idle_timer_timeout() -> void:
 	initialVelocity = Vector2.ZERO
-	print("timeout", timer.wait_time)
 	if !isBursting:
-		apply_burst()
+		applyIdleBurst()
 
 		
 		
 	isBursting = !isBursting
-	timer.start()
-	pass # Replace with function body.
+	idleTimer.start()
+
+
+func _on_fishing_timer_timeout() -> void:
+	fishingDirection = (randi_range(0, 1) - 0.5) * 2
+	
+	fishingTimer.start()
