@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://638hqodqju1e"]
+[gd_scene load_steps=38 format=3 uid="uid://638hqodqju1e"]
 
 [ext_resource type="Script" uid="uid://bah45uowqio7v" path="res://Scripts/fishing_player.gd" id="1_45n1i"]
 [ext_resource type="Texture2D" uid="uid://w38rmx0euw02" path="res://Assets/Sprites/FishingPlayerFishing/FishingCasting/Casting0.png" id="2_qqduh"]
@@ -30,6 +30,9 @@
 [ext_resource type="Texture2D" uid="uid://bnebx8xn3tc1u" path="res://Assets/Sprites/FishingPlayerWalk/WalkRight/WalkRight2.png" id="20_etvvv"]
 [ext_resource type="Texture2D" uid="uid://dn4go7a6uvlh3" path="res://Assets/Sprites/FishingPlayerWalk/WalkRight/WalkRight3.png" id="21_svom4"]
 [ext_resource type="Texture2D" uid="uid://daxggemfs02r" path="res://Assets/Sprites/FishingPlayerWalk/WalkRight/WalkRight4.png" id="22_quqkp"]
+[ext_resource type="Texture2D" uid="uid://bkq7cvov5aknf" path="res://Assets/Sprites/Hook/1.png" id="31_t6e8o"]
+[ext_resource type="Texture2D" uid="uid://3n3w2f2hvk38" path="res://Assets/Sprites/Hook/2.png" id="32_hd4i8"]
+[ext_resource type="Texture2D" uid="uid://c6ihl554t4gj8" path="res://Assets/Sprites/Hook/3.png" id="33_vpeqk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_88ni6"]
 animations = [{
@@ -87,6 +90,11 @@ animations = [{
 }],
 "loop": true,
 "name": &"fishing-interact",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"fishing-reel-complete",
 "speed": 5.0
 }, {
 "frames": [{
@@ -173,7 +181,16 @@ size = Vector2(8.8125, 68)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_ygoci")
+"texture": ExtResource("31_t6e8o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_hd4i8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_vpeqk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_hd4i8")
 }],
 "loop": true,
 "name": &"default",
@@ -187,9 +204,7 @@ script = ExtResource("1_45n1i")
 position = Vector2(48, 320.566)
 scale = Vector2(0.075, 0.088)
 sprite_frames = SubResource("SpriteFrames_88ni6")
-animation = &"standing-idle-left"
-frame = 2
-frame_progress = 0.665315
+animation = &"fishing-reel-complete"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(48, 343)
@@ -204,7 +219,9 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_45n1i")
 
 [node name="HookSprite" type="AnimatedSprite2D" parent="Hook"]
-scale = Vector2(0.5, 0.5)
+position = Vector2(1, -8)
+scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_fe5ay")
+autoplay = "default"
 
 [connection signal="area_entered" from="Hook" to="." method="_on_hook_area_entered"]
