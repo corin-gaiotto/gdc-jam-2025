@@ -3,6 +3,10 @@ extends CharacterBody2D
 class_name FishingPlayer
 
 @onready var _animatedSprite = $AnimatedSprite2D
+@onready var _hook = $Hook
+@onready var _hookSprite = $Hook/HookSprite
+
+var hookedFish: Fish # fish actor that has been hooked
 
 # movement
 @export var speed: float = 200
@@ -31,6 +35,8 @@ var stateTimeRemaining: int # amount of time in frames before the state is done.
 # - When being reeled in, it is pulled upwards towards the surface
 # - When it hits the surface, it is officially caught
 
+func _ready() -> void:
+	_hookSprite.visible = false # only display hook's sprite during FISHING_CAST_IDLE
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -40,7 +46,7 @@ func _physics_process(delta: float) -> void:
 	
 	# set velocity (only when not fishing)
 	if not(isFishing):
-		velocity = Vector2(_x_dir * speed, 0)
+		velocity = Vector2(_x_dir * speed * delta, 0)
 	else:
 		velocity = Vector2.ZERO
 	move_and_slide()
@@ -68,20 +74,31 @@ func _physics_process(delta: float) -> void:
 			fishingEnum.FISHING_CAST_ANIMATION:
 				if stateTimeRemaining < 1:
 					currentState = fishingEnum.FISHING_CAST_IDLE
+					# make hook visible, and place it correctly
+					_hookSprite.visible = true
+					_hook.position = Vector2(400, 200) # placeholder: relative to player position
 			
 			fishingEnum.FISHING_CAST_IDLE:
 				# Abilities: move hook in 4 directions, and cancel back to fishing_idle
+				
+				# TODO: clamp hook global position within the water (once the scene is more set up)
+				_hook.position += delta * 50 * Vector2(_x_dir, _y_dir)
+				
 				if Input.is_action_just_pressed("fishing-cancel"):
 					# return to fishing idle
 					currentState = fishingEnum.FISHING_IDLE
+					_hookSprite.visible = false
 			
 			fishingEnum.FISHING_BIT_HOOK:
 				# if stateTimeRemaining runs out, fish gets away; otherwise, if interact pressed, then start reeling in
 				if Input.is_action_just_pressed("fishing-interact"):
 					currentState = fishingEnum.FISHING_PULL_HOOK
+					_hookSprite.visible = true
+					# set fish state to reeling (instead of idle)
 				elif stateTimeRemaining < 1:
-					# also maybe remove the fish in question? idk
+					# also maybe remove the fish entirely? idk
 					currentState = fishingEnum.FISHING_IDLE
+					_hookSprite.visible = false
 			
 			fishingEnum.FISHING_PULL_HOOK:
 				# here is where the fishing minigame goes: on a success, return to FISHING_OBTAIN, otherwise, return to FISHING_IDLE
@@ -91,6 +108,14 @@ func _physics_process(delta: float) -> void:
 				# wait for the obtain animation to play out, then allow the player to return to FISHING_IDLE using interact
 				if stateTimeRemaining < 1 and Input.is_action_just_pressed("fishing-interact"):
 					currentState = fishingEnum.FISHING_IDLE
+					_hookSprite.visible = false
 					
 		
 	stateTimeRemaining -= 1
+
+
+func _on_hook_area_entered(area: Area2D) -> void:
+	# Fish collides with hook while hook is active
+	if currentState == fishingEnum.FISHING_CAST_IDLE:
+		var hookedFish = area.get_parent()
+		currentState = fishingEnum.FISHING_BIT_HOOK
