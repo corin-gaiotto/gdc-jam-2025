@@ -170,6 +170,8 @@ func _physics_process(delta: float) -> void:
 				_energyBar.visible = true
 				_energyBar.value = energy
 				# here is where the fishing minigame goes: on a success, return to FISHING_OBTAIN, otherwise, return to FISHING_IDLE
+				var minigame_difficulty = 3 # constant that determines how long it takes to reel fish in
+				
 				var pull_strength: float = abs(_x_dir) # 0 if not pulling, 1 if pulling
 				var energy_cost: float = 1
 				pull_strength /= hookedFish.fishingResistance
@@ -182,10 +184,10 @@ func _physics_process(delta: float) -> void:
 				elif sign(_x_dir) == -1 * sign(hookedFish.fishingDirection):
 					# pulling in opposite direction, so decrease pull strength and heavily increase energy cost
 					pull_strength /= 2
-					energy_cost *= 3
+					energy_cost *= 1.5
 				
 				# move the fish upwards based on the pull strength
-				hookedFish.position.y -= pull_strength
+				hookedFish.position.y -= pull_strength / minigame_difficulty
 				
 				if pull_strength == 0:
 					hookedFish.position.y += hookedFish.fishingResistance
@@ -198,7 +200,7 @@ func _physics_process(delta: float) -> void:
 					print("[minigame] Caught!")
 					hookedFish.global_position = global_position + Vector2(0, -80)
 					# remove the fish and add its name and price to the list of fish
-					_mainScene.conservedData["FishCaught"].append([hookedFish.speciesName, hookedFish.finalSellValue])
+					_mainScene.conservedData["FishCaught"].append([hookedFish.speciesName, snapped(hookedFish.finalSellValue, 0.01)])
 					print(_mainScene.conservedData["FishCaught"])
 					hookedFish.queue_free()
 					currentState = fishingEnum.FISHING_OBTAIN

@@ -53,6 +53,7 @@ func Initialize():
 	idleTimer.start()
 	# Set own texture to match fishTexture
 	set_sprite_frames(fishTexture)
+	play()
 
 func _physics_process(delta: float) -> void:
 	# Called 60 times per second on a fixed update.
@@ -68,6 +69,7 @@ func _physics_process(delta: float) -> void:
 			fishingDirection = (randi_range(0, 1) - 0.5) * 2
 		fishStatesEnum.REELING:
 			# move in direction
+			flip_h = sign(fishingDirection) < 0
 			position += Vector2(idleMoveSpeed * delta * fishingDirection, 0)
 			position.x = clamp(position.x, 465, 1150)
 			
@@ -86,6 +88,7 @@ func _physics_process(delta: float) -> void:
 func applyIdleBurst():
 	print(self.name)
 	initialVelocity = Vector2(randf_range(-1,1), randf_range(-1,1)).normalized() * idleMoveSpeed
+	flip_h = sign(initialVelocity.x) < 0
 	print(initialVelocity)
 	var depthDeviation = position.y - preferredDepth
 	if depthDeviation > 20:
@@ -107,5 +110,6 @@ func _on_idle_timer_timeout() -> void:
 
 func _on_fishing_timer_timeout() -> void:
 	fishingDirection = (randi_range(0, 1) - 0.5) * 2
+	flip_h = sign(fishingDirection) < 0
 	
 	fishingTimer.start()

@@ -21,14 +21,13 @@ size = Vector2(24, 88)
 [node name="Node2D" type="Node2D"]
 
 [node name="FishingPlayer" parent="." node_paths=PackedStringArray("_energyBar") instance=ExtResource("1_aonvm")]
-position = Vector2(84, -142)
+position = Vector2(88, -202)
 _energyBar = NodePath("../TextureProgressBar")
 
 [node name="FishManagerTemplate" parent="." node_paths=PackedStringArray("SpeciesDict") instance=ExtResource("2_nnhe8")]
 SpeciesDict = {
 "Anchovy": NodePath("Anchovy"),
-"Horse Mackerel": NodePath("HorseMackerel"),
-"TestSpecies": NodePath("TestSpecies")
+"Horse Mackerel": NodePath("HorseMackerel")
 }
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
