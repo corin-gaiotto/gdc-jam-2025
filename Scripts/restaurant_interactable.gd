@@ -3,32 +3,34 @@ extends Area2D
 class_name RestaurantInteractable
 
 
-var canInteract = false
-var storedIngredients
-var storedMenuItem
-var Player
+@export var canInteract = false
+@export var storedIngredients = [] #exported for debug
+var Player : Node2D
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
-	body_entered.connect(_on_body_exited)
+	body_exited.connect(_on_body_exited)
 
 func _physics_process(delta: float) -> void:
+	#print("[interact]", canInteract, Input.is_action_just_pressed("restaurant-interact"))
 	if canInteract and Input.is_action_just_pressed("restaurant-interact"):
 		interact(Player)
-		print("interacting")
+		print("[interact]interacting")
 		
 func interact(player : RestaurantPlayer):
-	print("interactable")
+	#print("[interact]interactable")
 	pass
 
 
 func _on_body_entered(body: Node2D) -> void:
 	canInteract = true
-	Player = body
-	print("interactable range")
+	Player = get_parent().find_child("RestaurantPlayer")
+	#print("[interact]interactable range")
+	#print(canInteract)
 	pass # Replace with function body.
 
 
 func _on_body_exited(body: Node2D) -> void:
+	#aprint("[interact]exited range")
 	canInteract = false
 	pass # Replace with function body.

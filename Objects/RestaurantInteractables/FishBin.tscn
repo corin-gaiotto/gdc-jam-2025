@@ -1,12 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://bo5d5lltdyqam"]
+[gd_scene load_steps=4 format=3 uid="uid://bo5d5lltdyqam"]
 
 [ext_resource type="Script" uid="uid://djtppkgqai6ip" path="res://Objects/RestaurantInteractables/fish_bin.gd" id="1_7bvsm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7bvsm"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mc2i4"]
+
 [node name="FishBin" type="Area2D"]
+scale = Vector2(5, 5)
+collision_layer = 0
+collision_mask = 4
 script = ExtResource("1_7bvsm")
 metadata/_custom_type_script = "uid://haqw6fvltw5"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="InteractableBox" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_7bvsm")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionBox" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_mc2i4")
