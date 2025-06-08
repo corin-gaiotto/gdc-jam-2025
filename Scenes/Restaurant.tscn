@@ -73,14 +73,30 @@ visible = false
 baseTimer = 5.0
 
 [node name="FishBin" parent="." instance=ExtResource("6_mdxsm")]
-position = Vector2(194.841, 132.002)
+position = Vector2(154, 136)
+scale = Vector2(7.54431, 7.54431)
 fishType = "Anchovy"
+
+[node name="FishBin2" parent="." instance=ExtResource("6_mdxsm")]
+position = Vector2(312, 140)
+scale = Vector2(7.54431, 7.54431)
+fishType = "Horse Mackerel"
+
+[node name="FishBin3" parent="." instance=ExtResource("6_mdxsm")]
+position = Vector2(470, 140)
+scale = Vector2(7.54431, 7.54431)
+fishType = "Sea Bass"
+
+[node name="FishBin4" parent="." instance=ExtResource("6_mdxsm")]
+position = Vector2(628, 138)
+scale = Vector2(7.54431, 7.54431)
+fishType = "Mahi-Mahi"
 
 [node name="Door" parent="." instance=ExtResource("5_mdxsm")]
 position = Vector2(2168.84, 338.002)
 
 [node name="Stove2" parent="." instance=ExtResource("8_hje71")]
-position = Vector2(394.841, 132.002)
+position = Vector2(1004, 138)
 
 [node name="TrashBin" parent="." instance=ExtResource("10_fy5am")]
 position = Vector2(1210.84, 136.002)
@@ -134,3 +150,9 @@ texture = ExtResource("12_ix3f7")
 
 [connection signal="body_entered" from="FishBin" to="FishBin" method="_on_body_entered"]
 [connection signal="body_exited" from="FishBin" to="FishBin" method="_on_body_exited"]
+[connection signal="body_entered" from="FishBin2" to="FishBin2" method="_on_body_entered"]
+[connection signal="body_exited" from="FishBin2" to="FishBin2" method="_on_body_exited"]
+[connection signal="body_entered" from="FishBin3" to="FishBin3" method="_on_body_entered"]
+[connection signal="body_exited" from="FishBin3" to="FishBin3" method="_on_body_exited"]
+[connection signal="body_entered" from="FishBin4" to="FishBin4" method="_on_body_entered"]
+[connection signal="body_exited" from="FishBin4" to="FishBin4" method="_on_body_exited"]

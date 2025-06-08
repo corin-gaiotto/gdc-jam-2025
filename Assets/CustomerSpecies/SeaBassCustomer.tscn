@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://jhesfxgdotqe"]
+
+[ext_resource type="Script" uid="uid://c7d8ue5vsjqnn" path="res://Scripts/customer_type.gd" id="1_86q1p"]
+[ext_resource type="Texture2D" uid="uid://c8bgn5qwxkk8f" path="res://Assets/Sprites/TestCustomer/CustomerStand.png" id="2_55k4k"]
+[ext_resource type="Script" uid="uid://oou5xsjpa84" path="res://Scripts/menu_item.gd" id="3_bjkv5"]
+[ext_resource type="Texture2D" uid="uid://dokj5ftigyxx8" path="res://icon.svg" id="4_5d02v"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t0lrf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_55k4k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7ffb1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_5d02v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TestCustomer" type="Node2D" node_paths=PackedStringArray("CustomerMenu")]
+script = ExtResource("1_86q1p")
+CustomerMenu = {
+"LightMenu": NodePath("Node")
+}
+customerPatience = 7.5
+customerTip = 12.5
+customerTimer = 10.0
+customerTexture = SubResource("SpriteFrames_t0lrf")
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("3_bjkv5")
+ingredients = Array[String](["Sea Bass"])
+basePrice = 2.0
+baseTimer = 4.0
+menuItemTexture = SubResource("SpriteFrames_7ffb1")
