@@ -11,7 +11,10 @@ var currentScene: Node
 	}
 
 @export var conservedData = {
-	"FishCaught": []
+	"FishCaught": {
+		"Anchovy":[],
+		"Horse Mackerel":[]
+	}
 }
 
 @onready var _musicHandler = $MusicHandler
