@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csy2iu71l88ib"
-path="res://.godot/imported/stool.png-b0debd1ee3ba4ff2839a34907f55cbc5.ctex"
+uid="uid://0t6bkm1yua3e"
+path="res://.godot/imported/WalkRight0-4 2.png-c5e762ec081e800224f5fc4ea175ae8d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/stool/stool.png"
-dest_files=["res://.godot/imported/stool.png-b0debd1ee3ba4ff2839a34907f55cbc5.ctex"]
+source_file="res://Assets/Sprites/FishingPlayerWalk/WalkRight/WalkRight0-4 2.png"
+dest_files=["res://.godot/imported/WalkRight0-4 2.png-c5e762ec081e800224f5fc4ea175ae8d.ctex"]
 
 [params]
 

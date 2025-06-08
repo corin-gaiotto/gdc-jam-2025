@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csy2iu71l88ib"
-path="res://.godot/imported/stool.png-b0debd1ee3ba4ff2839a34907f55cbc5.ctex"
+uid="uid://cqgex3rw67goh"
+path="res://.godot/imported/1-1.png-1a20a2a75fed0c7a1240b650eac315f5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/stool/stool.png"
-dest_files=["res://.godot/imported/stool.png-b0debd1ee3ba4ff2839a34907f55cbc5.ctex"]
+source_file="res://Assets/Sprites/Fish/Brown/1-1.png"
+dest_files=["res://.godot/imported/1-1.png-1a20a2a75fed0c7a1240b650eac315f5.ctex"]
 
 [params]
 
