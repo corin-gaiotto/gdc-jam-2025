@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://y0gf5mbgh4g3"]
+[gd_scene load_steps=3 format=3 uid="uid://y0gf5mbgh4g3"]
 
 [ext_resource type="Script" uid="uid://djcyjxpi7plx3" path="res://Scripts/customer_manager.gd" id="1_uh0xu"]
+[ext_resource type="PackedScene" uid="uid://dic5and18a6da" path="res://Objects/TestCustomer.tscn" id="2_ers0b"]
 
-[node name="RestaurantManager" type="Node2D"]
+[node name="RestaurantManager" type="Node2D" node_paths=PackedStringArray("CustomerDict")]
 script = ExtResource("1_uh0xu")
+CustomerDict = {
+"test": NodePath("TestCustomer")
+}
+CustomerWeights = Dictionary[String, int]({
+"test": 1
+})
+
+[node name="TestCustomer" parent="." node_paths=PackedStringArray("CustomerMenu") instance=ExtResource("2_ers0b")]
+CustomerMenu = {
+"testdish": NodePath("Node")
+}
