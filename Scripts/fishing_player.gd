@@ -220,6 +220,12 @@ func _physics_process(delta: float) -> void:
 				# decrease own energy by energy cost
 				energy -= energy_cost
 				
+				if Input.is_action_just_pressed("left") or Input.is_action_just_pressed("right"):
+					_animatedSprite.play("fishing-tug")
+				elif _x_dir == 0:
+					_animatedSprite.play("fishing-tug")
+					_animatedSprite.stop()
+				
 				if hookedFish.position.y < 256: # placeholder: wherever water surface will be
 					# caught the fish
 					print("[minigame] Caught!")
