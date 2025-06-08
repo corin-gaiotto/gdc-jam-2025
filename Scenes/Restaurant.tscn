@@ -5,12 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://cvy848mshr5cs" path="res://Assets/Art/restaurant/mockupS25 2.png" id="2_axxsr"]
 [ext_resource type="Texture2D" uid="uid://dokj5ftigyxx8" path="res://icon.svg" id="2_yfx12"]
 [ext_resource type="PackedScene" uid="uid://c4onavem3i6q6" path="res://Objects/Customer.tscn" id="3_yfx12"]
-[ext_resource type="PackedScene" uid="uid://8l6vpx5uyf7f" path="res://Objects/HeldItemIndicator.tscn" id="5_bue68"]
+[ext_resource type="PackedScene" path="res://Objects/HeldItemIndicator.tscn" id="5_bue68"]
 [ext_resource type="PackedScene" uid="uid://blpvjsdx2poov" path="res://Objects/RestaurantInteractables/RestaurantDoor.tscn" id="5_mdxsm"]
 [ext_resource type="PackedScene" uid="uid://wxs78acgk1qk" path="res://Objects/MenuItem.tscn" id="5_piffy"]
 [ext_resource type="PackedScene" uid="uid://bo5d5lltdyqam" path="res://Objects/RestaurantInteractables/FishBin.tscn" id="6_mdxsm"]
 [ext_resource type="PackedScene" uid="uid://c54ekrxvd6rgi" path="res://Objects/RestaurantInteractables/Stove.tscn" id="8_hje71"]
-[ext_resource type="PackedScene" path="res://Objects/RestaurantInteractables/TrashBin.tscn" id="10_fy5am"]
+[ext_resource type="PackedScene" uid="uid://bo3tcwn7b6g05" path="res://Objects/RestaurantInteractables/TrashBin.tscn" id="10_fy5am"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_piffy"]
 animations = [{
