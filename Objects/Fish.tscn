@@ -5,6 +5,7 @@
 [sub_resource type="SpriteFrames" id="SpriteFrames_hmv8f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hmv8f"]
+radius = 11.0
 
 [node name="Fish" type="AnimatedSprite2D"]
 position = Vector2(329, 184)

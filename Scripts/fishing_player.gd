@@ -21,7 +21,7 @@ class_name FishingPlayer
 var hookedFish: Fish # fish actor that has been hooked
 
 # movement
-@export var speed: float = 4500
+@export var speed: float = 4800
 @export var lastWalkedRight: bool = true
 @export var hookSpeed: float = 200
 
