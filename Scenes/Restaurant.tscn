@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://wxs78acgk1qk" path="res://Objects/MenuItem.tscn" id="5_piffy"]
 [ext_resource type="PackedScene" uid="uid://bo5d5lltdyqam" path="res://Objects/RestaurantInteractables/FishBin.tscn" id="6_mdxsm"]
 [ext_resource type="PackedScene" uid="uid://c54ekrxvd6rgi" path="res://Objects/RestaurantInteractables/Stove.tscn" id="8_hje71"]
-[ext_resource type="PackedScene" uid="uid://bo3tcwn7b6g05" path="res://Objects/RestaurantInteractables/TrashBin.tscn" id="10_fy5am"]
+[ext_resource type="PackedScene" path="res://Objects/RestaurantInteractables/TrashBin.tscn" id="10_fy5am"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_piffy"]
 animations = [{
