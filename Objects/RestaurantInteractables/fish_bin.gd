@@ -18,7 +18,7 @@ func interact(player : RestaurantPlayer):
 		player.heldIngredient = grabbedFish
 		print("[interact] grabbed fish ", player.heldIngredient)
 		pass
-	elif player.heldIngredient != null and player.heldIngredient.Ingredient == fishType:
+	elif player.heldIngredient != null and player.heldIngredient.Ingredient == fishType and player.heldIngredient.Cooked:
 		storedIngredients.append([player.heldIngredient.Ingredient, player.heldIngredient.baseValue])
 		player.heldIngredient = null
 		print("[interact] stored fish in fish bin")
