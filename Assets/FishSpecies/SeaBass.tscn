@@ -1,21 +1,21 @@
 [gd_scene load_steps=6 format=3 uid="uid://blp73mmjmh8l2"]
 
 [ext_resource type="Script" uid="uid://c3dgu655bgxdj" path="res://Scripts/fish_species.gd" id="1_aadg2"]
-[ext_resource type="Texture2D" uid="uid://bukuybohax0oi" path="res://Assets/Sprites/Fish/Blue/1-4.png" id="2_ju78m"]
-[ext_resource type="Texture2D" uid="uid://630nfe6ytl1n" path="res://Assets/Sprites/Fish/Blue/1-5.png" id="3_msj6k"]
-[ext_resource type="Texture2D" uid="uid://dcs3fmpfpkoca" path="res://Assets/Sprites/Fish/Blue/1-6.png" id="4_2hi77"]
+[ext_resource type="Texture2D" uid="uid://b21810x60d8xp" path="res://Assets/Sprites/Fish/Green/1-7.png" id="2_aadg2"]
+[ext_resource type="Texture2D" uid="uid://bly6joanolt15" path="res://Assets/Sprites/Fish/Green/1-8.png" id="3_ju78m"]
+[ext_resource type="Texture2D" uid="uid://dcii2nmdcbxw6" path="res://Assets/Sprites/Fish/Green/1-9.png" id="4_msj6k"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b00gv"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_ju78m")
+"texture": ExtResource("2_aadg2")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_msj6k")
+"texture": ExtResource("3_ju78m")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_2hi77")
+"texture": ExtResource("4_msj6k")
 }],
 "loop": true,
 "name": &"default",
@@ -24,14 +24,14 @@ animations = [{
 
 [node name="TestSpecies" type="Node"]
 script = ExtResource("1_aadg2")
-speciesName = "Anchovy"
-size = 0.15
-baseSellValue = 10.0
+speciesName = "SeaBass"
+size = 0.4
+baseSellValue = 30.0
 fishTexture = SubResource("SpriteFrames_b00gv")
-preferredDepth = 300.0
-idleBurstTime = 3.0
+preferredDepth = 450.0
+idleBurstTime = 5.0
 idleMoveSpeed = 50.0
-fishingTurnTime = 0.5
-fishingResistance = 0.75
-fishingEnergyDrain = 0.5
+fishingTurnTime = 2.0
+fishingResistance = 1.5
+fishingEnergyDrain = 1.0
 metadata/_custom_type_script = "uid://c3dgu655bgxdj"
