@@ -58,7 +58,7 @@ restaurantPlayerSprite = SubResource("SpriteFrames_piffy")
 CustomerDict = {
 "test": NodePath("TestCustomer")
 }
-seatArray = [NodePath("../TestChair")]
+seatArray = [NodePath("../Chair1"), NodePath("../Chair2"), NodePath("../Chair3"), NodePath("../Chair4")]
 
 [node name="HeldItemIndicator" parent="." instance=ExtResource("5_bue68")]
 offset_left = 1925.84
@@ -110,8 +110,20 @@ shape = SubResource("RectangleShape2D_ix3f7")
 position = Vector2(157, 629)
 shape = SubResource("RectangleShape2D_iqu8l")
 
-[node name="TestChair" type="Sprite2D" parent="."]
-position = Vector2(1048, 1094)
+[node name="Chair1" type="Sprite2D" parent="."]
+position = Vector2(1858, 1022)
+texture = ExtResource("2_yfx12")
+
+[node name="Chair2" type="Sprite2D" parent="."]
+position = Vector2(1600, 1022)
+texture = ExtResource("2_yfx12")
+
+[node name="Chair3" type="Sprite2D" parent="."]
+position = Vector2(1344, 1022)
+texture = ExtResource("2_yfx12")
+
+[node name="Chair4" type="Sprite2D" parent="."]
+position = Vector2(1088, 1022)
 texture = ExtResource("2_yfx12")
 
 [connection signal="body_entered" from="FishBin" to="FishBin" method="_on_body_entered"]

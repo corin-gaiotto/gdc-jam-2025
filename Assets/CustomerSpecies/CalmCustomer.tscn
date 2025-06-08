@@ -1,15 +1,15 @@
 [gd_scene load_steps=7 format=3 uid="uid://dic5and18a6da"]
 
-[ext_resource type="Script" uid="uid://c7d8ue5vsjqnn" path="res://Scripts/customer_type.gd" id="1_rt7w5"]
-[ext_resource type="Texture2D" uid="uid://c8bgn5qwxkk8f" path="res://Assets/Sprites/TestCustomer/CustomerStand.png" id="2_11q55"]
-[ext_resource type="Script" uid="uid://oou5xsjpa84" path="res://Scripts/menu_item.gd" id="2_c7ilb"]
-[ext_resource type="Texture2D" uid="uid://dokj5ftigyxx8" path="res://icon.svg" id="3_11q55"]
+[ext_resource type="Script" uid="uid://c7d8ue5vsjqnn" path="res://Scripts/customer_type.gd" id="1_3ivbp"]
+[ext_resource type="Texture2D" uid="uid://c8bgn5qwxkk8f" path="res://Assets/Art/TestCustomer/CustomerStand.png" id="2_evuch"]
+[ext_resource type="Script" uid="uid://oou5xsjpa84" path="res://Scripts/menu_item.gd" id="3_8wu2b"]
+[ext_resource type="Texture2D" uid="uid://dokj5ftigyxx8" path="res://icon.svg" id="4_k8xj5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_t0lrf"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_11q55")
+"texture": ExtResource("2_evuch")
 }],
 "loop": true,
 "name": &"default",
@@ -20,7 +20,7 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_11q55")
+"texture": ExtResource("4_k8xj5")
 }],
 "loop": true,
 "name": &"default",
@@ -28,17 +28,17 @@ animations = [{
 }]
 
 [node name="TestCustomer" type="Node2D" node_paths=PackedStringArray("CustomerMenu")]
-script = ExtResource("1_rt7w5")
+script = ExtResource("1_3ivbp")
 CustomerMenu = {
-"testdish": NodePath("Node")
+"LightMenu": NodePath("Node")
 }
-customerPatience = 5.0
+customerPatience = 10.0
 customerTip = 5.0
-customerTimer = 15.0
+customerTimer = 25.0
 customerTexture = SubResource("SpriteFrames_t0lrf")
 
 [node name="Node" type="Node" parent="."]
-script = ExtResource("2_c7ilb")
+script = ExtResource("3_8wu2b")
 ingredients = Array[String](["Anchovy"])
 basePrice = 2.0
 baseTimer = 4.0
