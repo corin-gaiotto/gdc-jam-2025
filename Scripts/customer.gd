@@ -11,6 +11,11 @@ class_name Customer
 @export var customerTimer: float                # Total time limit for customer order
 @export var totalBill: float                    # Total customer bill with tip
 
+@export var seatPosition: Vector2
+@export var seatIndex: int
+
+var targetPosition: Vector2
+
 # [Animations]
 
 @export var orderSatisfied: bool = false
@@ -20,6 +25,7 @@ class_name Customer
 @export var isSitting: bool = false
 @export var isHappy: bool = false
 @export var isSad: bool = false
+var isLeaving: bool = false
 
 @onready var _animatedSprite2D = $AnimatedSprite2D
 @onready var _speechBubble = $SpeechBubble
@@ -37,6 +43,8 @@ func _ready() -> void:
 	
 	_speechBubble.visible = false
 	_orderedDish.visible = false
+	
+	targetPosition = seatPosition
 
 func _physics_process(delta: float) -> void:
 	
@@ -63,15 +71,65 @@ func _physics_process(delta: float) -> void:
 			else:                                          # If order failed show sad face
 				_orderedDish.animation = "sad"
 				isWalking = true
+				# leave seat; thus, broadcast signal that seat is free
+				leave()
 		else:
 			_orderedDish.animation = "happy"               # If order satisfied show happy face
 			isWalking = true
+			# leave seat; thus, broadcast signal that seat is free
+			leave()
 	
 	if (isWalking):
 		isSitting = false
 		_animatedSprite2D.animation = "walk"
 		_animatedSprite2D.play("walk")
+		
+		# walk towards target position
+		var walkResult = walkTowards(targetPosition, 5, delta, isLeaving)
+		
+		if walkResult == 1:
+			if isLeaving:
+				# once left the bar, remove self
+				queue_free()
+			else:
+				# sit down to order
+				isWalking = false
+				isSitting = true
+		
 	else:
 		_animatedSprite2D.stop()
 		
 	pass
+
+func leave():
+	emit_signal("SeatFree", seatIndex)
+	isLeaving = true
+	targetPosition = Vector2(25, 750) # go back to whence you came
+	isWalking = true
+	isSitting = false
+
+func walkTowards(target: Vector2, walkSpeed: float, delta: float, horizontal_first: bool = false) -> int:
+	# walk towards the target position, and return 0 if not arrived and 1 if arrived (+- a few)
+	if horizontal_first:
+		# prioritize horizontal movement
+		if target.x - position.x > walkSpeed * delta:
+			# move horizontally
+			position.x += sign(target.x - position.x) * walkSpeed * delta
+		elif target.y - position.y > walkSpeed:
+			# move vertically
+			position.y += sign(target.y - position.y) * walkSpeed * delta
+		else:
+			# arrived
+			return 1
+	else:
+		# prioritize vertical movement
+		if target.y - position.y > walkSpeed:
+			# move vertically
+			position.y += sign(target.y - position.y) * walkSpeed
+		elif target.x - position.x > walkSpeed:
+			# move horizontally
+			position.x += sign(target.x - position.x) * walkSpeed
+		else:
+			# arrived
+			return 1
+	return 0

@@ -9,6 +9,9 @@ class_name CustomerManager
 @export var CustomerDict         : Dictionary[String, CustomerType] # Dict of available customers to spawn
 @export var CustomerWeights      : Dictionary[String, int]          # Dict of integer weights for their spawning rarity
 
+@export var seatArray : Array[Sprite2D]
+var seatsFree : Array[bool]
+
 # Spawning time is random between these two values
 @export var spawnTimeMin : int # in frames (60fps): how long between spawns (minimum)
 @export var spawnTimeMax : int # in frames (60fps): how long between spawns (maximum)
@@ -24,7 +27,10 @@ class_name CustomerManager
 var spawnTimeRemaining : int = 0
 
 func _ready() -> void:
-	pass
+	seatsFree = []
+	# populate seatsFree with true for each seat
+	for seat in seatArray:
+		seatsFree.append(true)
 
 func weightedChoice() -> String:
 	# Choose a random customer type name from the weight dict
@@ -40,10 +46,23 @@ func spawnCustomer(SceneParent : Node, chosenType : CustomerType):
 	# Spawns a customer and attaches it as a child of the given parent node
 	var customerNode = chosenType.generateCustomer()
 	
-	# TODO: set position properly. For now, just random between 0 and 400 on each axis
-	customerNode.position = Vector2(randf_range(0, 400), randf_range(0, 400))
+	# Set customer starting position to the position of the customer door (bottom left, offscreen from the bottom)
+	customerNode.position = Vector2(25, 750)
 	
-	SceneParent.add_child(customerNode)	
+	SceneParent.add_child(customerNode)
+	
+	# Pick an empty seat for the customer
+	var seatInd = pickEmptySeatIndex()
+	
+	# Give customer a target seat position and a seat index (to broadcast back once the seat is free again)
+	customerNode.seatPosition = seatArray[seatInd].position
+	customerNode.seatIndex = seatInd
+	
+	customerNode.add_user_signal("SeatFree", [{"name":"Index", "type":"int"}])
+	customerNode.connect("SeatFree", freeSeat)
+	
+	# mark seat as occupied
+	seatsFree[seatInd] = false
 
 
 func spawnRandomCustomer(SceneParent : Node):
@@ -51,3 +70,14 @@ func spawnRandomCustomer(SceneParent : Node):
 	var chosenType = CustomerDict[weightedChoice()]
 	
 	spawnCustomer(SceneParent, chosenType)
+
+func freeSeat(ind: int):
+	seatsFree[ind] = true
+
+func pickEmptySeatIndex():
+	# Picks a random empty seat and return its index in the list, assuming there is one (if there isn't, this won't be called)
+	var possiblePicks = []
+	for i in range(len(seatsFree)):
+		if seatsFree[i]:
+			possiblePicks.append(i)
+	return possiblePicks.pick_random()
