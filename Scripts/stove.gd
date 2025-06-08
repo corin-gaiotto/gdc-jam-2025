@@ -22,7 +22,7 @@ func interact(player : RestaurantPlayer):
 		$Timer.stop()
 		player.heldIngredient = storedIngredients[0]
 		storedIngredients = []
-		print("[interact] player grabbed non cooked food from stove ", player.heldIngredient.Igredient,player.heldIngredient.baseValue)
+		print("[interact] player grabbed non cooked food from stove ", player.heldIngredient.Ingredient,player.heldIngredient.baseValue)
 		pass
 
 
