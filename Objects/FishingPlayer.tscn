@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://638hqodqju1e"]
+[gd_scene load_steps=47 format=3 uid="uid://638hqodqju1e"]
 
 [ext_resource type="Script" uid="uid://bah45uowqio7v" path="res://Scripts/fishing_player.gd" id="1_45n1i"]
 [ext_resource type="Texture2D" uid="uid://w38rmx0euw02" path="res://Assets/Sprites/FishingPlayerFishing/FishingCasting/Casting0.png" id="2_qqduh"]
@@ -31,8 +31,11 @@
 [ext_resource type="Texture2D" uid="uid://bmd7p37cmj2ry" path="res://Assets/Sprites/FishingPlayerFishing/FishingComplete/Frame4.png" id="17_qjdbo"]
 [ext_resource type="Texture2D" uid="uid://5kc12q4eeis7" path="res://Assets/Sprites/FishingPlayerWalk/WalkLeft/WalkLeft4.png" id="17_u745p"]
 [ext_resource type="Texture2D" uid="uid://dwj1fm2er0h1j" path="res://Assets/Sprites/FishingPlayerWalk/WalkRight/WalkRight0.png" id="18_q0kp4"]
+[ext_resource type="Texture2D" uid="uid://cp5j0uk2u6o7d" path="res://Assets/Sprites/FishingPlayerFishing/FishingSparkles/frame0.png" id="18_quqkp"]
 [ext_resource type="Texture2D" uid="uid://bcyp0kre1y7dl" path="res://Assets/Sprites/FishingPlayerWalk/WalkRight/WalkRight1.png" id="19_2ew6n"]
+[ext_resource type="Texture2D" uid="uid://co23ly86g6opn" path="res://Assets/Sprites/FishingPlayerFishing/FishingSparkles/frame1.png" id="19_qjdbo"]
 [ext_resource type="Texture2D" uid="uid://bnebx8xn3tc1u" path="res://Assets/Sprites/FishingPlayerWalk/WalkRight/WalkRight2.png" id="20_etvvv"]
+[ext_resource type="Texture2D" uid="uid://b6s3ex1sridmp" path="res://Assets/Sprites/FishingPlayerFishing/FishingSparkles/frame2.png" id="20_lg26m"]
 [ext_resource type="Texture2D" uid="uid://dn4go7a6uvlh3" path="res://Assets/Sprites/FishingPlayerWalk/WalkRight/WalkRight3.png" id="21_svom4"]
 [ext_resource type="Texture2D" uid="uid://daxggemfs02r" path="res://Assets/Sprites/FishingPlayerWalk/WalkRight/WalkRight4.png" id="22_quqkp"]
 [ext_resource type="Texture2D" uid="uid://bkq7cvov5aknf" path="res://Assets/Sprites/Hook/1.png" id="31_t6e8o"]
@@ -115,6 +118,20 @@ animations = [{
 }],
 "loop": false,
 "name": &"fishing-reel-complete",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_qjdbo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_lg26m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_quqkp")
+}],
+"loop": true,
+"name": &"fishing-reel-sparkles",
 "speed": 5.0
 }, {
 "frames": [{
@@ -217,6 +234,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_2ew6n"]
+font_size = 30
+
 [node name="FishingPlayer" type="CharacterBody2D"]
 script = ExtResource("1_45n1i")
 
@@ -224,7 +244,8 @@ script = ExtResource("1_45n1i")
 position = Vector2(48, 320.566)
 scale = Vector2(0.075, 0.088)
 sprite_frames = SubResource("SpriteFrames_88ni6")
-animation = &"fishing-reel-complete"
+animation = &"fishing-reel-sparkles"
+frame_progress = 0.00740738
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(48, 343)
@@ -244,4 +265,63 @@ scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_fe5ay")
 autoplay = "default"
 
+[node name="DoorLabel" type="Label" parent="."]
+offset_left = 5.0
+offset_top = 200.0
+offset_right = 137.0
+offset_bottom = 275.0
+text = "[E]
+Enter Restaurant"
+horizontal_alignment = 1
+
+[node name="FishingLabel" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 200.0
+offset_right = 136.0
+offset_bottom = 275.0
+text = "[E] 
+Start Fishing"
+horizontal_alignment = 1
+
+[node name="CastLabel" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 200.0
+offset_right = 136.0
+offset_bottom = 275.0
+text = "[Space] 
+Cast Line"
+horizontal_alignment = 1
+
+[node name="MoveHookLabel" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 200.0
+offset_right = 136.0
+offset_bottom = 275.0
+text = "[WASD] 
+Move Hook"
+horizontal_alignment = 1
+
+[node name="BiteIndicator" type="Label" parent="."]
+offset_left = 26.0
+offset_top = 207.0
+offset_right = 58.0
+offset_bottom = 251.0
+text = "!!"
+label_settings = SubResource("LabelSettings_2ew6n")
+horizontal_alignment = 1
+
+[node name="FishDisplay" type="Label" parent="."]
+offset_left = 139.0
+offset_top = 211.0
+offset_right = 265.0
+offset_bottom = 286.0
+text = "<NAME>
+<SIZE> cm
+Value: $<VAL>"
+horizontal_alignment = 1
+
+[node name="DisplaySprite" type="AnimatedSprite2D" parent="FishDisplay"]
+position = Vector2(58, 115)
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="Hook" to="." method="_on_hook_area_entered"]
