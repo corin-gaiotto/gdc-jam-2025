@@ -225,7 +225,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk-left",
-"speed": 10.0
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -245,13 +245,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk-right",
-"speed": 10.0
+"speed": 9.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xur5a"]
 size = Vector2(8.8125, 68)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_45n1i"]
+radius = 13.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fe5ay"]
 animations = [{
@@ -294,13 +295,14 @@ shadow_size = 1
 script = ExtResource("1_45n1i")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(48, 320.566)
+position = Vector2(46, 321)
 scale = Vector2(0.075, 0.088)
 sprite_frames = SubResource("SpriteFrames_88ni6")
-animation = &"walk-left"
+animation = &"walk-right"
+frame_progress = 0.512429
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(48, 343)
+position = Vector2(54, 342)
 scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_xur5a")
 
@@ -309,6 +311,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hook"]
+position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_45n1i")
 
 [node name="HookSprite" type="AnimatedSprite2D" parent="Hook"]
