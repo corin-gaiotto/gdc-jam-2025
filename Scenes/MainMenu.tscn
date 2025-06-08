@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://ci2ujbudpnctm" path="res://Scripts/main_menu.gd" id="1_tt5f1"]
 [ext_resource type="Script" path="res://Scenes/main_menu_sprite_pivot.gd" id="2_8saeu"]
 [ext_resource type="Texture2D" uid="uid://dokj5ftigyxx8" path="res://icon.svg" id="2_853f1"]
-[ext_resource type="Texture2D" uid="uid://bwkhbtak37hvq" path="res://Assets/Sprites/MainMenu/MainMenu1.png" id="4_8um5k"]
-[ext_resource type="Texture2D" uid="uid://bk53gndqfvu11" path="res://Assets/Sprites/MainMenu/MainMenu2.png" id="5_xim88"]
-[ext_resource type="Texture2D" uid="uid://hytj65l2l70k" path="res://Assets/Sprites/MainMenu/MainMenu3.png" id="6_koqhg"]
+[ext_resource type="Texture2D" uid="uid://we0hv5qts063" path="res://Assets/Sprites/MainMenu/Menu1.png" id="4_8um5k"]
+[ext_resource type="Texture2D" uid="uid://bythe2w3lx34u" path="res://Assets/Sprites/MainMenu/Menu2.png" id="5_xim88"]
+[ext_resource type="Texture2D" uid="uid://bnu70s56mhij" path="res://Assets/Sprites/MainMenu/Menu3.png" id="6_koqhg"]
 
 [sub_resource type="Animation" id="Animation_loo7a"]
 length = 0.001
@@ -65,19 +65,35 @@ script = ExtResource("1_tt5f1")
 showTutorial = false
 
 [node name="StartButton" type="Button" parent="."]
+z_index = 1
 offset_left = 421.0
 offset_top = 549.0
 offset_right = 688.0
 offset_bottom = 604.0
 focus_mode = 0
+theme_override_colors/font_disabled_color = Color(0.186391, 0.307332, 0.445432, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.188235, 0.305882, 0.447059, 1)
+theme_override_colors/font_hover_color = Color(0.188235, 0.305882, 0.447059, 1)
+theme_override_colors/font_outline_color = Color(0.188235, 0.305882, 0.447059, 1)
+theme_override_colors/font_color = Color(0.188235, 0.305882, 0.447059, 1)
+theme_override_colors/font_focus_color = Color(0.188235, 0.305882, 0.447059, 1)
+theme_override_colors/font_pressed_color = Color(0.188235, 0.305882, 0.447059, 1)
 text = "Start"
 flat = true
 
 [node name="ExitButton" type="Button" parent="."]
+z_index = 1
 offset_left = 420.0
 offset_top = 636.0
 offset_right = 687.0
 offset_bottom = 691.0
+theme_override_colors/font_disabled_color = Color(0.188235, 0.305882, 0.447059, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.188235, 0.305882, 0.447059, 1)
+theme_override_colors/font_hover_color = Color(0.188235, 0.305882, 0.447059, 1)
+theme_override_colors/font_outline_color = Color(0.188235, 0.305882, 0.447059, 1)
+theme_override_colors/font_color = Color(0.188235, 0.305882, 0.447059, 1)
+theme_override_colors/font_focus_color = Color(0.188235, 0.305882, 0.447059, 1)
+theme_override_colors/font_pressed_color = Color(0.188235, 0.305882, 0.447059, 1)
 text = "Exit"
 flat = true
 
