@@ -61,6 +61,8 @@ func _physics_process(delta: float) -> void:
 		_speechBubble.visible = true
 		_orderedDish.visible = true
 		
+		$ServingBox.monitoring = true
+		$ServingBox.Order = customerOrder
 		# Customer waiting timer
 		customerTimer -= delta
 		if customerTimer <= 0:

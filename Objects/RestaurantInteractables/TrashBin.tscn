@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bo3tcwn7b6g05"]
 
-[ext_resource type="Script" path="res://Scripts/trash_bin.gd" id="1_syt33"]
+[ext_resource type="Script" uid="uid://dr2o6cn37e41w" path="res://Scripts/trash_bin.gd" id="1_syt33"]
 [ext_resource type="Texture2D" uid="uid://2govfjvwyhnf" path="res://Assets/Art/restaurant/mockupS25 4.png" id="2_2nsa1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2nsa1"]

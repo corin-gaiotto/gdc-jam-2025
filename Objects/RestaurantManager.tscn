@@ -14,5 +14,6 @@ CustomerWeights = Dictionary[String, int]({
 
 [node name="TestCustomer" parent="." node_paths=PackedStringArray("CustomerMenu") instance=ExtResource("2_ers0b")]
 CustomerMenu = {
+"LightMenu": NodePath("Node"),
 "testdish": NodePath("Node")
 }
