@@ -8,6 +8,13 @@ class_name FishingPlayer
 @onready var _hookSprite = $Hook/HookSprite
 @onready var _collisionShape = $CollisionShape2D
 
+@onready var _doorLabel = $DoorLabel
+@onready var _fishingLabel = $FishingLabel
+@onready var _castLabel = $CastLabel
+@onready var _moveHookLabel = $MoveHookLabel
+@onready var _fishDisplay = $FishDisplay
+@onready var _displaySprite = $FishDisplay/DisplaySprite
+
 @export var _energyBar : TextureProgressBar
 
 var hookedFish: Fish # fish actor that has been hooked
@@ -56,6 +63,10 @@ func _ready() -> void:
 	_energyBar.max_value = maxEnergy
 	_energyBar.value = energy
 	_energyBar.visible = false
+	_doorLabel.visible = false
+	_fishingLabel.visible = false
+	_castLabel.visible = false
+	_fishDisplay.visible = false
 	
 	_mainScene = get_parent().get_parent()
 	if _mainScene:
@@ -104,6 +115,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = Vector2.ZERO
 	move_and_slide()
+	
+	_doorLabel.visible = inDoor
+	_fishingLabel.visible = canFish and not(isFishing)
+	_castLabel.visible = currentState == fishingEnum.FISHING_IDLE and isFishing
+	_moveHookLabel.visible = currentState == fishingEnum.FISHING_CAST_IDLE and isFishing
 	
 	if inDoor and Input.is_action_just_pressed("start-fishing"):
 		_mainScene.switchScene("Restaurant")
@@ -206,6 +222,12 @@ func _physics_process(delta: float) -> void:
 					print("[minigame] Caught!")
 					hookedFish.global_position = global_position + Vector2(0, -80)
 					# remove the fish and add its name and price to the list of fish
+					_fishDisplay.text = hookedFish.speciesName + "\n" + str(snapped(hookedFish.size*100, 1)) + " cm\nValue: $" + str("%0.2f" % snapped(hookedFish.finalSellValue, 0.01))
+					_displaySprite.sprite_frames = hookedFish.sprite_frames
+					_displaySprite.scale = hookedFish.scale
+					_fishDisplay.visible = true
+					_displaySprite.visible = true
+					
 					_mainScene.conservedData["FishCaught"].append([hookedFish.speciesName, snapped(hookedFish.finalSellValue, 0.01)])
 					print(_mainScene.conservedData["FishCaught"])
 					hookedFish.queue_free()
@@ -226,6 +248,7 @@ func _physics_process(delta: float) -> void:
 				# wait for the obtain animation to play out, then allow the player to return to FISHING_IDLE using interact
 				if stateTimeRemaining < 1 and Input.is_action_just_pressed("fishing-interact"):
 					currentState = fishingEnum.FISHING_IDLE
+					_fishDisplay.visible = false
 					_animatedSprite.play("fishing-idle")
 					_hookSprite.visible = false
 					play_fishing_calm.emit()

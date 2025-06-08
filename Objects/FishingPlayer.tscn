@@ -244,4 +244,53 @@ scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_fe5ay")
 autoplay = "default"
 
+[node name="DoorLabel" type="Label" parent="."]
+offset_left = 5.0
+offset_top = 200.0
+offset_right = 137.0
+offset_bottom = 275.0
+text = "[E]
+Enter Restaurant"
+horizontal_alignment = 1
+
+[node name="FishingLabel" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 200.0
+offset_right = 136.0
+offset_bottom = 275.0
+text = "[E] 
+Start Fishing"
+horizontal_alignment = 1
+
+[node name="CastLabel" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 200.0
+offset_right = 136.0
+offset_bottom = 275.0
+text = "[Space] 
+Cast Line"
+horizontal_alignment = 1
+
+[node name="MoveHookLabel" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 200.0
+offset_right = 136.0
+offset_bottom = 275.0
+text = "[WASD] 
+Move Hook"
+horizontal_alignment = 1
+
+[node name="FishDisplay" type="Label" parent="."]
+offset_left = 139.0
+offset_top = 211.0
+offset_right = 265.0
+offset_bottom = 286.0
+text = "<NAME>
+<SIZE> cm
+Value: $<VAL>"
+horizontal_alignment = 1
+
+[node name="DisplaySprite" type="AnimatedSprite2D" parent="FishDisplay"]
+position = Vector2(58, 115)
+
 [connection signal="area_entered" from="Hook" to="." method="_on_hook_area_entered"]
