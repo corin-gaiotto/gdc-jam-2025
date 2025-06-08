@@ -30,7 +30,7 @@ var dir_animation_map : = {
 }
 
 
-@export var heldIngredient = [] #exported for debug
+var heldIngredient : FoodItem = null
 
 
 # Called when the node enters the scene tree for the first time.

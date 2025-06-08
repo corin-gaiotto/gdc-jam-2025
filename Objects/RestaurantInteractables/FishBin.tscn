@@ -21,3 +21,4 @@ shape = SubResource("RectangleShape2D_7bvsm")
 
 [node name="CollisionBox" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_mc2i4")
+debug_color = Color(1, 0, 0, 0.396078)
