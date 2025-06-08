@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://wxs78acgk1qk" path="res://Objects/MenuItem.tscn" id="5_piffy"]
 [ext_resource type="PackedScene" uid="uid://bo5d5lltdyqam" path="res://Objects/RestaurantInteractables/FishBin.tscn" id="6_mdxsm"]
 [ext_resource type="PackedScene" uid="uid://c54ekrxvd6rgi" path="res://Objects/RestaurantInteractables/Stove.tscn" id="8_hje71"]
-[ext_resource type="PackedScene" path="res://Objects/RestaurantInteractables/TrashBin.tscn" id="10_fy5am"]
+[ext_resource type="PackedScene" uid="uid://bo3tcwn7b6g05" path="res://Objects/RestaurantInteractables/TrashBin.tscn" id="10_fy5am"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_piffy"]
 animations = [{
@@ -58,7 +58,7 @@ restaurantPlayerSprite = SubResource("SpriteFrames_piffy")
 CustomerDict = {
 "test": NodePath("TestCustomer")
 }
-seatArray = [NodePath("../TestChair")]
+seatArray = [NodePath("../Chair1"), NodePath("../Chair2"), NodePath("../Chair3"), NodePath("../Chair4")]
 
 [node name="HeldItemIndicator" parent="." instance=ExtResource("5_bue68")]
 offset_left = 1925.84
@@ -110,8 +110,20 @@ shape = SubResource("RectangleShape2D_ix3f7")
 position = Vector2(157, 629)
 shape = SubResource("RectangleShape2D_iqu8l")
 
-[node name="TestChair" type="Sprite2D" parent="."]
-position = Vector2(1048, 1094)
+[node name="Chair1" type="Sprite2D" parent="."]
+position = Vector2(1858, 1022)
+texture = ExtResource("2_yfx12")
+
+[node name="Chair2" type="Sprite2D" parent="."]
+position = Vector2(1600, 1022)
+texture = ExtResource("2_yfx12")
+
+[node name="Chair3" type="Sprite2D" parent="."]
+position = Vector2(1344, 1022)
+texture = ExtResource("2_yfx12")
+
+[node name="Chair4" type="Sprite2D" parent="."]
+position = Vector2(1088, 1022)
 texture = ExtResource("2_yfx12")
 
 [connection signal="body_entered" from="FishBin" to="FishBin" method="_on_body_entered"]
