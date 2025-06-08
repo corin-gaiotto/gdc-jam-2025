@@ -4,7 +4,7 @@ class_name RestaurantPlayer
 
 # movement
 @export var speed = 200
-@export_range(1, 3) var sprintMultiplier: float = 2.5
+@export_range(1, 3) var sprintMultiplier: float = 2.25
 @export_range(0, 1) var decceleration: float = 0.2
 @export var isSprinting: bool = false
 @export var canSprint: bool = true
