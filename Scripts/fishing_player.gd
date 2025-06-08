@@ -160,7 +160,7 @@ func _physics_process(delta: float) -> void:
 					currentState = fishingEnum.FISHING_CAST_IDLE
 					# make hook visible, and place it correctly
 					_hookSprite.visible = true
-					_hook.global_position = Vector2(global_position.x + 240, 256) # placeholder: relative to player position
+					_hook.global_position = Vector2(global_position.x + 240, 320) # placeholder: relative to player position
 			
 			fishingEnum.FISHING_CAST_IDLE:
 				_energyBar.visible = false
@@ -168,7 +168,7 @@ func _physics_process(delta: float) -> void:
 				
 				# TODO: clamp hook global position within the water (once the scene is more set up)
 				_hook.position += delta * hookSpeed * Vector2(_x_dir, _y_dir)
-				_hook.global_position.y = clamp(_hook.global_position.y, 256, 648)
+				_hook.global_position.y = clamp(_hook.global_position.y, 320, 648)
 				_hook.global_position.x = clamp(_hook.global_position.x, 465, 1150)
 				if Input.is_action_just_pressed("fishing-cancel"):
 					# return to fishing idle
@@ -226,7 +226,7 @@ func _physics_process(delta: float) -> void:
 					_animatedSprite.play("fishing-tug")
 					_animatedSprite.stop()
 				
-				if hookedFish.position.y < 256: # placeholder: wherever water surface will be
+				if hookedFish.position.y < 300: # placeholder: wherever water surface will be
 					# caught the fish
 					print("[minigame] Caught!")
 					hookedFish.global_position = global_position + Vector2(0, -80)

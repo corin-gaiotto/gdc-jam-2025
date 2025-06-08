@@ -42,8 +42,8 @@ size = Vector2(2458, 70)
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_piffy")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = -1
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(1136.84, 646.002)
 scale = Vector2(1.26882, 1.26882)
 texture = ExtResource("2_axxsr")
@@ -111,18 +111,22 @@ position = Vector2(157, 629)
 shape = SubResource("RectangleShape2D_iqu8l")
 
 [node name="Chair1" type="Sprite2D" parent="."]
+z_index = -1
 position = Vector2(1858, 1022)
 texture = ExtResource("2_yfx12")
 
 [node name="Chair2" type="Sprite2D" parent="."]
+z_index = -1
 position = Vector2(1600, 1022)
 texture = ExtResource("2_yfx12")
 
 [node name="Chair3" type="Sprite2D" parent="."]
+z_index = -1
 position = Vector2(1344, 1022)
 texture = ExtResource("2_yfx12")
 
 [node name="Chair4" type="Sprite2D" parent="."]
+z_index = -1
 position = Vector2(1088, 1022)
 texture = ExtResource("2_yfx12")
 

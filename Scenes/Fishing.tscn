@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://ckw8t1fex5blh" path="res://Assets/Art/UI/EnergyBar/over.png" id="4_5bvba"]
 [ext_resource type="Texture2D" uid="uid://bj0ct40kvwjv6" path="res://Assets/Art/UI/EnergyBar/progress.png" id="5_p25a2"]
 [ext_resource type="Texture2D" uid="uid://csy2iu71l88ib" path="res://Assets/Sprites/stool/stool.png" id="6_5bvba"]
-[ext_resource type="Texture2D" uid="uid://6bojn83svimv" path="res://Assets/Sprites/FishingBG/fishing_background.png" id="7_p25a2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nnhe8"]
 size = Vector2(32, 128)
@@ -20,6 +19,9 @@ size = Vector2(16, 88)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5bvba"]
 size = Vector2(24, 88)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5bvba"]
+load_path = "res://.godot/imported/fishing_background.png-bd1b6eb694dc5f3a1ab3b4a8504f740f.ctex"
+
 [node name="Node2D" type="Node2D"]
 
 [node name="FishingPlayer" parent="." node_paths=PackedStringArray("_energyBar") instance=ExtResource("1_aonvm")]
@@ -30,7 +32,9 @@ _energyBar = NodePath("../TextureProgressBar")
 [node name="FishManagerTemplate" parent="." node_paths=PackedStringArray("SpeciesDict") instance=ExtResource("2_nnhe8")]
 SpeciesDict = {
 "Anchovy": NodePath("Anchovy"),
-"Horse Mackerel": NodePath("HorseMackerel")
+"Horse Mackerel": NodePath("HorseMackerel"),
+"Mahi-Mahi": NodePath("MahiMahi"),
+"Sea Bass": NodePath("SeaBass")
 }
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
@@ -87,7 +91,7 @@ texture = ExtResource("6_5bvba")
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -2
 position = Vector2(576, 324)
-texture = ExtResource("7_p25a2")
+texture = SubResource("CompressedTexture2D_5bvba")
 
 [connection signal="body_entered" from="FishingArea" to="FishingPlayer" method="_on_fishing_area_body_entered"]
 [connection signal="body_exited" from="FishingArea" to="FishingPlayer" method="_on_fishing_area_body_exited"]
