@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dsbtedevf5vc1"]
+[gd_scene load_steps=11 format=3 uid="uid://dsbtedevf5vc1"]
 
 [ext_resource type="PackedScene" uid="uid://638hqodqju1e" path="res://Objects/FishingPlayer.tscn" id="1_aonvm"]
 [ext_resource type="PackedScene" uid="uid://biouiciisyeg2" path="res://Objects/FishManagerTemplate.tscn" id="2_nnhe8"]
 [ext_resource type="Texture2D" uid="uid://dmo5lowf7admv" path="res://Assets/Art/UI/EnergyBar/under.png" id="3_y05ux"]
 [ext_resource type="Texture2D" uid="uid://ckw8t1fex5blh" path="res://Assets/Art/UI/EnergyBar/over.png" id="4_5bvba"]
 [ext_resource type="Texture2D" uid="uid://bj0ct40kvwjv6" path="res://Assets/Art/UI/EnergyBar/progress.png" id="5_p25a2"]
+[ext_resource type="Texture2D" uid="uid://ce6m583841xci" path="res://Assets/Sprites/stool/stool.png" id="6_5bvba"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nnhe8"]
 size = Vector2(32, 128)
@@ -75,6 +76,12 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DoorArea"]
 position = Vector2(84, 180)
 shape = SubResource("RectangleShape2D_5bvba")
+
+[node name="Stool" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(416, 237)
+scale = Vector2(0.174279, 0.174279)
+texture = ExtResource("6_5bvba")
 
 [connection signal="body_entered" from="FishingArea" to="FishingPlayer" method="_on_fishing_area_body_entered"]
 [connection signal="body_exited" from="FishingArea" to="FishingPlayer" method="_on_fishing_area_body_exited"]
