@@ -1,14 +1,16 @@
 [gd_scene load_steps=13 format=3 uid="uid://c4onavem3i6q6"]
 
 [ext_resource type="Script" uid="uid://b0lnctqxeoiia" path="res://Scripts/customer.gd" id="1_bdb25"]
+
 [ext_resource type="Texture2D" uid="uid://dxlac51l10xvb" path="res://Assets/Sprites/TestCustomer/CustomerSit.png" id="2_py31r"]
 [ext_resource type="Texture2D" uid="uid://cy428a7pnx1q6" path="res://Assets/Sprites/TestCustomer/TestSpeechBubble.png" id="3_dohlm"]
-[ext_resource type="Texture2D" uid="uid://boh5l5scglkf5" path="res://Assets/Sprites/TestCustomer/CustomerWalkLeft.png" id="3_w6vul"]
 [ext_resource type="Texture2D" uid="uid://cyfpimqm1pace" path="res://Assets/Sprites/TestCustomer/TestMenuItem.png" id="4_0g1uc"]
-[ext_resource type="Texture2D" uid="uid://2hb7ghrjosrp" path="res://Assets/Sprites/TestCustomer/CustomerWalkRight.png" id="4_iyeuv"]
 [ext_resource type="Texture2D" uid="uid://bugytd7yvl4ns" path="res://Assets/Sprites/TestCustomer/HappyFace.png" id="5_a7kyv"]
 [ext_resource type="Texture2D" uid="uid://de0qk0o4dlxmj" path="res://Assets/Sprites/TestCustomer/SadFace.png" id="6_j0p7o"]
-[ext_resource type="Texture2D" uid="uid://c8bgn5qwxkk8f" path="res://Assets/Sprites/TestCustomer/CustomerStand.png" id="7_w6vul"]
+[ext_resource type="Texture2D" uid="uid://dtnil8uscr3kf" path="res://Assets/Sprites/RestaurantCustomer/Untitled_Artwork-2 39.png" id="6_py31r"]
+[ext_resource type="Texture2D" uid="uid://c3qgna8dwnaek" path="res://Assets/Sprites/RestaurantCustomer/Untitled_Artwork-1 38.png" id="7_w6vul"]
+[ext_resource type="Texture2D" uid="uid://bn610ub1r662f" path="res://Assets/Sprites/RestaurantCustomer/Untitled_Artwork-3 33.png" id="8_iyeuv"]
+[ext_resource type="Texture2D" uid="uid://rjqdatcdtbht" path="res://Assets/Sprites/RestaurantCustomer/Untitled_Artwork-4 18.png" id="9_rl8sf"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_a7kyv"]
 animations = [{
@@ -52,7 +54,7 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("7_w6vul")
+"texture": ExtResource("6_py31r")
 }],
 "loop": true,
 "name": &"default",
@@ -60,7 +62,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_py31r")
+"texture": ExtResource("7_w6vul")
 }],
 "loop": true,
 "name": &"sit",
@@ -68,10 +70,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_w6vul")
+"texture": ExtResource("8_iyeuv")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_iyeuv")
+"texture": ExtResource("9_rl8sf")
 }],
 "loop": true,
 "name": &"walk",
@@ -95,6 +97,4 @@ animation = &"sad"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_iyeuv")
-animation = &"walk"
-frame_progress = 0.808002
 speed_scale = 0.5
