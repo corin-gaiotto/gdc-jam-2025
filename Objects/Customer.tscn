@@ -96,7 +96,7 @@ func interact(player : RestaurantPlayer):
 		print(\"[serving] customer\", Order.ingredients, \" \", player.heldIngredient)
 		print(\"[serving] customer\", Order.ingredients, \" \", player.heldIngredient)
 		print(\"[serving] customer\", Order.ingredients[0], \" \", player.heldIngredient.Ingredient)
-		if Order.ingredients[0] == player.heldIngredient.Ingredient:
+		if Order.ingredients[0] == player.heldIngredient.Ingredient and player.heldIngredient.Cooked:
 			player.heldIngredient = null
 			get_parent().orderSatisfied = true
 		
