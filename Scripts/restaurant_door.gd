@@ -14,4 +14,4 @@ func interact(player : RestaurantPlayer):
 	super.interact(player)
 	print("Door back to fishing")
 	if _mainScene:
-		_mainScene.switchScene("Fishing")
+		_mainScene.switchScene("RestaurantToFishing")
