@@ -26,6 +26,7 @@ func interact(player : RestaurantPlayer):
 func _on_body_entered(body: Node2D) -> void:
 	canInteract = true
 	Player = get_parent().find_child("RestaurantPlayer")
+	Player = body
 	print("[interact]interactable range")
 	#print(canInteract)
 	pass # Replace with function body.

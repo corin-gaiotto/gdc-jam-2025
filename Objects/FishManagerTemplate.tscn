@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://c82kc21gwu57i" path="res://Assets/FishSpecies/TestSpecies.tscn" id="2_56iai"]
 [ext_resource type="PackedScene" uid="uid://yvyapn1ab3xl" path="res://Assets/FishSpecies/Anchovy.tscn" id="3_sv0qc"]
 [ext_resource type="PackedScene" uid="uid://d3g7m2kou81hj" path="res://Assets/FishSpecies/HorseMackerel.tscn" id="4_vadww"]
-[ext_resource type="PackedScene" uid="uid://blp73mmjmh8l2" path="res://Assets/FishSpecies/SeaBass.tscn" id="5_012vj"]
-[ext_resource type="PackedScene" uid="uid://b60f35dak1ake" path="res://Assets/FishSpecies/MahiMahi.tscn" id="6_8bd1w"]
+[ext_resource type="PackedScene" path="res://Assets/FishSpecies/SeaBass.tscn" id="5_012vj"]
+[ext_resource type="PackedScene" path="res://Assets/FishSpecies/MahiMahi.tscn" id="6_8bd1w"]
 
 [node name="FishManagerTemplate" type="Node2D" node_paths=PackedStringArray("SpeciesDict")]
 script = ExtResource("1_w4qpl")

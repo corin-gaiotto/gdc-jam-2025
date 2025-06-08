@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c4onavem3i6q6"]
+[gd_scene load_steps=15 format=3 uid="uid://c4onavem3i6q6"]
 
 [ext_resource type="Script" uid="uid://b0lnctqxeoiia" path="res://Scripts/customer.gd" id="1_bdb25"]
 [ext_resource type="Texture2D" uid="uid://cy428a7pnx1q6" path="res://Assets/Sprites/TestCustomer/TestSpeechBubble.png" id="3_dohlm"]
@@ -78,6 +78,33 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="GDScript" id="GDScript_py31r"]
+script/source = "extends RestaurantInteractable
+
+var Order
+
+
+func _ready() -> void:
+	monitoring = false
+	Order = get_parent().customerOrder
+	
+	
+func interact(player : RestaurantPlayer):
+	print(player)
+	Player = player
+	if player.heldIngredient:
+		print(\"[serving] customer\", Order.ingredients, \" \", player.heldIngredient)
+		print(\"[serving] customer\", Order.ingredients, \" \", player.heldIngredient)
+		print(\"[serving] customer\", Order.ingredients[0], \" \", player.heldIngredient.Ingredient)
+		if Order.ingredients[0] == player.heldIngredient.Ingredient:
+			player.heldIngredient = null
+			get_parent().orderSatisfied = true
+		
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w6vul"]
+size = Vector2(174, 487.5)
+
 [node name="Customer" type="AnimatedSprite2D"]
 script = ExtResource("1_bdb25")
 customerPatience = 1.0
@@ -96,3 +123,17 @@ animation = &"sad"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_iyeuv")
 speed_scale = 0.5
+
+[node name="ServingBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+script = SubResource("GDScript_py31r")
+metadata/_custom_type_script = "uid://haqw6fvltw5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ServingBox"]
+position = Vector2(-6, -239.25)
+shape = SubResource("RectangleShape2D_w6vul")
+
+[connection signal="body_entered" from="ServingBox" to="ServingBox" method="_on_body_entered"]
+[connection signal="body_exited" from="ServingBox" to="ServingBox" method="_on_body_exited"]
