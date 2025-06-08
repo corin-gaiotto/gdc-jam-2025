@@ -1,6 +1,7 @@
 extends RestaurantInteractable
 
 var finishedCooking
+var base_scale: float
 
 func interact(player : RestaurantPlayer):
 	super.interact(player)
@@ -25,6 +26,14 @@ func interact(player : RestaurantPlayer):
 		print("[interact] player grabbed non cooked food from stove ", player.heldIngredient.Ingredient,player.heldIngredient.baseValue)
 		pass
 
+func _ready() -> void:
+	super._ready()
+	base_scale = scale.x
+
+func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
+	self.scale.x = base_scale * (1 + sin($Timer.time_left)*0.2)
+	self.scale.y = base_scale * (1 + cos($Timer.time_left)*0.2)
 
 func _on_timer_timeout() -> void:
 	finishedCooking = true
