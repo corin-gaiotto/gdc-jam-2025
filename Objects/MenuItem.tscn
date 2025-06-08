@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://wxs78acgk1qk"]
 
 [ext_resource type="Script" uid="uid://oou5xsjpa84" path="res://Scripts/menu_item.gd" id="1_3xyw0"]
-[ext_resource type="Texture2D" uid="uid://cyfpimqm1pace" path="res://Assets/Art/TestCustomer/TestMenuItem.png" id="2_j0yuq"]
+[ext_resource type="Texture2D" uid="uid://cyfpimqm1pace" path="res://Assets/Sprites/TestCustomer/TestMenuItem.png" id="2_j0yuq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4vuta"]
 animations = [{

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dmo5lowf7admv" path="res://Assets/Art/UI/EnergyBar/under.png" id="3_y05ux"]
 [ext_resource type="Texture2D" uid="uid://ckw8t1fex5blh" path="res://Assets/Art/UI/EnergyBar/over.png" id="4_5bvba"]
 [ext_resource type="Texture2D" uid="uid://bj0ct40kvwjv6" path="res://Assets/Art/UI/EnergyBar/progress.png" id="5_p25a2"]
-[ext_resource type="Texture2D" uid="uid://ce6m583841xci" path="res://Assets/Sprites/stool/stool.png" id="6_5bvba"]
+[ext_resource type="Texture2D" uid="uid://csy2iu71l88ib" path="res://Assets/Sprites/stool/stool.png" id="6_5bvba"]
 [ext_resource type="Texture2D" uid="uid://6bojn83svimv" path="res://Assets/Sprites/FishingBG/fishing_background.png" id="7_p25a2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nnhe8"]

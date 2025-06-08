@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csy2iu71l88ib"
-path="res://.godot/imported/stool.png-b0debd1ee3ba4ff2839a34907f55cbc5.ctex"
+uid="uid://bugytd7yvl4ns"
+path="res://.godot/imported/HappyFace.png-7bf3c79fa0d2988b42c4c78d5fa7b7a5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/stool/stool.png"
-dest_files=["res://.godot/imported/stool.png-b0debd1ee3ba4ff2839a34907f55cbc5.ctex"]
+source_file="res://Assets/Sprites/TestCustomer/HappyFace.png"
+dest_files=["res://.godot/imported/HappyFace.png-7bf3c79fa0d2988b42c4c78d5fa7b7a5.ctex"]
 
 [params]
 
