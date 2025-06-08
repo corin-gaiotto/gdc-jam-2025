@@ -206,7 +206,7 @@ func _physics_process(delta: float) -> void:
 					print("[minigame] Caught!")
 					hookedFish.global_position = global_position + Vector2(0, -80)
 					# remove the fish and add its name and price to the list of fish
-					_mainScene.conservedData["FishCaught"].append([hookedFish.speciesName, snapped(hookedFish.finalSellValue, 0.01)])
+					_mainScene.conservedData["FishCaught"][hookedFish.speciesName].append(snapped(hookedFish.finalSellValue, 0.01))
 					print(_mainScene.conservedData["FishCaught"])
 					hookedFish.queue_free()
 					currentState = fishingEnum.FISHING_OBTAIN

@@ -2,8 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dg4fvy4y531xb" path="res://Scripts/stove.gd" id="1_1cxga"]
 
-[ext_resource type="PackedScene" uid="uid://dmcswnvo3phg2" path="res://Objects/RestaurantPlayer.tscn" id="2_1cxga"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qn1c0"]
 
 [node name="Stove" type="Area2D"]
