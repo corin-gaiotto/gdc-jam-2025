@@ -22,6 +22,7 @@ position = Vector2(500, 350)
 scale = Vector2(0.5, 0.5)
 
 [node name="RestaurantPlayer" parent="." instance=ExtResource("1_hi3lj")]
+position = Vector2(1056, -474)
 restaurantPlayerSprite = SubResource("SpriteFrames_piffy")
 
 [node name="Customer" parent="." instance=ExtResource("3_yfx12")]
