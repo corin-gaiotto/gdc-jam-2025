@@ -1,9 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://c4onavem3i6q6"]
+[gd_scene load_steps=19 format=3 uid="uid://c4onavem3i6q6"]
 
 [ext_resource type="Script" uid="uid://b0lnctqxeoiia" path="res://Scripts/customer.gd" id="1_bdb25"]
 [ext_resource type="Texture2D" uid="uid://cy428a7pnx1q6" path="res://Assets/Sprites/TestCustomer/TestSpeechBubble.png" id="3_dohlm"]
+[ext_resource type="Texture2D" uid="uid://dvs47d4o5nw7l" path="res://Assets/Sprites/cookedFish/blue.png" id="3_q4cu3"]
 [ext_resource type="Texture2D" uid="uid://cyfpimqm1pace" path="res://Assets/Sprites/TestCustomer/TestMenuItem.png" id="4_0g1uc"]
+[ext_resource type="Texture2D" uid="uid://hhcklqh6p1g1" path="res://Assets/Sprites/cookedFish/brown.png" id="4_folhq"]
+[ext_resource type="Texture2D" uid="uid://cmhtvp5yciv7k" path="res://Assets/Sprites/cookedFish/yellow.png" id="5_1uh04"]
 [ext_resource type="Texture2D" uid="uid://bugytd7yvl4ns" path="res://Assets/Sprites/TestCustomer/HappyFace.png" id="5_a7kyv"]
+[ext_resource type="Texture2D" uid="uid://cd1deglf37r6q" path="res://Assets/Sprites/cookedFish/green.png" id="6_3ws4v"]
 [ext_resource type="Texture2D" uid="uid://de0qk0o4dlxmj" path="res://Assets/Sprites/TestCustomer/SadFace.png" id="6_j0p7o"]
 [ext_resource type="Texture2D" uid="uid://dtnil8uscr3kf" path="res://Assets/Sprites/RestaurantCustomer/Untitled_Artwork-2 39.png" id="6_py31r"]
 [ext_resource type="Texture2D" uid="uid://c3qgna8dwnaek" path="res://Assets/Sprites/RestaurantCustomer/Untitled_Artwork-1 38.png" id="7_w6vul"]
@@ -23,6 +27,38 @@ animations = [{
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_j0p7o"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_q4cu3")
+}],
+"loop": true,
+"name": &"Anchovy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_folhq")
+}],
+"loop": true,
+"name": &"Horse Mackerel",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_1uh04")
+}],
+"loop": true,
+"name": &"Mahi-Mahi",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_3ws4v")
+}],
+"loop": true,
+"name": &"Sea Bass",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("4_0g1uc")
@@ -96,7 +132,7 @@ func interact(player : RestaurantPlayer):
 		print(\"[serving] customer\", Order.ingredients, \" \", player.heldIngredient)
 		print(\"[serving] customer\", Order.ingredients, \" \", player.heldIngredient)
 		print(\"[serving] customer\", Order.ingredients[0], \" \", player.heldIngredient.Ingredient)
-		if Order.ingredients[0] == player.heldIngredient.Ingredient:
+		if Order.ingredients[0] == player.heldIngredient.Ingredient and player.heldIngredient.Cooked:
 			player.heldIngredient = null
 			get_parent().orderSatisfied = true
 		
@@ -118,7 +154,7 @@ sprite_frames = SubResource("SpriteFrames_a7kyv")
 [node name="OrderedDish" type="AnimatedSprite2D" parent="."]
 position = Vector2(400, -200)
 sprite_frames = SubResource("SpriteFrames_j0p7o")
-animation = &"sad"
+animation = &"Sea Bass"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_iyeuv")

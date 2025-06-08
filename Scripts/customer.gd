@@ -72,7 +72,7 @@ func _physics_process(delta: float) -> void:
 		# Displaying speech bubble content
 		if (!orderSatisfied):
 			if (!orderExpired):                            # If customer waiting show dish
-				_orderedDish.animation = "default"
+				_orderedDish.animation = customerOrder.ingredients[0]
 			else:                                          # If order failed show sad face
 				_orderedDish.animation = "sad"
 				isWalking = true

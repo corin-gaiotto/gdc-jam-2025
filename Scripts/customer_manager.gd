@@ -25,13 +25,25 @@ var seatsFree : Array[bool]
 @export var spawningActive : bool
 # How much time before the next spawn.
 var spawnTimeRemaining : int = 0
+var customerTimer = 5.0
 
 func _ready() -> void:
 	seatsFree = []
 	# populate seatsFree with true for each seat
 	for seat in seatArray:
 		seatsFree.append(true)
-	spawnRandomCustomer(self)
+	
+
+func _physics_process(delta: float) -> void:
+	if customerTimer < 0:
+		var numSeats = 0
+		for seat in seatsFree:
+			if seat:
+				numSeats += 1
+		if numSeats > 0:
+			spawnRandomCustomer(self)
+		customerTimer = randf_range(5, 10)
+	customerTimer -= delta
 
 func weightedChoice() -> String:
 	# Choose a random customer type name from the weight dict
