@@ -16,6 +16,7 @@ func interact(player : RestaurantPlayer):
 		player.heldIngredient = storedIngredients[0]
 		print("[interact] player grabbed cooked food ", player.heldIngredient.Ingredient, player.heldIngredient.baseValue )
 		storedIngredients = []
+		finishedCooking = false
 		
 		#cookedFood.Ingredients.append_array(storedIngredients)
 	elif player.heldIngredient == null:
