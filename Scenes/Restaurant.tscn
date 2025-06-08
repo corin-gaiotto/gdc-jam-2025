@@ -49,6 +49,7 @@ scale = Vector2(1.26882, 1.26882)
 texture = ExtResource("2_axxsr")
 
 [node name="RestaurantPlayer" parent="." node_paths=PackedStringArray("heldItemIndicator") instance=ExtResource("1_hi3lj")]
+z_index = 1
 position = Vector2(2040.84, 190.002)
 collision_layer = 4
 heldItemIndicator = NodePath("../HeldItemIndicator")

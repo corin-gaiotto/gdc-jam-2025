@@ -10,7 +10,8 @@ var currentScene: Node
 	"MainMenu": preload("res://Scenes/MainMenu.tscn"),
 	"Fishing":preload("res://Scenes/Fishing.tscn"),
 	"Restaurant":preload("res://Scenes/Restaurant.tscn"),
-	"RestaurantToFishing":preload("res://Scenes/Transitions/RestaurantToFishing.tscn")
+	"RestaurantToFishing":preload("res://Scenes/Transitions/RestaurantToFishing.tscn"),
+	"FishingToRestaurant":preload("res://Scenes/Transitions/FishingToRestaurant.tscn")
 	}
 
 @export var conservedData = {

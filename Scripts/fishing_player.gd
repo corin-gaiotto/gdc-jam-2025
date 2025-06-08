@@ -125,7 +125,7 @@ func _physics_process(delta: float) -> void:
 	_biteIndicator.visible = currentState == fishingEnum.FISHING_BIT_HOOK and isFishing
 	
 	if inDoor and Input.is_action_just_pressed("start-fishing"):
-		_mainScene.switchScene("Restaurant")
+		_mainScene.switchScene("FishingToRestaurant")
 	
 	#print("[debug-sitting]", isFishing, canFish, inArea)
 	
