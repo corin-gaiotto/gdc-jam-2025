@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://8l6vpx5uyf7f"]
+[gd_scene load_steps=3 format=3 uid="uid://8l6vpx5uyf7f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0o60k"]
 bg_color = Color(0.290196, 0.372549, 0.482353, 1)
@@ -14,11 +14,14 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 shadow_size = 1
 
+[sub_resource type="LabelSettings" id="LabelSettings_0o60k"]
+font_size = 32
+
 [node name="HeldItemIndicator" type="Panel"]
-offset_left = 1022.0
-offset_top = 524.0
-offset_right = 1142.0
-offset_bottom = 644.0
+offset_left = 941.0
+offset_top = 358.0
+offset_right = 1181.0
+offset_bottom = 598.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_0o60k")
 
 [node name="Label" type="Label" parent="."]
@@ -29,3 +32,4 @@ offset_bottom = 75.0
 text = "Held Item:
 (Cooked)
 <FISHNAME>"
+label_settings = SubResource("LabelSettings_0o60k")
