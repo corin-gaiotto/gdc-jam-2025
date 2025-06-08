@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://b17etnuhkys1f"]
+
+[ext_resource type="Script" uid="uid://djdrg14c1n708" path="res://Scenes/Transitions/fishing_to_restaurant.gd" id="1_d1lhh"]
+[ext_resource type="Texture2D" uid="uid://csebj54a70vql" path="res://Assets/Sprites/Transitions/FishingToRestaurant/frame0.png" id="2_d1lhh"]
+[ext_resource type="Texture2D" uid="uid://2lyktr5cg4a0" path="res://Assets/Sprites/Transitions/FishingToRestaurant/frame1.png" id="3_2mt26"]
+[ext_resource type="Texture2D" uid="uid://dlkggi05hhb1j" path="res://Assets/Sprites/Transitions/FishingToRestaurant/frame2.png" id="4_oibi8"]
+[ext_resource type="Texture2D" uid="uid://j27b8hmhgq8g" path="res://Assets/Sprites/Transitions/FishingToRestaurant/frame3.png" id="5_6tnot"]
+[ext_resource type="Texture2D" uid="uid://cs3qk3jx64br" path="res://Assets/Sprites/Transitions/FishingToRestaurant/frame4.png" id="6_u57fq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ng7n4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_d1lhh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2mt26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_oibi8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_6tnot")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_u57fq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_u57fq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_u57fq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_u57fq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="FishingToRestaurant" type="Node2D"]
+script = ExtResource("1_d1lhh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(573, 323)
+scale = Vector2(1.33003, 1.33003)
+sprite_frames = SubResource("SpriteFrames_ng7n4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1500.0
+offset_bottom = 1000.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+z_index = -1
+offset_right = 1506.0
+offset_bottom = 1010.0
