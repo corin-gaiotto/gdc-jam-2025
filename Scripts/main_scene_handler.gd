@@ -16,7 +16,9 @@ var currentScene: Node
 @export var conservedData = {
 	"FishCaught": {
 		"Anchovy":[10, 20],
-		"Horse Mackerel":[]
+		"Horse Mackerel":[],
+		"Sea Bass":[],
+		"Mahi-Mahi":[]
 	}
 }
 

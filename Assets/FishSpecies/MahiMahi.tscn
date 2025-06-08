@@ -24,7 +24,7 @@ animations = [{
 
 [node name="TestSpecies" type="Node"]
 script = ExtResource("1_jcw2f")
-speciesName = "MahiMahi"
+speciesName = "Mahi-Mahi"
 size = 0.6
 baseSellValue = 200.0
 fishTexture = SubResource("SpriteFrames_b00gv")
