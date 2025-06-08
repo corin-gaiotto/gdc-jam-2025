@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://8l6vpx5uyf7f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0o60k"]
+bg_color = Color(0.290196, 0.372549, 0.482353, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.619608, 0.686275, 0.847059, 1)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_size = 1
+
+[node name="HeldItemIndicator" type="Panel"]
+offset_left = 1022.0
+offset_top = 524.0
+offset_right = 1142.0
+offset_bottom = 644.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_0o60k")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 7.0
+offset_right = 107.0
+offset_bottom = 75.0
+text = "Held Item:
+(Cooked)
+<FISHNAME>"

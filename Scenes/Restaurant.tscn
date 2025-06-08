@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://bl1stivf7y0us"]
-
+[gd_scene load_steps=17 format=3 uid="uid://bl1stivf7y0us"]
 
 [ext_resource type="PackedScene" uid="uid://dmcswnvo3phg2" path="res://Objects/RestaurantPlayer.tscn" id="1_hi3lj"]
-[ext_resource type="Script" uid="uid://20q6fv23uu24" path="res://Scenes/restaurant.gd" id="1_piffy"]
+[ext_resource type="Script" path="res://Scenes/restaurant.gd" id="1_piffy"]
 [ext_resource type="Texture2D" uid="uid://cvy848mshr5cs" path="res://Assets/Art/restaurant/mockupS25 2.png" id="2_axxsr"]
 [ext_resource type="Texture2D" uid="uid://dokj5ftigyxx8" path="res://icon.svg" id="2_yfx12"]
 [ext_resource type="PackedScene" uid="uid://c4onavem3i6q6" path="res://Objects/Customer.tscn" id="3_yfx12"]
@@ -51,6 +50,7 @@ texture = ExtResource("2_axxsr")
 
 [node name="RestaurantPlayer" parent="." instance=ExtResource("1_hi3lj")]
 position = Vector2(1056, -474)
+collision_layer = 4
 restaurantPlayerSprite = SubResource("SpriteFrames_piffy")
 
 [node name="Customer" parent="." instance=ExtResource("3_yfx12")]
@@ -71,11 +71,7 @@ position = Vector2(1184, -326)
 position = Vector2(-590, -532)
 
 [node name="TrashBin" parent="." instance=ExtResource("10_fy5am")]
-position = Vector2(1192, -174)
-rotation = 1.5708
-
-[connection signal="body_entered" from="FishBin" to="FishBin" method="_on_body_entered"]
-[connection signal="body_exited" from="FishBin" to="FishBin" method="_on_body_exited"]
+position = Vector2(226, -528)
 
 [node name="RestaurantColliders" type="StaticBody2D" parent="."]
 
@@ -102,3 +98,6 @@ shape = SubResource("RectangleShape2D_ix3f7")
 [node name="WallBottom" type="CollisionShape2D" parent="RestaurantColliders"]
 position = Vector2(157, 629)
 shape = SubResource("RectangleShape2D_iqu8l")
+
+[connection signal="body_entered" from="FishBin" to="FishBin" method="_on_body_entered"]
+[connection signal="body_exited" from="FishBin" to="FishBin" method="_on_body_exited"]
