@@ -44,14 +44,17 @@ func _ready() -> void:
 	_speechBubble.visible = false
 	_orderedDish.visible = false
 	
-	targetPosition = seatPosition
+	
+	isWalking = true
 
 func _physics_process(delta: float) -> void:
+	if targetPosition == Vector2.ZERO:
+		targetPosition = seatPosition
+	
 	
 	# When customer sits down
-	
-
 	if (isSitting):
+		print("isSitting")
 		isWalking = false
 		_animatedSprite2D.animation = "sit"
 		# Show speech bubble
@@ -80,12 +83,13 @@ func _physics_process(delta: float) -> void:
 			leave()
 	
 	if (isWalking):
+		print("isWalking")
 		isSitting = false
 		_animatedSprite2D.animation = "walk"
 		_animatedSprite2D.play("walk")
 		
 		# walk towards target position
-		var walkResult = walkTowards(targetPosition, 5, delta, isLeaving)
+		var walkResult = walkTowards(targetPosition, 300, delta, isLeaving)
 		
 		if walkResult == 1:
 			if isLeaving:
@@ -99,36 +103,36 @@ func _physics_process(delta: float) -> void:
 	else:
 		_animatedSprite2D.stop()
 		
-	pass
 
 func leave():
 	emit_signal("SeatFree", seatIndex)
 	isLeaving = true
-	targetPosition = Vector2(25, 750) # go back to whence you came
+	targetPosition = Vector2(100, 1250) # go back to whence you came
 	isWalking = true
 	isSitting = false
 
 func walkTowards(target: Vector2, walkSpeed: float, delta: float, horizontal_first: bool = false) -> int:
+	print("walking time")
 	# walk towards the target position, and return 0 if not arrived and 1 if arrived (+- a few)
 	if horizontal_first:
 		# prioritize horizontal movement
-		if target.x - position.x > walkSpeed * delta:
+		if abs(target.x - global_position.x) > walkSpeed * delta:
 			# move horizontally
-			position.x += sign(target.x - position.x) * walkSpeed * delta
-		elif target.y - position.y > walkSpeed:
+			global_position.x += sign(target.x - global_position.x) * walkSpeed * delta
+		elif abs(target.y - position.y) > walkSpeed * delta:
 			# move vertically
-			position.y += sign(target.y - position.y) * walkSpeed * delta
+			global_position.y += sign(target.y - global_position.y) * walkSpeed * delta
 		else:
 			# arrived
 			return 1
 	else:
 		# prioritize vertical movement
-		if target.y - position.y > walkSpeed:
+		if abs(target.y - global_position.y) > walkSpeed * delta:
 			# move vertically
-			position.y += sign(target.y - position.y) * walkSpeed
-		elif target.x - position.x > walkSpeed:
+			global_position.y += sign(target.y - global_position.y) * walkSpeed * delta
+		elif abs(target.x - global_position.x) > walkSpeed * delta:
 			# move horizontally
-			position.x += sign(target.x - position.x) * walkSpeed
+			global_position.x += sign(target.x - global_position.x) * walkSpeed * delta
 		else:
 			# arrived
 			return 1

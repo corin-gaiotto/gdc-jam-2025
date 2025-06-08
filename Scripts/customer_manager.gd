@@ -2,7 +2,7 @@ extends Node2D
 
 class_name CustomerManager
 
-#Class that handles the spawning of customers.
+# Class that handles the spawning of customers.
 
 # [ATTRIBUTES]
 
@@ -31,6 +31,7 @@ func _ready() -> void:
 	# populate seatsFree with true for each seat
 	for seat in seatArray:
 		seatsFree.append(true)
+	spawnRandomCustomer(self)
 
 func weightedChoice() -> String:
 	# Choose a random customer type name from the weight dict
@@ -47,7 +48,7 @@ func spawnCustomer(SceneParent : Node, chosenType : CustomerType):
 	var customerNode = chosenType.generateCustomer()
 	
 	# Set customer starting position to the position of the customer door (bottom left, offscreen from the bottom)
-	customerNode.position = Vector2(25, 750)
+	customerNode.global_position = Vector2(100, 1250)
 	
 	SceneParent.add_child(customerNode)
 	
@@ -55,7 +56,8 @@ func spawnCustomer(SceneParent : Node, chosenType : CustomerType):
 	var seatInd = pickEmptySeatIndex()
 	
 	# Give customer a target seat position and a seat index (to broadcast back once the seat is free again)
-	customerNode.seatPosition = seatArray[seatInd].position
+	print(seatArray[seatInd].global_position)
+	customerNode.seatPosition = seatArray[seatInd].global_position
 	customerNode.seatIndex = seatInd
 	
 	customerNode.add_user_signal("SeatFree", [{"name":"Index", "type":"int"}])

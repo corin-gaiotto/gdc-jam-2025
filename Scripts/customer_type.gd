@@ -26,14 +26,13 @@ func generateCustomer() -> Customer:
 	
 	# Set attributes based on type
 	generatedCustomer.orderSatisfied = false
-	generatedCustomer.orderTimer = randf_range(0, 30) # TODO: tweak the random ranges later
 	generatedCustomer.customerTip = randf_range(0, 1)
 	generatedCustomer.customerOrder = generateCustomerOrder() # Select random Menu Item from dictionary
-	
+	print(is_instance_of(generatedCustomer.customerOrder, MenuItem))
 	# Calculate any derived attributes based on the above
 	#  Calculate final payment value based on customer tip
-	generatedCustomer.customerTimer = customerOrder.baseTimer * customerPatience
-	generatedCustomer.totalBill = generateCustomer().customerOrder.basePrice * generatedCustomer.customerTip
+	generatedCustomer.customerTimer = generatedCustomer.customerOrder.baseTimer * customerPatience
+	generatedCustomer.totalBill = generatedCustomer.customerOrder.basePrice * generatedCustomer.customerTip
 	
 	# If we would like to implement multiple orders per customer
 	#generatedCustomer.totalBill = calculateBillNoTip(generatedCustomer.customerOrder) * (1 + generatedCustomer.customerTip)
@@ -41,6 +40,7 @@ func generateCustomer() -> Customer:
 	return generatedCustomer
 	
 func generateCustomerOrder():
+	print("[customergen]", CustomerMenu)
 	# Choose a random order combination from menu items
 	var choiceList = []
 	for k in CustomerMenu.keys():
@@ -54,7 +54,7 @@ func generateCustomerOrder():
 	
 	# If we would like to implement multiiple orders per customer
 	#for k in chosenOrderLength:
-	
+	print("[customergen]",choiceList)
 	chosenOrder= choiceList.pick_random()
 			
 	return chosenOrder
