@@ -4,7 +4,6 @@ class_name RestaurantPlayer
 
 @onready var _animatedSprite = $AnimatedSprite2D
 
-
 # movement
 @export var speed = 200
 @export_range(1, 3) var sprintMultiplier: float = 2.25
@@ -35,7 +34,19 @@ var heldIngredient : FoodItem = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	var _mainScene = get_parent().get_parent()
+	var _audioPlayer = null
+	if _mainScene:
+		# if has parents two layers up, then is running from the main scene.
+		# find audio player
+		for sibling in _mainScene.get_children():
+			if is_instance_of(sibling, AudioStreamPlayer):
+				_audioPlayer = sibling
+				break
+	
+	if _audioPlayer:
+		print(_audioPlayer)
+		_audioPlayer.switch_to_restaurant()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -71,7 +82,6 @@ func _physics_process(delta: float) -> void:
 	var currSpeed = speed;
 	if isSprinting:
 		currSpeed *= sprintMultiplier
-		
 	velocity = _dir.normalized() * currSpeed
 	move_and_slide()
 	

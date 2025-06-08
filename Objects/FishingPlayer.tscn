@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://638hqodqju1e"]
+[gd_scene load_steps=52 format=3 uid="uid://638hqodqju1e"]
 
 [ext_resource type="Script" uid="uid://bah45uowqio7v" path="res://Scripts/fishing_player.gd" id="1_45n1i"]
 [ext_resource type="Texture2D" uid="uid://w38rmx0euw02" path="res://Assets/Sprites/FishingPlayerFishing/FishingCasting/Casting0.png" id="2_qqduh"]
@@ -36,8 +36,11 @@
 [ext_resource type="Texture2D" uid="uid://co23ly86g6opn" path="res://Assets/Sprites/FishingPlayerFishing/FishingSparkles/frame1.png" id="19_qjdbo"]
 [ext_resource type="Texture2D" uid="uid://bnebx8xn3tc1u" path="res://Assets/Sprites/FishingPlayerWalk/WalkRight/WalkRight2.png" id="20_etvvv"]
 [ext_resource type="Texture2D" uid="uid://b6s3ex1sridmp" path="res://Assets/Sprites/FishingPlayerFishing/FishingSparkles/frame2.png" id="20_lg26m"]
+[ext_resource type="Texture2D" uid="uid://24jn0r7xesse" path="res://Assets/Sprites/FishingPlayerFishing/FishingTugging/frame0_fixed.png" id="21_3ny6j"]
 [ext_resource type="Texture2D" uid="uid://dn4go7a6uvlh3" path="res://Assets/Sprites/FishingPlayerWalk/WalkRight/WalkRight3.png" id="21_svom4"]
+[ext_resource type="Texture2D" uid="uid://dpwxjh2fdn25q" path="res://Assets/Sprites/FishingPlayerFishing/FishingTugging/frame1_fixed.png" id="22_67qiq"]
 [ext_resource type="Texture2D" uid="uid://daxggemfs02r" path="res://Assets/Sprites/FishingPlayerWalk/WalkRight/WalkRight4.png" id="22_quqkp"]
+[ext_resource type="Texture2D" uid="uid://p2v7jbfsu860" path="res://Assets/Sprites/FishingPlayerFishing/FishingTugging/frame2_fixed.png" id="23_rrdr6"]
 [ext_resource type="Texture2D" uid="uid://bkq7cvov5aknf" path="res://Assets/Sprites/Hook/1.png" id="31_t6e8o"]
 [ext_resource type="Texture2D" uid="uid://3n3w2f2hvk38" path="res://Assets/Sprites/Hook/2.png" id="32_hd4i8"]
 [ext_resource type="Texture2D" uid="uid://c6ihl554t4gj8" path="res://Assets/Sprites/Hook/3.png" id="33_vpeqk"]
@@ -134,6 +137,20 @@ animations = [{
 "loop": true,
 "name": &"fishing-reel-sparkles",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_3ny6j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_67qiq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_rrdr6")
+}],
+"loop": false,
+"name": &"fishing-tug",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -262,7 +279,7 @@ script = ExtResource("1_45n1i")
 position = Vector2(48, 320.566)
 scale = Vector2(0.075, 0.088)
 sprite_frames = SubResource("SpriteFrames_88ni6")
-animation = &"standing-idle-right"
+animation = &"fishing-tug"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(48, 343)

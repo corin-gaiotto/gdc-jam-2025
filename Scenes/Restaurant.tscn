@@ -34,6 +34,7 @@ texture = ExtResource("2_axxsr")
 
 [node name="RestaurantPlayer" parent="." instance=ExtResource("1_hi3lj")]
 position = Vector2(1056, -474)
+collision_layer = 1
 restaurantPlayerSprite = SubResource("SpriteFrames_piffy")
 
 [node name="Customer" parent="." instance=ExtResource("3_yfx12")]
