@@ -17,6 +17,7 @@ class_name RestaurantPlayer
 @export var sprintCD: float = 1.5
 @export var CDTimer: float = 0
 @export var timeBeforeIdle: float
+@export var heldItemIndicator: Panel
 
 # appearance
 @export var restaurantPlayerSprite: SpriteFrames
@@ -51,6 +52,12 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	# UI
+	if heldIngredient != null:
+		heldItemIndicator.get_children()[0].text = "Held Item:\n" + ("Cooked\n" if heldIngredient.Cooked else "\n") + heldIngredient.Ingredient
+	else:
+		heldItemIndicator.get_children()[0].text = "Held Item:"
+	
 	# get movement direction
 	var _dir = Input.get_vector("left", "right", "up", "down")
 		
