@@ -16,11 +16,9 @@ metadata/_custom_type_script = "uid://haqw6fvltw5"
 
 [node name="InteractableBox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_7bvsm")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-scale = Vector2(1, 1)
 
 [node name="CollisionBox" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_mc2i4")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bl1stivf7y0us"]
+[gd_scene load_steps=12 format=3 uid="uid://bl1stivf7y0us"]
 
 [ext_resource type="PackedScene" uid="uid://dmcswnvo3phg2" path="res://Objects/RestaurantPlayer.tscn" id="1_hi3lj"]
 [ext_resource type="Script" uid="uid://20q6fv23uu24" path="res://Scenes/restaurant.gd" id="1_piffy"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://wxs78acgk1qk" path="res://Objects/MenuItem.tscn" id="5_piffy"]
 [ext_resource type="PackedScene" uid="uid://bo5d5lltdyqam" path="res://Objects/RestaurantInteractables/FishBin.tscn" id="6_mdxsm"]
 [ext_resource type="PackedScene" uid="uid://c54ekrxvd6rgi" path="res://Objects/RestaurantInteractables/Stove.tscn" id="8_hje71"]
+[ext_resource type="PackedScene" uid="uid://bo3tcwn7b6g05" path="res://Objects/RestaurantInteractables/TrashBin.tscn" id="10_fy5am"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_piffy"]
 animations = [{
@@ -34,7 +35,6 @@ texture = ExtResource("2_axxsr")
 
 [node name="RestaurantPlayer" parent="." instance=ExtResource("1_hi3lj")]
 position = Vector2(1056, -474)
-collision_layer = 1
 restaurantPlayerSprite = SubResource("SpriteFrames_piffy")
 
 [node name="Customer" parent="." instance=ExtResource("3_yfx12")]
@@ -51,3 +51,10 @@ position = Vector2(1228, -612)
 
 [node name="Stove2" parent="." instance=ExtResource("8_hje71")]
 position = Vector2(-590, -532)
+
+[node name="TrashBin" parent="." instance=ExtResource("10_fy5am")]
+position = Vector2(1192, -174)
+rotation = 1.5708
+
+[connection signal="body_entered" from="FishBin" to="FishBin" method="_on_body_entered"]
+[connection signal="body_exited" from="FishBin" to="FishBin" method="_on_body_exited"]
