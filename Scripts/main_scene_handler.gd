@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name SceneHandler
+
 var currentScene: Node
 
 # Scene Handler: stores data between scenes, and can switch between scenes. This should ideally be done by emitting signals.

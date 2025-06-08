@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bl1stivf7y0us"]
+[gd_scene load_steps=7 format=3 uid="uid://bl1stivf7y0us"]
 
 [ext_resource type="PackedScene" uid="uid://dmcswnvo3phg2" path="res://Objects/RestaurantPlayer.tscn" id="1_hi3lj"]
 [ext_resource type="Texture2D" uid="uid://dokj5ftigyxx8" path="res://icon.svg" id="2_yfx12"]
 [ext_resource type="PackedScene" uid="uid://c4onavem3i6q6" path="res://Objects/Customer.tscn" id="3_yfx12"]
+[ext_resource type="PackedScene" uid="uid://blpvjsdx2poov" path="res://Objects/RestaurantInteractables/RestaurantDoor.tscn" id="5_mdxsm"]
 [ext_resource type="PackedScene" uid="uid://wxs78acgk1qk" path="res://Objects/MenuItem.tscn" id="5_piffy"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_piffy"]
@@ -27,3 +28,6 @@ restaurantPlayerSprite = SubResource("SpriteFrames_piffy")
 
 [node name="MenuItem" parent="." instance=ExtResource("5_piffy")]
 baseTimer = 5.0
+
+[node name="Door" parent="." instance=ExtResource("5_mdxsm")]
+position = Vector2(1228, -612)

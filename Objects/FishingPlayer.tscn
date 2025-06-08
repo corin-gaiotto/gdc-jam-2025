@@ -244,8 +244,7 @@ script = ExtResource("1_45n1i")
 position = Vector2(48, 320.566)
 scale = Vector2(0.075, 0.088)
 sprite_frames = SubResource("SpriteFrames_88ni6")
-animation = &"fishing-reel-sparkles"
-frame_progress = 0.00740738
+animation = &"standing-idle-right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(48, 343)
