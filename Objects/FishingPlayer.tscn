@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://638hqodqju1e"]
+[gd_scene load_steps=49 format=3 uid="uid://638hqodqju1e"]
 
 [ext_resource type="Script" uid="uid://bah45uowqio7v" path="res://Scripts/fishing_player.gd" id="1_45n1i"]
 [ext_resource type="Texture2D" uid="uid://w38rmx0euw02" path="res://Assets/Sprites/FishingPlayerFishing/FishingCasting/Casting0.png" id="2_qqduh"]
@@ -41,6 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://bkq7cvov5aknf" path="res://Assets/Sprites/Hook/1.png" id="31_t6e8o"]
 [ext_resource type="Texture2D" uid="uid://3n3w2f2hvk38" path="res://Assets/Sprites/Hook/2.png" id="32_hd4i8"]
 [ext_resource type="Texture2D" uid="uid://c6ihl554t4gj8" path="res://Assets/Sprites/Hook/3.png" id="33_vpeqk"]
+[ext_resource type="LabelSettings" uid="uid://b0sa8o74cghvd" path="res://Assets/Art/UI/fishing-head-popups.tres" id="42_qjdbo"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_88ni6"]
 animations = [{
@@ -236,6 +237,23 @@ animations = [{
 
 [sub_resource type="LabelSettings" id="LabelSettings_2ew6n"]
 font_size = 30
+font_color = Color(1, 0, 0, 1)
+outline_size = 4
+outline_color = Color(0.709804, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_quqkp"]
+bg_color = Color(0.288979, 0.373192, 0.482907, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.618356, 0.686291, 0.845429, 1)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_size = 1
 
 [node name="FishingPlayer" type="CharacterBody2D"]
 script = ExtResource("1_45n1i")
@@ -271,6 +289,7 @@ offset_right = 137.0
 offset_bottom = 275.0
 text = "[E]
 Enter Restaurant"
+label_settings = ExtResource("42_qjdbo")
 horizontal_alignment = 1
 
 [node name="FishingLabel" type="Label" parent="."]
@@ -280,6 +299,7 @@ offset_right = 136.0
 offset_bottom = 275.0
 text = "[E] 
 Start Fishing"
+label_settings = ExtResource("42_qjdbo")
 horizontal_alignment = 1
 
 [node name="CastLabel" type="Label" parent="."]
@@ -289,6 +309,7 @@ offset_right = 136.0
 offset_bottom = 275.0
 text = "[Space] 
 Cast Line"
+label_settings = ExtResource("42_qjdbo")
 horizontal_alignment = 1
 
 [node name="MoveHookLabel" type="Label" parent="."]
@@ -298,6 +319,7 @@ offset_right = 136.0
 offset_bottom = 275.0
 text = "[WASD] 
 Move Hook"
+label_settings = ExtResource("42_qjdbo")
 horizontal_alignment = 1
 
 [node name="BiteIndicator" type="Label" parent="."]
@@ -320,7 +342,17 @@ Value: $<VAL>"
 horizontal_alignment = 1
 
 [node name="DisplaySprite" type="AnimatedSprite2D" parent="FishDisplay"]
-position = Vector2(58, 115)
+position = Vector2(121, 127)
+
+[node name="Panel" type="Panel" parent="FishDisplay"]
+z_index = -1
+layout_mode = 0
+offset_left = -6.0
+offset_top = -20.0
+offset_right = 34.0
+offset_bottom = 20.0
+scale = Vector2(3.92, 4.67478)
+theme_override_styles/panel = SubResource("StyleBoxFlat_quqkp")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="Hook" to="." method="_on_hook_area_entered"]
