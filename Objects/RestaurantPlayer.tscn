@@ -140,7 +140,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ju37u"]
 
 [node name="RestaurantPlayer" type="CharacterBody2D"]
-collision_layer = 4
+collision_layer = 5
 script = ExtResource("1_ju37u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
