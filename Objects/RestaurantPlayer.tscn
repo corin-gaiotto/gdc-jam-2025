@@ -5,12 +5,47 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tvcfu"]
 animations = [{
+"frames": [],
+"loop": true,
+"name": &"down-idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"down-walk",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"left-idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"left-walk",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"right-idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"right-walk",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_447i3")
 }],
 "loop": true,
-"name": &"default",
+"name": &"up-idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"up-walk",
 "speed": 5.0
 }]
 
@@ -21,7 +56,7 @@ script = ExtResource("1_ju37u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tvcfu")
-frame_progress = 0.154517
+animation = &"up-idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ju37u")
