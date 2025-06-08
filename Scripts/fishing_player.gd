@@ -297,3 +297,9 @@ func _on_door_area_body_entered(body: Node2D) -> void:
 
 func _on_door_area_body_exited(body: Node2D) -> void:
 	inDoor = false
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if _animatedSprite.animation == "fishing-reel-complete":
+		print("[Anim] fishing complete")
+		_animatedSprite.play("fishing-reel-sparkles")
