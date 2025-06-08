@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://b60f35dak1ake"]
+
+[ext_resource type="Script" uid="uid://c3dgu655bgxdj" path="res://Scripts/fish_species.gd" id="1_jcw2f"]
+[ext_resource type="Texture2D" uid="uid://d1gmcsdjevi3f" path="res://Assets/Sprites/Fish/Yellow/1-13.png" id="2_jcw2f"]
+[ext_resource type="Texture2D" uid="uid://lnb52wldhc77" path="res://Assets/Sprites/Fish/Yellow/1-14.png" id="3_o7mkn"]
+[ext_resource type="Texture2D" uid="uid://l25yxbvsgowj" path="res://Assets/Sprites/Fish/Yellow/1-15.png" id="4_6qp6k"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b00gv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jcw2f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_o7mkn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6qp6k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TestSpecies" type="Node"]
+script = ExtResource("1_jcw2f")
+speciesName = "MahiMahi"
+size = 0.6
+baseSellValue = 200.0
+fishTexture = SubResource("SpriteFrames_b00gv")
+preferredDepth = 600.0
+idleBurstTime = 6.0
+idleMoveSpeed = 200.0
+fishingTurnTime = 1.0
+fishingResistance = 2.0
+fishingEnergyDrain = 1.5
+metadata/_custom_type_script = "uid://c3dgu655bgxdj"
