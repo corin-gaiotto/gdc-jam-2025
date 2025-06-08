@@ -62,8 +62,8 @@ func _physics_process(delta: float) -> void:
 			if isBursting:
 				currentVelocity = initialVelocity * pow((idleTimer.time_left/idleTimer.wait_time), 1.2)
 				position += currentVelocity * delta
-			position.x = clamp(position.x, 465, 1150)
-			position.y = clamp(position.y, 280, 648)
+			global_position.x = clamp(position.x, 465, 1150)
+			global_position.y = clamp(position.y, 320, 648)
 		fishStatesEnum.BITHOOK:
 			fishingTimer.start()
 			fishingDirection = (randi_range(0, 1) - 0.5) * 2

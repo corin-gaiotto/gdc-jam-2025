@@ -39,7 +39,7 @@ customerTexture = SubResource("SpriteFrames_t0lrf")
 
 [node name="Node" type="Node" parent="."]
 script = ExtResource("3_n42iu")
-ingredients = Array[String](["Anchovy", "Horse Mackerel"])
+ingredients = Array[String](["Horse Mackerel"])
 basePrice = 2.0
 baseTimer = 4.0
 menuItemTexture = SubResource("SpriteFrames_7ffb1")
