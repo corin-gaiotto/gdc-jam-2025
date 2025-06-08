@@ -1,38 +1,37 @@
-[gd_scene load_steps=8 format=3 uid="uid://b17etnuhkys1f"]
+[gd_scene load_steps=7 format=3 uid="uid://b17etnuhkys1f"]
 
-[ext_resource type="Script" uid="uid://djdrg14c1n708" path="res://Scenes/Transitions/fishing_to_restaurant.gd" id="1_d1lhh"]
-[ext_resource type="Texture2D" uid="uid://csebj54a70vql" path="res://Assets/Sprites/Transitions/FishingToRestaurant/frame0.png" id="2_d1lhh"]
-[ext_resource type="Texture2D" uid="uid://2lyktr5cg4a0" path="res://Assets/Sprites/Transitions/FishingToRestaurant/frame1.png" id="3_2mt26"]
-[ext_resource type="Texture2D" uid="uid://dlkggi05hhb1j" path="res://Assets/Sprites/Transitions/FishingToRestaurant/frame2.png" id="4_oibi8"]
-[ext_resource type="Texture2D" uid="uid://j27b8hmhgq8g" path="res://Assets/Sprites/Transitions/FishingToRestaurant/frame3.png" id="5_6tnot"]
-[ext_resource type="Texture2D" uid="uid://cs3qk3jx64br" path="res://Assets/Sprites/Transitions/FishingToRestaurant/frame4.png" id="6_u57fq"]
+[ext_resource type="Script" path="res://Scenes/Transitions/fishing_to_restaurant.gd" id="1_d1lhh"]
+[ext_resource type="Texture2D" uid="uid://46gontrosslk" path="res://Assets/Sprites/Transitions/FishingToRestaurant/Frame0.png" id="2_imhql"]
+[ext_resource type="Texture2D" uid="uid://cgtgspkamwn31" path="res://Assets/Sprites/Transitions/FishingToRestaurant/Frame1.png" id="3_d1lhh"]
+[ext_resource type="Texture2D" uid="uid://c7wiftdqjynd" path="res://Assets/Sprites/Transitions/FishingToRestaurant/Frame2.png" id="4_2mt26"]
+[ext_resource type="Texture2D" uid="uid://fnd6eevt485a" path="res://Assets/Sprites/Transitions/FishingToRestaurant/Frame4.png" id="5_oibi8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ng7n4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_d1lhh")
+"texture": ExtResource("2_imhql")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_2mt26")
+"texture": ExtResource("3_d1lhh")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_oibi8")
+"texture": ExtResource("4_2mt26")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_6tnot")
+"texture": ExtResource("5_oibi8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_u57fq")
+"texture": ExtResource("4_2mt26")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_u57fq")
+"texture": ExtResource("3_d1lhh")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_u57fq")
+"texture": ExtResource("4_2mt26")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_u57fq")
+"texture": ExtResource("5_oibi8")
 }],
 "loop": true,
 "name": &"default",

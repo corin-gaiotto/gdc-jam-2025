@@ -80,3 +80,7 @@ start-fishing={
 
 2d_physics/layer_1="Main"
 2d_physics/layer_2="Fish"
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(1, 1, 1, 1)
