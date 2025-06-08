@@ -1,6 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://c4onavem3i6q6"]
 
 [ext_resource type="Script" uid="uid://b0lnctqxeoiia" path="res://Scripts/customer.gd" id="1_bdb25"]
+
+[ext_resource type="Texture2D" uid="uid://dxlac51l10xvb" path="res://Assets/Sprites/TestCustomer/CustomerSit.png" id="2_py31r"]
 [ext_resource type="Texture2D" uid="uid://cy428a7pnx1q6" path="res://Assets/Sprites/TestCustomer/TestSpeechBubble.png" id="3_dohlm"]
 [ext_resource type="Texture2D" uid="uid://cyfpimqm1pace" path="res://Assets/Sprites/TestCustomer/TestMenuItem.png" id="4_0g1uc"]
 [ext_resource type="Texture2D" uid="uid://bugytd7yvl4ns" path="res://Assets/Sprites/TestCustomer/HappyFace.png" id="5_a7kyv"]
