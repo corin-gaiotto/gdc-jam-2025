@@ -7,3 +7,6 @@ func switch_to_fishing_calm():
 
 func switch_to_fishing_bite():
 	get_stream_playback().switch_to_clip_by_name("fishing-bite")
+
+func switch_to_restaurant():
+	get_stream_playback().switch_to_clip_by_name("restaurant")
