@@ -21,7 +21,7 @@ size = Vector2(24, 88)
 [node name="Node2D" type="Node2D"]
 
 [node name="FishingPlayer" parent="." node_paths=PackedStringArray("_energyBar") instance=ExtResource("1_aonvm")]
-position = Vector2(88, -202)
+position = Vector2(89, -179)
 collision_layer = 5
 _energyBar = NodePath("../TextureProgressBar")
 

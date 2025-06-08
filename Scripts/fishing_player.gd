@@ -14,6 +14,7 @@ class_name FishingPlayer
 @onready var _moveHookLabel = $MoveHookLabel
 @onready var _fishDisplay = $FishDisplay
 @onready var _displaySprite = $FishDisplay/DisplaySprite
+@onready var _biteIndicator = $BiteIndicator
 
 @export var _energyBar : TextureProgressBar
 
@@ -67,6 +68,7 @@ func _ready() -> void:
 	_fishingLabel.visible = false
 	_castLabel.visible = false
 	_fishDisplay.visible = false
+	_biteIndicator.visible = false
 	
 	_mainScene = get_parent().get_parent()
 	if _mainScene:
@@ -120,6 +122,7 @@ func _physics_process(delta: float) -> void:
 	_fishingLabel.visible = canFish and not(isFishing)
 	_castLabel.visible = currentState == fishingEnum.FISHING_IDLE and isFishing
 	_moveHookLabel.visible = currentState == fishingEnum.FISHING_CAST_IDLE and isFishing
+	_biteIndicator.visible = currentState == fishingEnum.FISHING_BIT_HOOK and isFishing
 	
 	if inDoor and Input.is_action_just_pressed("start-fishing"):
 		_mainScene.switchScene("Restaurant")
