@@ -4,7 +4,6 @@ class_name RestaurantPlayer
 
 @onready var _animatedSprite = $AnimatedSprite2D
 
-
 # movement
 @export var speed = 200
 @export_range(1, 3) var sprintMultiplier: float = 2.25
@@ -71,7 +70,6 @@ func _physics_process(delta: float) -> void:
 	var currSpeed = speed;
 	if isSprinting:
 		currSpeed *= sprintMultiplier
-		
 	velocity = _dir.normalized() * currSpeed
 	move_and_slide()
 	
