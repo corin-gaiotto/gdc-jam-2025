@@ -1,5 +1,7 @@
 class_name FoodItem
 
-var Ingredients = []
+
+var Ingredient : String
+var baseValue : float
 
 var Cooked = false
